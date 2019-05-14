@@ -141,6 +141,7 @@ public class UsuarioTesteDao {
     
     public UsuarioTeste logar(String usuario, String password) {        
         UsuarioTeste user = null;
+        
         try {
             Repository conexao = Repository.getInstace();
             conexao.open();
