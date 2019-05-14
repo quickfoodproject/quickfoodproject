@@ -12,8 +12,7 @@ public class UsuarioTesteDao {
     String UPDATE = "UPDATE USUARIO SET LOGIN = ?, PASSWORD = ?, NOME = ?, TELEFONE = ?, EMAIL = ?, REPOSTASEGURANCA = ?, IEPERMISSAO = ? WHERE ID = ?";
     String DELETE = "DELETE FROM USUARIO WHERE ID = ?";
     String SELECTALL = "SELECT * FROM USUARIO";
-    String SELECTBYID = "SELECT * FROM USUARIO WHERE ID = ?";
-    String LOGIN = "SELECT * FROM USUARIO WHERE LOGIN = ? AND PASSWORD = ?";
+    String SELECTBYID = "SELECT * FROM USUARIO WHERE ID = ";
 
     public void save(UsuarioTeste usuario) {
         try {
@@ -115,13 +114,9 @@ public class UsuarioTesteDao {
         try {
             Repository conexao = Repository.getInstace();
             conexao.open();
-
-            conexao.preparedStatement = conexao.conection.prepareStatement(SELECTBYID);
-            conexao.preparedStatement.setInt(1, id);
-            conexao.preparedStatement.execute();
-            
-//            conexao.statement = conexao.conection.createStatement();
-//            conexao.resultSet = conexao.statement.executeQuery(SELECTBYID + id);
+           
+            conexao.statement = conexao.conection.createStatement();
+            conexao.resultSet = conexao.statement.executeQuery(SELECTBYID + id);
 
             while (conexao.resultSet.next()) {
                 usuario = new UsuarioTeste();
@@ -146,17 +141,13 @@ public class UsuarioTesteDao {
     
     public UsuarioTeste logar(String usuario, String password) {        
         UsuarioTeste user = null;
+        
         try {
             Repository conexao = Repository.getInstace();
             conexao.open();
-            
-            conexao.preparedStatement = conexao.conection.prepareStatement("SELECT * FROM USUARIO WHERE LOGIN = ? AND PASSWORD = ?");
-            conexao.preparedStatement.setString(1, usuario);
-            conexao.preparedStatement.setString(2, password);
-            conexao.preparedStatement.execute();
 
-//            conexao.statement = conexao.conection.createStatement();
-//            conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM USUARIO WHERE LOGIN = '" + usuario + "' AND PASSWORD = '" + password + "'");
+            conexao.statement = conexao.conection.createStatement();
+            conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM USUARIO WHERE LOGIN = '" + usuario + "' AND PASSWORD = '" + password + "'");
 
             while (conexao.resultSet.next()) {
                 user = new UsuarioTeste();
