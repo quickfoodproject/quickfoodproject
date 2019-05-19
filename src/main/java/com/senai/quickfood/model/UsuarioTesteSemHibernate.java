@@ -2,7 +2,7 @@ package com.senai.quickfood.model;
 
 import java.io.Serializable;
 
-public class UsuarioTeste implements Serializable {
+public class UsuarioTesteSemHibernate implements Serializable {
 
     private int id;
     private String login;
@@ -13,10 +13,10 @@ public class UsuarioTeste implements Serializable {
     private String repostaSeguranca;
     private String iePermissao;
 
-    public UsuarioTeste() {
+    public UsuarioTesteSemHibernate() {
     }
 
-    public UsuarioTeste(int id) {
+    public UsuarioTesteSemHibernate(int id) {
         this.id = id;
     }
 

@@ -1,6 +1,6 @@
 package com.senai.quickfood.dao;
 
-import com.senai.quickfood.model.UsuarioTeste;
+import com.senai.quickfood.model.UsuarioTesteSemHibernate;
 import com.senai.quickfood.repository.Repository;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class UsuarioTesteDao {
     String SELECTALL = "SELECT * FROM USUARIO";
     String SELECTBYID = "SELECT * FROM USUARIO WHERE ID = ";
 
-    public void save(UsuarioTeste usuario) {
+    public void save(UsuarioTesteSemHibernate usuario) {
         try {
             Repository conexao = Repository.getInstace();
             conexao.open();
@@ -36,7 +36,7 @@ public class UsuarioTesteDao {
         }
     }
 
-    public void update(UsuarioTeste usuario) {
+    public void update(UsuarioTesteSemHibernate usuario) {
         try {
             Repository conexao = Repository.getInstace();
             conexao.open();
@@ -59,7 +59,7 @@ public class UsuarioTesteDao {
         }
     }
 
-    public void delete(UsuarioTeste usuario) {
+    public void delete(UsuarioTesteSemHibernate usuario) {
         try {
             Repository conexao = Repository.getInstace();
             conexao.open();
@@ -74,9 +74,9 @@ public class UsuarioTesteDao {
         }
     }
 
-    public List<UsuarioTeste> getAll() {
-        List<UsuarioTeste> usuarios = new ArrayList();
-        UsuarioTeste usuario = null;
+    public List<UsuarioTesteSemHibernate> getAll() {
+        List<UsuarioTesteSemHibernate> usuarios = new ArrayList();
+        UsuarioTesteSemHibernate usuario = null;
 
         try {
             Repository conexao = Repository.getInstace();
@@ -86,7 +86,7 @@ public class UsuarioTesteDao {
             conexao.resultSet = conexao.statement.executeQuery(SELECTALL);
 
             while (conexao.resultSet.next()) {
-                usuario = new UsuarioTeste();
+                usuario = new UsuarioTesteSemHibernate();
                 
                 usuario.setId(conexao.resultSet.getInt("id"));
                 usuario.setLogin(conexao.resultSet.getString("login"));
@@ -108,8 +108,8 @@ public class UsuarioTesteDao {
         return usuarios;
     }
     
-    public UsuarioTeste getById(int id) {
-       UsuarioTeste usuario = null;
+    public UsuarioTesteSemHibernate getById(int id) {
+       UsuarioTesteSemHibernate usuario = null;
 
         try {
             Repository conexao = Repository.getInstace();
@@ -119,7 +119,7 @@ public class UsuarioTesteDao {
             conexao.resultSet = conexao.statement.executeQuery(SELECTBYID + id);
 
             while (conexao.resultSet.next()) {
-                usuario = new UsuarioTeste();
+                usuario = new UsuarioTesteSemHibernate();
                 
                 usuario.setId(conexao.resultSet.getInt("id"));
                 usuario.setLogin(conexao.resultSet.getString("login"));
@@ -139,8 +139,8 @@ public class UsuarioTesteDao {
         return usuario;
     }
     
-    public UsuarioTeste logar(String usuario, String password) {        
-        UsuarioTeste user = null;
+    public UsuarioTesteSemHibernate logar(String usuario, String password) {        
+        UsuarioTesteSemHibernate user = null;
         
         try {
             Repository conexao = Repository.getInstace();
@@ -150,7 +150,7 @@ public class UsuarioTesteDao {
             conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM USUARIO WHERE LOGIN = '" + usuario + "' AND PASSWORD = '" + password + "'");
 
             while (conexao.resultSet.next()) {
-                user = new UsuarioTeste();
+                user = new UsuarioTesteSemHibernate();
                 
                 user.setId(conexao.resultSet.getInt("id"));
                 user.setLogin(conexao.resultSet.getString("login"));
