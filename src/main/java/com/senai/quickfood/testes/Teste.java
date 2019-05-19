@@ -1,8 +1,7 @@
 package com.senai.quickfood.testes;
 
+import com.senai.quickfood.controller.Utils;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Teste {
@@ -39,25 +38,8 @@ public class Teste {
 //           System.out.println("Usuário ou senha inválidos!");
 //       }
         try {
-            System.out.println(criptografar("Senha"));
+            System.out.println(Utils.criptografarSHA256("Senha"));
         } catch (Exception e) {
         }
-
     }
-
-    private static String criptografar(String pSenha) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        StringBuilder sb = new StringBuilder();
-
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] encodedhash = md.digest(pSenha.getBytes("UTF-8"));
-
-        for (byte b : encodedhash) {
-            sb.append(String.format("%02X", 0xFF & b));
-        }
-
-        String senhaHex = sb.toString();
-
-        return senhaHex;
-    }
-
 }
