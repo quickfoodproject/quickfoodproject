@@ -5,9 +5,9 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_bda16118a5482b1?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="8303cc180c69c9c"/>
+      <property name="javax.persistence.jdbc.user" value="bacf406b54e8ea"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="f7c9935339fea37"/>
+      <property name="javax.persistence.jdbc.password" value="8303cc180c69c9c"/>
     </properties>
   </persistence-unit>
 </persistence>
