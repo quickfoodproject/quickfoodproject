@@ -1,56 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.senai.quickfood.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Greg
- */
-@Entity
-@Table(name = "tbingredientereceita")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Tbingredientereceita.findAll", query = "SELECT t FROM Tbingredientereceita t")
-    , @NamedQuery(name = "Tbingredientereceita.findByBdID", query = "SELECT t FROM Tbingredientereceita t WHERE t.bdID = :bdID")
-    , @NamedQuery(name = "Tbingredientereceita.findByBdQuantidadeIngrediente", query = "SELECT t FROM Tbingredientereceita t WHERE t.bdQuantidadeIngrediente = :bdQuantidadeIngrediente")})
 public class Tbingredientereceita implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "bdID")
-    private Integer bdID;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "bdQuantidadeIngrediente")
-    private double bdQuantidadeIngrediente;
-    @JoinColumn(name = "bdFKUnidadeMedida", referencedColumnName = "bdID")
-    @ManyToOne
-    private Tbunidademedida bdFKUnidadeMedida;
-    @JoinColumn(name = "bdFKIngrediente", referencedColumnName = "dbID")
-    @ManyToOne
-    private Tbingrediente bdFKIngrediente;
-    @JoinColumn(name = "bdFKReceita", referencedColumnName = "bdID")
-    @ManyToOne
+   
+    private Integer bdID;    
+    private double bdQuantidadeIngrediente;   
+    private Tbunidademedida bdFKUnidadeMedida;    
+    private Tbingrediente bdFKIngrediente;   
     private Tbreceita bdFKReceita;
 
     public Tbingredientereceita() {

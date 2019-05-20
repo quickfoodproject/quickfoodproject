@@ -1,71 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.senai.quickfood.model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Greg
- */
-@Entity
-@Table(name = "tbusuario")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Tbusuario.findAll", query = "SELECT t FROM Tbusuario t")
-    , @NamedQuery(name = "Tbusuario.findByBdID", query = "SELECT t FROM Tbusuario t WHERE t.bdID = :bdID")
-    , @NamedQuery(name = "Tbusuario.findByBdLogin", query = "SELECT t FROM Tbusuario t WHERE t.bdLogin = :bdLogin")
-    , @NamedQuery(name = "Tbusuario.findByBdSenha", query = "SELECT t FROM Tbusuario t WHERE t.bdSenha = :bdSenha")
-    , @NamedQuery(name = "Tbusuario.findByBdUsuarioAdministrador", query = "SELECT t FROM Tbusuario t WHERE t.bdUsuarioAdministrador = :bdUsuarioAdministrador")})
 public class Tbusuario implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "bdID")
-    private Integer bdID;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "bdLogin")
-    private String bdLogin;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "bdSenha")
+   
+    private Integer bdID;   
+    private String bdLogin;        
     private String bdSenha;
-    @Column(name = "bdUsuarioAdministrador")
     private Boolean bdUsuarioAdministrador;
-    @OneToMany(mappedBy = "bdDKUsuario")
     private Collection<Tbreceita> tbreceitaCollection;
-    @OneToMany(mappedBy = "bdFKUsuario")
-    private Collection<Tbcomentario> tbcomentarioCollection;
-    @JoinColumn(name = "bdFKPessoa", referencedColumnName = "bdID")
-    @ManyToOne
-    private Tbpessoa bdFKPessoa;
-    @OneToMany(mappedBy = "bdFKUsuario")
+    private Collection<Tbcomentario> tbcomentarioCollection;    
     private Collection<Tbavaliacao> tbavaliacaoCollection;
+    private Tbpessoa bdFKPessoa; 
 
     public Tbusuario() {
     }
@@ -112,7 +59,6 @@ public class Tbusuario implements Serializable {
         this.bdUsuarioAdministrador = bdUsuarioAdministrador;
     }
 
-    @XmlTransient
     public Collection<Tbreceita> getTbreceitaCollection() {
         return tbreceitaCollection;
     }
@@ -121,7 +67,6 @@ public class Tbusuario implements Serializable {
         this.tbreceitaCollection = tbreceitaCollection;
     }
 
-    @XmlTransient
     public Collection<Tbcomentario> getTbcomentarioCollection() {
         return tbcomentarioCollection;
     }
@@ -138,7 +83,6 @@ public class Tbusuario implements Serializable {
         this.bdFKPessoa = bdFKPessoa;
     }
 
-    @XmlTransient
     public Collection<Tbavaliacao> getTbavaliacaoCollection() {
         return tbavaliacaoCollection;
     }

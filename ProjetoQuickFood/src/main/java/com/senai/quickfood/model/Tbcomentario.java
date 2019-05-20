@@ -6,50 +6,12 @@
 package com.senai.quickfood.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Greg
- */
-@Entity
-@Table(name = "tbcomentario")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Tbcomentario.findAll", query = "SELECT t FROM Tbcomentario t")
-    , @NamedQuery(name = "Tbcomentario.findByBdID", query = "SELECT t FROM Tbcomentario t WHERE t.bdID = :bdID")
-    , @NamedQuery(name = "Tbcomentario.findByBdDescricao", query = "SELECT t FROM Tbcomentario t WHERE t.bdDescricao = :bdDescricao")})
 public class Tbcomentario implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "bdID")
+      
     private Integer bdID;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "bdDescricao")
     private String bdDescricao;
-    @JoinColumn(name = "bdFKReceita", referencedColumnName = "bdID")
-    @ManyToOne
     private Tbreceita bdFKReceita;
-    @JoinColumn(name = "bdFKUsuario", referencedColumnName = "bdID")
-    @ManyToOne
     private Tbusuario bdFKUsuario;
 
     public Tbcomentario() {
