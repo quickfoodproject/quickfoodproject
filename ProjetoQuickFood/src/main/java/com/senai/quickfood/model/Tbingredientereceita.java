@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Tbingredientereceita implements Serializable {
    
-    private Integer bdID;    
+    private int bdID;    
     private double bdQuantidadeIngrediente;   
     private Tbunidademedida bdFKUnidadeMedida;    
     private Tbingrediente bdFKIngrediente;   
@@ -13,20 +13,20 @@ public class Tbingredientereceita implements Serializable {
     public Tbingredientereceita() {
     }
 
-    public Tbingredientereceita(Integer bdID) {
+    public Tbingredientereceita(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbingredientereceita(Integer bdID, double bdQuantidadeIngrediente) {
+    public Tbingredientereceita(int bdID, double bdQuantidadeIngrediente) {
         this.bdID = bdID;
         this.bdQuantidadeIngrediente = bdQuantidadeIngrediente;
     }
 
-    public Integer getBdID() {
+    public int getBdID() {
         return bdID;
     }
 
-    public void setBdID(Integer bdID) {
+    public void setBdID(int bdID) {
         this.bdID = bdID;
     }
 
@@ -60,27 +60,7 @@ public class Tbingredientereceita implements Serializable {
 
     public void setBdFKReceita(Tbreceita bdFKReceita) {
         this.bdFKReceita = bdFKReceita;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (bdID != null ? bdID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tbingredientereceita)) {
-            return false;
-        }
-        Tbingredientereceita other = (Tbingredientereceita) object;
-        if ((this.bdID == null && other.bdID != null) || (this.bdID != null && !this.bdID.equals(other.bdID))) {
-            return false;
-        }
-        return true;
-    }
+    } 
 
     @Override
     public String toString() {

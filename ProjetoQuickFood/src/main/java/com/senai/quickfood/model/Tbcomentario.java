@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class Tbcomentario implements Serializable {
       
-    private Integer bdID;
+    private int bdID;
     private String bdDescricao;
     private Tbreceita bdFKReceita;
     private Tbusuario bdFKUsuario;
@@ -17,20 +17,20 @@ public class Tbcomentario implements Serializable {
     public Tbcomentario() {
     }
 
-    public Tbcomentario(Integer bdID) {
+    public Tbcomentario(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbcomentario(Integer bdID, String bdDescricao) {
+    public Tbcomentario(int bdID, String bdDescricao) {
         this.bdID = bdID;
         this.bdDescricao = bdDescricao;
     }
 
-    public Integer getBdID() {
+    public int getBdID() {
         return bdID;
     }
 
-    public void setBdID(Integer bdID) {
+    public void setBdID(int bdID) {
         this.bdID = bdID;
     }
 
@@ -57,27 +57,7 @@ public class Tbcomentario implements Serializable {
     public void setBdFKUsuario(Tbusuario bdFKUsuario) {
         this.bdFKUsuario = bdFKUsuario;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (bdID != null ? bdID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tbcomentario)) {
-            return false;
-        }
-        Tbcomentario other = (Tbcomentario) object;
-        if ((this.bdID == null && other.bdID != null) || (this.bdID != null && !this.bdID.equals(other.bdID))) {
-            return false;
-        }
-        return true;
-    }
-
+  
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbcomentario[ bdID=" + bdID + " ]";

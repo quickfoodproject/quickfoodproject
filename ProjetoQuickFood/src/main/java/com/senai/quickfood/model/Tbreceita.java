@@ -5,10 +5,11 @@ import java.util.Collection;
 
 public class Tbreceita implements Serializable {
    
-    private Integer bdID;    
+    private int bdID;    
     private String bdNome;    
     private String bdDescricao;   
-    private String bdURLlmagem;   
+    private String bdURLlmagem;  
+    private int bdCurtidas;   
     private Tbusuario bdDKUsuario;
     private Collection<Tbcomentario> tbcomentarioCollection;    
     private Collection<Tbingrediente> tbingredienteCollection;    
@@ -17,21 +18,21 @@ public class Tbreceita implements Serializable {
     public Tbreceita() {
     }
 
-    public Tbreceita(Integer bdID) {
+    public Tbreceita(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbreceita(Integer bdID, String bdNome, String bdDescricao) {
+    public Tbreceita(int bdID, String bdNome, String bdDescricao) {
         this.bdID = bdID;
         this.bdNome = bdNome;
         this.bdDescricao = bdDescricao;
     }
 
-    public Integer getBdID() {
+    public int getBdID() {
         return bdID;
     }
 
-    public void setBdID(Integer bdID) {
+    public void setBdID(int bdID) {
         this.bdID = bdID;
     }
 
@@ -59,6 +60,14 @@ public class Tbreceita implements Serializable {
         this.bdURLlmagem = bdURLlmagem;
     }
 
+    public int getBdCurtidas() {
+        return bdCurtidas;
+    }
+
+    public void setBdCurtidas(int bdCurtidas) {
+        this.bdCurtidas = bdCurtidas;
+    }    
+    
     public Tbusuario getBdDKUsuario() {
         return bdDKUsuario;
     }
@@ -90,27 +99,7 @@ public class Tbreceita implements Serializable {
     public void setTbavaliacaoCollection(Collection<Tbavaliacao> tbavaliacaoCollection) {
         this.tbavaliacaoCollection = tbavaliacaoCollection;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (bdID != null ? bdID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tbreceita)) {
-            return false;
-        }
-        Tbreceita other = (Tbreceita) object;
-        if ((this.bdID == null && other.bdID != null) || (this.bdID != null && !this.bdID.equals(other.bdID))) {
-            return false;
-        }
-        return true;
-    }
-
+   
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbreceita[ bdID=" + bdID + " ]";

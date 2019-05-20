@@ -5,10 +5,10 @@ import java.util.Collection;
 
 public class Tbusuario implements Serializable {
    
-    private Integer bdID;   
+    private int bdID;   
     private String bdLogin;        
     private String bdSenha;
-    private Boolean bdUsuarioAdministrador;
+    private boolean bdUsuarioAdministrador;
     private Collection<Tbreceita> tbreceitaCollection;
     private Collection<Tbcomentario> tbcomentarioCollection;    
     private Collection<Tbavaliacao> tbavaliacaoCollection;
@@ -17,21 +17,21 @@ public class Tbusuario implements Serializable {
     public Tbusuario() {
     }
 
-    public Tbusuario(Integer bdID) {
+    public Tbusuario(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbusuario(Integer bdID, String bdLogin, String bdSenha) {
+    public Tbusuario(int bdID, String bdLogin, String bdSenha) {
         this.bdID = bdID;
         this.bdLogin = bdLogin;
         this.bdSenha = bdSenha;
     }
 
-    public Integer getBdID() {
+    public int getBdID() {
         return bdID;
     }
 
-    public void setBdID(Integer bdID) {
+    public void setBdID(int bdID) {
         this.bdID = bdID;
     }
 
@@ -51,11 +51,11 @@ public class Tbusuario implements Serializable {
         this.bdSenha = bdSenha;
     }
 
-    public Boolean getBdUsuarioAdministrador() {
+    public boolean getBdUsuarioAdministrador() {
         return bdUsuarioAdministrador;
     }
 
-    public void setBdUsuarioAdministrador(Boolean bdUsuarioAdministrador) {
+    public void setBdUsuarioAdministrador(boolean bdUsuarioAdministrador) {
         this.bdUsuarioAdministrador = bdUsuarioAdministrador;
     }
 
@@ -90,27 +90,7 @@ public class Tbusuario implements Serializable {
     public void setTbavaliacaoCollection(Collection<Tbavaliacao> tbavaliacaoCollection) {
         this.tbavaliacaoCollection = tbavaliacaoCollection;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (bdID != null ? bdID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tbusuario)) {
-            return false;
-        }
-        Tbusuario other = (Tbusuario) object;
-        if ((this.bdID == null && other.bdID != null) || (this.bdID != null && !this.bdID.equals(other.bdID))) {
-            return false;
-        }
-        return true;
-    }
-
+  
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbusuario[ bdID=" + bdID + " ]";

@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Tbpessoa implements Serializable {
    
-    private Integer bdID;   
+    private int bdID;   
     private String bdNome;
     private String bdSexo;   
     private Date bdDataNascimento;    
@@ -15,22 +15,22 @@ public class Tbpessoa implements Serializable {
     public Tbpessoa() {
     }
 
-    public Tbpessoa(Integer bdID) {
+    public Tbpessoa(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbpessoa(Integer bdID, String bdNome, String bdSexo, Date bdDataNascimento) {
+    public Tbpessoa(int bdID, String bdNome, String bdSexo, Date bdDataNascimento) {
         this.bdID = bdID;
         this.bdNome = bdNome;
         this.bdSexo = bdSexo;
         this.bdDataNascimento = bdDataNascimento;
     }
 
-    public Integer getBdID() {
+    public int getBdID() {
         return bdID;
     }
 
-    public void setBdID(Integer bdID) {
+    public void setBdID(int bdID) {
         this.bdID = bdID;
     }
 
@@ -64,26 +64,6 @@ public class Tbpessoa implements Serializable {
 
     public void setTbusuarioCollection(Collection<Tbusuario> tbusuarioCollection) {
         this.tbusuarioCollection = tbusuarioCollection;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (bdID != null ? bdID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tbpessoa)) {
-            return false;
-        }
-        Tbpessoa other = (Tbpessoa) object;
-        if ((this.bdID == null && other.bdID != null) || (this.bdID != null && !this.bdID.equals(other.bdID))) {
-            return false;
-        }
-        return true;
     }
 
     @Override
