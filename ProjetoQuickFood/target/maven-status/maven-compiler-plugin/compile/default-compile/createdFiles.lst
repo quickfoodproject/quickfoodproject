@@ -1,0 +1,5 @@
+com\senai\quickfood\repository\Hibernate.class
+com\senai\quickfood\model\UsuarioTeste.class
+com\senai\quickfood\dao\UsuarioTesteDao.class
+com\senai\quickfood\testes\Teste.class
+com\senai\quickfood\repository\Repository.class
