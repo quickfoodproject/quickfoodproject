@@ -24,7 +24,7 @@ public class Utils {
             } catch (UnsupportedEncodingException e) {
                 System.err.println("Não foi possível criptografar o conteúdo: UnsupportedEncodingException: " + e.toString());
             }
-
+            
             senhaHex = sb.toString();
         } catch (NoSuchAlgorithmException e) {
             System.err.println("Não foi possível criptografar o conteúdo: NoSuchAlgorithmException: " + e.toString());
