@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.util.Collection;
 
 public class Tbusuario implements Serializable {
-   
-    private int bdID;   
-    private String bdLogin;        
+
+    private int bdID;
+    private String bdLogin;
     private String bdSenha;
+    private String bdEmail;
     private boolean bdUsuarioAdministrador;
     private Collection<Tbreceita> tbreceitaCollection;
-    private Collection<Tbcomentario> tbcomentarioCollection;    
+    private Collection<Tbcomentario> tbcomentarioCollection;
     private Collection<Tbavaliacao> tbavaliacaoCollection;
-    private Tbpessoa bdFKPessoa; 
+    private Tbpessoa bdFKPessoa;
 
     public Tbusuario() {
     }
@@ -55,6 +56,14 @@ public class Tbusuario implements Serializable {
         return bdUsuarioAdministrador;
     }
 
+    public String getBdEmail() {
+        return bdEmail;
+    }
+
+    public void setBdEmail(String bdSEmail) {
+        this.bdEmail = bdSEmail;
+    }
+
     public void setBdUsuarioAdministrador(boolean bdUsuarioAdministrador) {
         this.bdUsuarioAdministrador = bdUsuarioAdministrador;
     }
@@ -90,10 +99,10 @@ public class Tbusuario implements Serializable {
     public void setTbavaliacaoCollection(Collection<Tbavaliacao> tbavaliacaoCollection) {
         this.tbavaliacaoCollection = tbavaliacaoCollection;
     }
-  
+
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbusuario[ bdID=" + bdID + " ]";
     }
-    
+
 }
