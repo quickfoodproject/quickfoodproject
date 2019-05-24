@@ -11,7 +11,6 @@ public class Tbusuario implements Serializable {
     private String bdEmail;
     private boolean bdUsuarioAdministrador;
     private Collection<Tbreceita> tbreceitaCollection;
-    private Collection<Tbcomentario> tbcomentarioCollection;
     private Collection<Tbavaliacao> tbavaliacaoCollection;
     private Tbpessoa bdFKPessoa;
 
@@ -74,14 +73,6 @@ public class Tbusuario implements Serializable {
 
     public void setTbreceitaCollection(Collection<Tbreceita> tbreceitaCollection) {
         this.tbreceitaCollection = tbreceitaCollection;
-    }
-
-    public Collection<Tbcomentario> getTbcomentarioCollection() {
-        return tbcomentarioCollection;
-    }
-
-    public void setTbcomentarioCollection(Collection<Tbcomentario> tbcomentarioCollection) {
-        this.tbcomentarioCollection = tbcomentarioCollection;
     }
 
     public Tbpessoa getBdFKPessoa() {

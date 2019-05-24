@@ -10,8 +10,7 @@ public class Tbreceita implements Serializable {
     private String bdDescricao;   
     private String bdURLlmagem;  
     private int bdCurtidas;   
-    private Tbusuario bdDKUsuario;
-    private Collection<Tbcomentario> tbcomentarioCollection;    
+    private Tbusuario bdDKUsuario;  
     private Collection<Tbingrediente> tbingredienteCollection;    
     private Collection<Tbavaliacao> tbavaliacaoCollection;
 
@@ -75,15 +74,7 @@ public class Tbreceita implements Serializable {
     public void setBdDKUsuario(Tbusuario bdDKUsuario) {
         this.bdDKUsuario = bdDKUsuario;
     }
-
-    public Collection<Tbcomentario> getTbcomentarioCollection() {
-        return tbcomentarioCollection;
-    }
-
-    public void setTbcomentarioCollection(Collection<Tbcomentario> tbcomentarioCollection) {
-        this.tbcomentarioCollection = tbcomentarioCollection;
-    }
-    
+  
     public Collection<Tbingrediente> getTbingredienteCollection() {
         return tbingredienteCollection;
     }
