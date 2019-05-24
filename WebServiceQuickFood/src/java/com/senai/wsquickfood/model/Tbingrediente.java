@@ -6,6 +6,7 @@ public class Tbingrediente implements Serializable {
     
     private int dbID;    
     private String bdNome; 
+    private int quantidade; 
 
     public Tbingrediente() {
     }
@@ -35,6 +36,14 @@ public class Tbingrediente implements Serializable {
         this.bdNome = bdNome;
     }     
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+        
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbingrediente[ dbID=" + dbID + " ]";
