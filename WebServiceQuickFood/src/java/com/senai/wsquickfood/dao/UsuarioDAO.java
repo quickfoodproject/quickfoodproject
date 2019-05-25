@@ -8,12 +8,13 @@ import java.sql.SQLException;
 public class UsuarioDAO {
 
     String SELECT_RECUPERA_SENHA = "SELECT BDID, BDEMAIL, BDLOGIN FROM TBUSUARIO WHERE BDLOGIN = ";
+    String UPDATE_SENHA = "UPDATE TBUSUARIO SET BDSENHA = ? WHERE BDID = ?";
     String ID = "bdID";
     String EMAIL = "bdEmail";
     String LOGIN = "bdLogin";
     String SENHA = "bdSenha";
 
-    public Tbusuario recuperaSenhaDAO(String login) {
+    public Tbusuario recuperaUsuarioEmailDAO(String login) {
 
         Repository conexao = Repository.getInstace();
         Tbusuario usuario = new Tbusuario();
@@ -25,7 +26,7 @@ public class UsuarioDAO {
             conexao.resultSet = conexao.statement.executeQuery(SELECT_RECUPERA_SENHA + "'" + login + "'");
             System.out.println(SELECT_RECUPERA_SENHA + "'" + login + "'");
 
-            while (conexao.resultSet.next()) {                
+            while (conexao.resultSet.next()) {
                 usuario.setBdID(conexao.resultSet.getInt(ID));
                 usuario.setBdEmail(conexao.resultSet.getString(EMAIL));
                 usuario.setBdLogin(conexao.resultSet.getString(LOGIN));
@@ -38,6 +39,28 @@ public class UsuarioDAO {
         }
 
         return usuario;
+    }
+
+    public void gravaNovaSenha(int id, String senha) {
+
+        Repository conexao = Repository.getInstace();
+        String senhaCriptografada = Utils.criptografarSHA256(senha);
+        Tbusuario usuario = new Tbusuario();
+
+        try {
+            conexao.open();
+
+            conexao.preparedStatement = conexao.conection.prepareStatement(UPDATE_SENHA);
+            conexao.preparedStatement.setString(1, senhaCriptografada);
+            conexao.preparedStatement.setInt(2, id);
+            conexao.preparedStatement.execute();
+
+        } catch (SQLException e) {
+            System.err.println("Erro na execução SQL: UsuarioDAO.gravaNovaSenha - " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
     }
 
     public Tbusuario validaLoginDAO(String login, String senha) {
@@ -63,7 +86,7 @@ public class UsuarioDAO {
         } finally {
             conexao.close();
         }
-        
+
         return usuario;
     }
 }

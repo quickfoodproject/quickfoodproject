@@ -5,6 +5,7 @@
  */
 package com.senai.wsquickfood.ws;
 
+import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
 import com.senai.wsquickfood.model.Tbusuario;
 import javax.ws.rs.core.Context;
@@ -18,48 +19,46 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * REST Web Service
- *
- * @author Greg
- */
 @Path("quickfood")
 public class UsuarioWs {
 
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of Ws
-     */
     public UsuarioWs() {
     }
-
-    /**
-     * Retrieves representation of an instance of com.senai.wsquickfood.ws.Ws
-     *
-     * @return an instance of java.lang.String
-     */
+  
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/recuperaSenha/{login}")
-    public Response recuperaSenha(@PathParam("login") String login) {
+    public Response solicitarNovaSenha(@PathParam("login") String login) {
         UsuarioDAO dao = new UsuarioDAO();
-        Tbusuario user = dao.recuperaSenhaDAO(login);
-        try {
+        Tbusuario user = dao.recuperaUsuarioEmailDAO(login);
+        
+        String novaSenha;
+        String titulo;
+        String mensagem;        
+        
+        if(user.getBdID() != 0) {
+            
+            novaSenha = Utils.geradorDeSenhaRandomica();
+            titulo = "Solicitação de Senha";            
+            mensagem = "Sua nova senha foi enviada por email. Após o novo login com esta senha, recomendamos você fazer sua alteração.\n\n Nova senha: " + novaSenha;
+            dao.gravaNovaSenha(user.getBdID(), novaSenha);
+            Utils.enviaEmail(user.getBdEmail(), titulo, mensagem);
+        
+        }       
+        
+        try {            
             return Response.status(Response.Status.OK).entity(user).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
 
-    /**
-     * PUT method for updating or creating an instance of Ws
-     *
-     * @param content representation for the resource
-     */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
+    
 }

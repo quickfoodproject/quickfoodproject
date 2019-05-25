@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/model/Tbunidademedida.java</file>
-            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/dao/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/model/Tbingrediente.java</file>
+            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/ws/ApplicationConfig.java</file>
+            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/ws/UsuarioWs.java</file>
             <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/model/Tbreceita.java</file>
-            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/controller/Utils.java</file>
+            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/testes/Teste.java</file>
             <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/model/Tbusuario.java</file>
         </group>
     </open-files>

@@ -1,8 +1,11 @@
 package com.senai.wsquickfood.testes;
 
 import com.senai.wsquickfood.controller.Utils;
+import com.senai.wsquickfood.dao.UsuarioDAO;
+import com.senai.wsquickfood.model.Tbusuario;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -46,8 +49,15 @@ public class Teste {
 //            System.out.println(Utils.criptografarSHA256("Senha"));
 //        } catch (Exception e) {
 //        }
-
-    Utils.enviaEmail("gregoryalves@hotmail.com", "Teste", "Teste Java");
+//    Tbusuario user = new Tbusuario();
+//    
+//    UsuarioDAO usuario = new UsuarioDAO();
+//    
+//    user = usuario.recuperaSenhaDAO("Leonardo");
+//    
+//        System.out.println(user.toString());
+//    
+//Utils.enviaEmail("gregoryalves@hotmail.com", "Teste", "Teste Java");
 
     }
 }
