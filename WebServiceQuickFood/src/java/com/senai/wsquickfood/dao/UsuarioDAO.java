@@ -50,7 +50,7 @@ public class UsuarioDAO {
             conexao.open();
 
             conexao.statement = conexao.conection.createStatement();
-            conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM TBUSUARIO WHERE LOGIN = " + login + " AND SENHA = " + senhaCriptografada);
+            conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM TBUSUARIO WHERE LOGIN = '" + login + "' AND SENHA = '" + senhaCriptografada + "'");
 
             while (conexao.resultSet.next()) {
                 usuario.setBdID(conexao.resultSet.getInt(ID));
