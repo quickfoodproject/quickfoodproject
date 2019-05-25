@@ -16,15 +16,16 @@ public class UsuarioDAO {
     public Tbusuario recuperaSenhaDAO(String login) {
 
         Repository conexao = Repository.getInstace();
-        Tbusuario usuario = null;
+        Tbusuario usuario = new Tbusuario();
 
         try {
             conexao.open();
 
             conexao.statement = conexao.conection.createStatement();
-            conexao.resultSet = conexao.statement.executeQuery(SELECT_RECUPERA_SENHA + login);
+            conexao.resultSet = conexao.statement.executeQuery(SELECT_RECUPERA_SENHA + "'" + login + "'");
+            System.out.println(SELECT_RECUPERA_SENHA + "'" + login + "'");
 
-            while (conexao.resultSet.next()) {
+            while (conexao.resultSet.next()) {                
                 usuario.setBdID(conexao.resultSet.getInt(ID));
                 usuario.setBdEmail(conexao.resultSet.getString(EMAIL));
                 usuario.setBdLogin(conexao.resultSet.getString(LOGIN));
@@ -43,7 +44,7 @@ public class UsuarioDAO {
 
         Repository conexao = Repository.getInstace();
         String senhaCriptografada = Utils.criptografarSHA256(senha);
-        Tbusuario usuario = null;
+        Tbusuario usuario = new Tbusuario();
 
         try {
             conexao.open();
