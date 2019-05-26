@@ -3,25 +3,25 @@ package com.senai.wsquickfood.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-public class Tbreceita implements Serializable {
+public class TbReceita implements Serializable {
    
     private int bdID;    
     private String bdNome;    
     private String bdDescricao;   
     private String bdURLlmagem;  
     private int bdCurtidas;   
-    private Tbusuario bdDKUsuario;  
-    private Collection<Tbingrediente> tbingredienteCollection;    
-    private Collection<Tbavaliacao> tbavaliacaoCollection;
+    private TbUsuario bdDKUsuario;  
+    private Collection<TbIngrediente> tbingredienteCollection;    
+    private Collection<TbAvaliacao> tbavaliacaoCollection;
 
-    public Tbreceita() {
+    public TbReceita() {
     }
 
-    public Tbreceita(int bdID) {
+    public TbReceita(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbreceita(int bdID, String bdNome, String bdDescricao) {
+    public TbReceita(int bdID, String bdNome, String bdDescricao) {
         this.bdID = bdID;
         this.bdNome = bdNome;
         this.bdDescricao = bdDescricao;
@@ -67,27 +67,27 @@ public class Tbreceita implements Serializable {
         this.bdCurtidas = bdCurtidas;
     }    
     
-    public Tbusuario getBdDKUsuario() {
+    public TbUsuario getBdDKUsuario() {
         return bdDKUsuario;
     }
 
-    public void setBdDKUsuario(Tbusuario bdDKUsuario) {
+    public void setBdDKUsuario(TbUsuario bdDKUsuario) {
         this.bdDKUsuario = bdDKUsuario;
     }
   
-    public Collection<Tbingrediente> getTbingredienteCollection() {
+    public Collection<TbIngrediente> getTbingredienteCollection() {
         return tbingredienteCollection;
     }
 
-    public void setTbingredienteCollection(Collection<Tbingrediente> tbingredienteCollection) {
+    public void setTbingredienteCollection(Collection<TbIngrediente> tbingredienteCollection) {
         this.tbingredienteCollection = tbingredienteCollection;
     }
    
-    public Collection<Tbavaliacao> getTbavaliacaoCollection() {
+    public Collection<TbAvaliacao> getTbavaliacaoCollection() {
         return tbavaliacaoCollection;
     }
 
-    public void setTbavaliacaoCollection(Collection<Tbavaliacao> tbavaliacaoCollection) {
+    public void setTbavaliacaoCollection(Collection<TbAvaliacao> tbavaliacaoCollection) {
         this.tbavaliacaoCollection = tbavaliacaoCollection;
     }
    

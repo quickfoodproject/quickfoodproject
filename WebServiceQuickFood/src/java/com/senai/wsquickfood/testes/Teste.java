@@ -2,7 +2,7 @@ package com.senai.wsquickfood.testes;
 
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
-import com.senai.wsquickfood.model.Tbusuario;
+import com.senai.wsquickfood.model.TbUsuario;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;

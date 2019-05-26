@@ -5,10 +5,8 @@
         <group>
             <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/ws/ApplicationConfig.java</file>
             <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/ws/UsuarioWs.java</file>
-            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/model/Tbreceita.java</file>
             <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/dao/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/testes/Teste.java</file>
-            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/model/Tbusuario.java</file>
+            <file>file:/C:/Users/Greg/Documents/NetBeansProjects/quickfoodproject/WebServiceQuickFood/src/java/com/senai/wsquickfood/controller/Utils.java</file>
         </group>
     </open-files>
 </project-private>

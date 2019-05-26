@@ -3,25 +3,25 @@ package com.senai.wsquickfood.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-public class Tbusuario implements Serializable {
-
+public class TbUsuario implements Serializable {
+    
     private int bdID;
     private String bdLogin;
     private String bdSenha;
     private String bdEmail;
     private boolean bdUsuarioAdministrador;
-    private Collection<Tbreceita> tbreceitaCollection;
-    private Collection<Tbavaliacao> tbavaliacaoCollection;
-    private Tbpessoa bdFKPessoa;
+    private Collection<TbReceita> tbreceitaCollection;
+    private Collection<TbAvaliacao> tbavaliacaoCollection;
+    private TbPessoa bdFKPessoa;
 
-    public Tbusuario() {
+    public TbUsuario() {
     }
 
-    public Tbusuario(int bdID) {
+    public TbUsuario(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbusuario(int bdID, String bdLogin, String bdSenha) {
+    public TbUsuario(int bdID, String bdLogin, String bdSenha) {
         this.bdID = bdID;
         this.bdLogin = bdLogin;
         this.bdSenha = bdSenha;
@@ -67,27 +67,27 @@ public class Tbusuario implements Serializable {
         this.bdUsuarioAdministrador = bdUsuarioAdministrador;
     }
 
-    public Collection<Tbreceita> getTbreceitaCollection() {
+    public Collection<TbReceita> getTbreceitaCollection() {
         return tbreceitaCollection;
     }
 
-    public void setTbreceitaCollection(Collection<Tbreceita> tbreceitaCollection) {
+    public void setTbreceitaCollection(Collection<TbReceita> tbreceitaCollection) {
         this.tbreceitaCollection = tbreceitaCollection;
     }
 
-    public Tbpessoa getBdFKPessoa() {
+    public TbPessoa getBdFKPessoa() {
         return bdFKPessoa;
     }
 
-    public void setBdFKPessoa(Tbpessoa bdFKPessoa) {
+    public void setBdFKPessoa(TbPessoa bdFKPessoa) {
         this.bdFKPessoa = bdFKPessoa;
     }
 
-    public Collection<Tbavaliacao> getTbavaliacaoCollection() {
+    public Collection<TbAvaliacao> getTbavaliacaoCollection() {
         return tbavaliacaoCollection;
     }
 
-    public void setTbavaliacaoCollection(Collection<Tbavaliacao> tbavaliacaoCollection) {
+    public void setTbavaliacaoCollection(Collection<TbAvaliacao> tbavaliacaoCollection) {
         this.tbavaliacaoCollection = tbavaliacaoCollection;
     }
 
