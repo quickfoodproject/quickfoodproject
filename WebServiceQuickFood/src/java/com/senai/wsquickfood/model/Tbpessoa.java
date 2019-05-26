@@ -4,22 +4,22 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-public class Tbpessoa implements Serializable {
-   
+public class TbPessoa implements Serializable {
+       
     private int bdID;   
     private String bdNome;
     private String bdSexo;   
     private Date bdDataNascimento;    
-    private Collection<Tbusuario> tbusuarioCollection;
+    private Collection<TbUsuario> tbusuarioCollection;
 
-    public Tbpessoa() {
+    public TbPessoa() {
     }
 
-    public Tbpessoa(int bdID) {
+    public TbPessoa(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbpessoa(int bdID, String bdNome, String bdSexo, Date bdDataNascimento) {
+    public TbPessoa(int bdID, String bdNome, String bdSexo, Date bdDataNascimento) {
         this.bdID = bdID;
         this.bdNome = bdNome;
         this.bdSexo = bdSexo;
@@ -58,11 +58,11 @@ public class Tbpessoa implements Serializable {
         this.bdDataNascimento = bdDataNascimento;
     }
 
-    public Collection<Tbusuario> getTbusuarioCollection() {
+    public Collection<TbUsuario> getTbusuarioCollection() {
         return tbusuarioCollection;
     }
 
-    public void setTbusuarioCollection(Collection<Tbusuario> tbusuarioCollection) {
+    public void setTbusuarioCollection(Collection<TbUsuario> tbusuarioCollection) {
         this.tbusuarioCollection = tbusuarioCollection;
     }
 

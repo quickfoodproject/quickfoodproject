@@ -2,17 +2,17 @@ package com.senai.wsquickfood.model;
 
 import java.io.Serializable;
 
-public class Tbavaliacao implements Serializable {
-
+public class TbAvaliacao implements Serializable {
+    
     private int bdID;
     private boolean bdJaCurtiu;
-    private Tbreceita bdFKReceita;
-    private Tbusuario bdFKUsuario;
+    private TbReceita bdFKReceita;
+    private TbUsuario bdFKUsuario;
 
-    public Tbavaliacao() {
+    public TbAvaliacao() {
     }
 
-    public Tbavaliacao(int bdID) {
+    public TbAvaliacao(int bdID) {
         this.bdID = bdID;
     }
 
@@ -32,19 +32,19 @@ public class Tbavaliacao implements Serializable {
         this.bdJaCurtiu = bdJaCurtiu;
     }
 
-    public Tbreceita getBdFKReceita() {
+    public TbReceita getBdFKReceita() {
         return bdFKReceita;
     }
 
-    public void setBdFKReceita(Tbreceita bdFKReceita) {
+    public void setBdFKReceita(TbReceita bdFKReceita) {
         this.bdFKReceita = bdFKReceita;
     }
 
-    public Tbusuario getBdFKUsuario() {
+    public TbUsuario getBdFKUsuario() {
         return bdFKUsuario;
     }
 
-    public void setBdFKUsuario(Tbusuario bdFKUsuario) {
+    public void setBdFKUsuario(TbUsuario bdFKUsuario) {
         this.bdFKUsuario = bdFKUsuario;
     }
 

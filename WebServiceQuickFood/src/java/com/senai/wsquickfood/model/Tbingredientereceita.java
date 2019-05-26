@@ -2,22 +2,22 @@ package com.senai.wsquickfood.model;
 
 import java.io.Serializable;
 
-public class Tbingredientereceita implements Serializable {
-   
+public class TbIngredienteReceita implements Serializable {
+       
     private int bdID;    
     private double bdQuantidadeIngrediente;   
-    private Tbunidademedida bdFKUnidadeMedida;    
-    private Tbingrediente bdFKIngrediente;   
-    private Tbreceita bdFKReceita;
+    private TbUnidadeMedida bdFKUnidadeMedida;    
+    private TbIngrediente bdFKIngrediente;   
+    private TbReceita bdFKReceita;
 
-    public Tbingredientereceita() {
+    public TbIngredienteReceita() {
     }
 
-    public Tbingredientereceita(int bdID) {
+    public TbIngredienteReceita(int bdID) {
         this.bdID = bdID;
     }
 
-    public Tbingredientereceita(int bdID, double bdQuantidadeIngrediente) {
+    public TbIngredienteReceita(int bdID, double bdQuantidadeIngrediente) {
         this.bdID = bdID;
         this.bdQuantidadeIngrediente = bdQuantidadeIngrediente;
     }
@@ -38,27 +38,27 @@ public class Tbingredientereceita implements Serializable {
         this.bdQuantidadeIngrediente = bdQuantidadeIngrediente;
     }
 
-    public Tbunidademedida getBdFKUnidadeMedida() {
+    public TbUnidadeMedida getBdFKUnidadeMedida() {
         return bdFKUnidadeMedida;
     }
 
-    public void setBdFKUnidadeMedida(Tbunidademedida bdFKUnidadeMedida) {
+    public void setBdFKUnidadeMedida(TbUnidadeMedida bdFKUnidadeMedida) {
         this.bdFKUnidadeMedida = bdFKUnidadeMedida;
     }
 
-    public Tbingrediente getBdFKIngrediente() {
+    public TbIngrediente getBdFKIngrediente() {
         return bdFKIngrediente;
     }
 
-    public void setBdFKIngrediente(Tbingrediente bdFKIngrediente) {
+    public void setBdFKIngrediente(TbIngrediente bdFKIngrediente) {
         this.bdFKIngrediente = bdFKIngrediente;
     }
 
-    public Tbreceita getBdFKReceita() {
+    public TbReceita getBdFKReceita() {
         return bdFKReceita;
     }
 
-    public void setBdFKReceita(Tbreceita bdFKReceita) {
+    public void setBdFKReceita(TbReceita bdFKReceita) {
         this.bdFKReceita = bdFKReceita;
     } 
 

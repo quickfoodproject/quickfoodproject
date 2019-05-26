@@ -2,20 +2,20 @@ package com.senai.wsquickfood.model;
 
 import java.io.Serializable;
 
-public class Tbingrediente implements Serializable {
-    
+public class TbIngrediente implements Serializable {
+        
     private int dbID;    
     private String bdNome; 
     private int quantidade; 
 
-    public Tbingrediente() {
+    public TbIngrediente() {
     }
 
-    public Tbingrediente(int dbID) {
+    public TbIngrediente(int dbID) {
         this.dbID = dbID;
     }
 
-    public Tbingrediente(int dbID, String bdNome) {
+    public TbIngrediente(int dbID, String bdNome) {
         this.dbID = dbID;
         this.bdNome = bdNome;
     }

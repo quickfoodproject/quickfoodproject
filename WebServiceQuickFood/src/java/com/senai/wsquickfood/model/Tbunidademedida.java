@@ -2,15 +2,15 @@ package com.senai.wsquickfood.model;
 
 import java.io.Serializable;
 
-public class Tbunidademedida implements Serializable {
-   
+public class TbUnidadeMedida implements Serializable {
+       
     private int bdID;   
     private String bdUnidade;   
 
-    public Tbunidademedida() {
+    public TbUnidadeMedida() {
     }
 
-    public Tbunidademedida(int bdID) {
+    public TbUnidadeMedida(int bdID) {
         this.bdID = bdID;
     }
 
