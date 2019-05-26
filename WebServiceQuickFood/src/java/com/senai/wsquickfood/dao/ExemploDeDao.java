@@ -16,7 +16,7 @@ public class ExemploDeDao {
 
     public void save(ExemploDeModel usuario) {
         try {
-            Repository conexao = Repository.getInstace();
+            Repository conexao = Repository.getInstance();
             conexao.open();
 
             conexao.preparedStatement = conexao.conection.prepareStatement(INSERT);
@@ -38,7 +38,7 @@ public class ExemploDeDao {
 
     public void update(ExemploDeModel usuario) {
         try {
-            Repository conexao = Repository.getInstace();
+            Repository conexao = Repository.getInstance();
             conexao.open();
 
             conexao.preparedStatement = conexao.conection.prepareStatement(UPDATE);
@@ -61,7 +61,7 @@ public class ExemploDeDao {
 
     public void delete(ExemploDeModel usuario) {
         try {
-            Repository conexao = Repository.getInstace();
+            Repository conexao = Repository.getInstance();
             conexao.open();
 
             conexao.preparedStatement = conexao.conection.prepareStatement(DELETE);
@@ -79,7 +79,7 @@ public class ExemploDeDao {
         ExemploDeModel usuario = null;
 
         try {
-            Repository conexao = Repository.getInstace();
+            Repository conexao = Repository.getInstance();
             conexao.open();
 
             conexao.statement = conexao.conection.createStatement();
@@ -112,7 +112,7 @@ public class ExemploDeDao {
        ExemploDeModel usuario = null;
 
         try {
-            Repository conexao = Repository.getInstace();
+            Repository conexao = Repository.getInstance();
             conexao.open();
            
             conexao.statement = conexao.conection.createStatement();
@@ -143,7 +143,7 @@ public class ExemploDeDao {
         ExemploDeModel user = null;
         
         try {
-            Repository conexao = Repository.getInstace();
+            Repository conexao = Repository.getInstance();
             conexao.open();
 
             conexao.statement = conexao.conection.createStatement();

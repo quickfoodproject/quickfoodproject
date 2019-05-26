@@ -7,7 +7,7 @@ package com.senai.wsquickfood.ws;
 
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
-import com.senai.wsquickfood.model.Tbusuario;
+import com.senai.wsquickfood.model.TbUsuario;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -33,7 +33,7 @@ public class UsuarioWs {
     @Path("Usuario/recuperaSenha/{login}")
     public Response solicitarNovaSenha(@PathParam("login") String login) {
         UsuarioDAO dao = new UsuarioDAO();
-        Tbusuario user = dao.recuperaUsuarioEmailDAO(login);
+        TbUsuario user = dao.recuperaUsuarioEmailDAO(login);
         
         String novaSenha;
         String titulo;

@@ -1,7 +1,7 @@
 package com.senai.wsquickfood.dao;
 
 import com.senai.wsquickfood.controller.Utils;
-import com.senai.wsquickfood.model.Tbusuario;
+import com.senai.wsquickfood.model.TbUsuario;
 import com.senai.wsquickfood.repository.Repository;
 import java.sql.SQLException;
 
@@ -14,10 +14,10 @@ public class UsuarioDAO {
     String LOGIN = "bdLogin";
     String SENHA = "bdSenha";
 
-    public Tbusuario recuperaUsuarioEmailDAO(String login) {
+    public TbUsuario recuperaUsuarioEmailDAO(String login) {
 
-        Repository conexao = Repository.getInstace();
-        Tbusuario usuario = new Tbusuario();
+        Repository conexao = Repository.getInstance();
+        TbUsuario usuario = new TbUsuario();
 
         try {
             conexao.open();
@@ -43,9 +43,9 @@ public class UsuarioDAO {
 
     public void gravaNovaSenha(int id, String senha) {
 
-        Repository conexao = Repository.getInstace();
+        Repository conexao = Repository.getInstance();
         String senhaCriptografada = Utils.criptografarSHA256(senha);
-        Tbusuario usuario = new Tbusuario();
+        TbUsuario usuario = new TbUsuario();
 
         try {
             conexao.open();
@@ -63,11 +63,11 @@ public class UsuarioDAO {
 
     }
 
-    public Tbusuario validaLoginDAO(String login, String senha) {
+    public TbUsuario validaLoginDAO(String login, String senha) {
 
-        Repository conexao = Repository.getInstace();
+        Repository conexao = Repository.getInstance();
         String senhaCriptografada = Utils.criptografarSHA256(senha);
-        Tbusuario usuario = new Tbusuario();
+        TbUsuario usuario = new TbUsuario();
 
         try {
             conexao.open();

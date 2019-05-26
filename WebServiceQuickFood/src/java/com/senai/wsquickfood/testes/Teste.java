@@ -1,16 +1,11 @@
 package com.senai.wsquickfood.testes;
 
-import com.senai.wsquickfood.controller.Utils;
-import com.senai.wsquickfood.dao.UsuarioDAO;
-import com.senai.wsquickfood.model.Tbusuario;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
+import com.senai.wsquickfood.dao.IngredienteDAO;
+import com.senai.wsquickfood.model.TbIngrediente;
+import java.util.ArrayList;
+
+import java.util.List;
+
 
 public class Teste {
 
@@ -58,6 +53,18 @@ public class Teste {
 //        System.out.println(user.toString());
 //    
 //Utils.enviaEmail("gregoryalves@hotmail.com", "Teste", "Teste Java");
+        TbIngrediente ingrediente = new TbIngrediente();
+        IngredienteDAO ingredienteDAO = new IngredienteDAO();
+        List<TbIngrediente> ingredientes = new ArrayList();
+        
+        String pNome = "";
+        
+        ingredientes.addAll(ingredienteDAO.getAllNome(pNome));
+        
+        for (TbIngrediente ingrediente1 : ingredientes) {
+            System.out.println(ingrediente1.toString());
+            
+        }
 
     }
 }
