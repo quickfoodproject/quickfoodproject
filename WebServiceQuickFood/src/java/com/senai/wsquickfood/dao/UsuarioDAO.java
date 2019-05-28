@@ -16,7 +16,7 @@ public class UsuarioDAO {
 
     public TbUsuario recuperaUsuarioEmailDAO(String login) {
 
-        Repository conexao = Repository.getInstace();
+        Repository conexao = Repository.getInstance();
         TbUsuario usuario = new TbUsuario();
 
         try {
@@ -43,7 +43,7 @@ public class UsuarioDAO {
 
     public void gravaNovaSenha(int id, String senha) {
 
-        Repository conexao = Repository.getInstace();
+        Repository conexao = Repository.getInstance();
         String senhaCriptografada = Utils.criptografarSHA256(senha);
         TbUsuario usuario = new TbUsuario();
 
@@ -65,7 +65,7 @@ public class UsuarioDAO {
 
     public TbUsuario validaLoginDAO(String login, String senha) {
 
-        Repository conexao = Repository.getInstace();
+        Repository conexao = Repository.getInstance();
         String senhaCriptografada = Utils.criptografarSHA256(senha);
         TbUsuario usuario = new TbUsuario();
 

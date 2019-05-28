@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 public class TbPessoa implements Serializable {
-       
+
     private int bdID;   
     private String bdNome;
     private String bdSexo;   

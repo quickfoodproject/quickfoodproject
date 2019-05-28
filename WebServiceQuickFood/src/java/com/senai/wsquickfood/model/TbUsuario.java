@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 public class TbUsuario implements Serializable {
-    
+
     private int bdID;
     private String bdLogin;
     private String bdSenha;

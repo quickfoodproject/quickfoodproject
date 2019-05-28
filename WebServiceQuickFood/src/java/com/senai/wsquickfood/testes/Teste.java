@@ -1,5 +1,11 @@
 package com.senai.wsquickfood.testes;
 
+import com.senai.wsquickfood.dao.IngredienteDAO;
+import com.senai.wsquickfood.model.TbIngrediente;
+import java.util.ArrayList;
+
+import java.util.List;
+
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
 import com.senai.wsquickfood.model.TbUsuario;
@@ -58,6 +64,18 @@ public class Teste {
 //        System.out.println(user.toString());
 //    
 //Utils.enviaEmail("gregoryalves@hotmail.com", "Teste", "Teste Java");
+        TbIngrediente ingrediente = new TbIngrediente();
+        IngredienteDAO ingredienteDAO = new IngredienteDAO();
+        List<TbIngrediente> ingredientes = new ArrayList();
+        
+        String pNome = "";
+        
+        ingredientes.addAll(ingredienteDAO.getAllNome(pNome));
+        
+        for (TbIngrediente ingrediente1 : ingredientes) {
+            System.out.println(ingrediente1.toString());
+            
+        }
 
     }
 }

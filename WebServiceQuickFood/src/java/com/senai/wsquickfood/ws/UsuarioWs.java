@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.senai.wsquickfood.ws;
 
 import com.senai.wsquickfood.controller.Utils;
@@ -27,39 +22,34 @@ public class UsuarioWs {
 
     public UsuarioWs() {
     }
-  
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/recuperaSenha/{login}")
     public Response solicitarNovaSenha(@PathParam("login") String login) {
         UsuarioDAO dao = new UsuarioDAO();
         TbUsuario user = dao.recuperaUsuarioEmailDAO(login);
-        
+
         String novaSenha;
         String titulo;
-        String mensagem;        
-        
-        if(user.getBdID() != 0) {
-            
+        String mensagem;
+
+        if (user.getBdID() != 0) {
+
             novaSenha = Utils.geradorDeSenhaRandomica();
-            titulo = "Solicitação de Senha";            
-            mensagem = "Você solicitou uma nova senha para acesso. Após o novo login com esta senha, recomendamos você fazer sua alteração.\n\nNova senha: " + novaSenha +
-                       "/n/n/nAtenciosamente,\n\nEquipe QuickFood" ;
+            titulo = "Solicitação de Senha";
+            mensagem = "Você solicitou uma nova senha para acesso. Após o novo login com esta senha, recomendamos você fazer sua alteração.\n\nNova senha: " + novaSenha
+                    + "/n/n/nAtenciosamente,\n\nEquipe QuickFood";
             dao.gravaNovaSenha(user.getBdID(), novaSenha);
             Utils.enviaEmail(user.getBdEmail(), titulo, mensagem);
-        
-        }       
-        
-        try {            
+
+        }
+
+        try {
             return Response.status(Response.Status.OK).entity(user).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
-    
 }

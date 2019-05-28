@@ -3,7 +3,7 @@ package com.senai.wsquickfood.model;
 import java.io.Serializable;
 
 public class TbUnidadeMedida implements Serializable {
-       
+
     private int bdID;   
     private String bdUnidade;   
 

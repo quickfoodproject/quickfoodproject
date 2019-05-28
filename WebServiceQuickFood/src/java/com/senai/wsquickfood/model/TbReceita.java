@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.util.Collection;
 
 public class TbReceita implements Serializable {
-
-    private int bdID;
-    private String bdNome;
-    private String bdDescricao;
-    private String bdFkFoto;
-    private int bdCurtidas;
-    private boolean bdDoceSalgado;
-    private String bdTempoPreparo;
-    private String bdRendumento;
-    private TbUsuario bdFKUsuario;
-    private Collection<TbIngrediente> tbingredienteCollection;
+   
+    private int bdID;    
+    private String bdNome;    
+    private String bdDescricao;   
+    private String bdURLlmagem;  
+    private int bdCurtidas;   
+    private TbUsuario bdDKUsuario;  
+    private Collection<TbIngrediente> tbingredienteCollection;    
     private Collection<TbAvaliacao> tbavaliacaoCollection;
 
     public TbReceita() {
@@ -54,22 +51,30 @@ public class TbReceita implements Serializable {
         this.bdDescricao = bdDescricao;
     }
 
+    public String getBdURLlmagem() {
+        return bdURLlmagem;
+    }
+
+    public void setBdURLlmagem(String bdURLlmagem) {
+        this.bdURLlmagem = bdURLlmagem;
+    }
+
     public int getBdCurtidas() {
         return bdCurtidas;
     }
 
     public void setBdCurtidas(int bdCurtidas) {
         this.bdCurtidas = bdCurtidas;
+    }    
+    
+    public TbUsuario getBdDKUsuario() {
+        return bdDKUsuario;
     }
 
-    public TbUsuario getBdFKUsuario() {
-        return bdFKUsuario;
+    public void setBdDKUsuario(TbUsuario bdDKUsuario) {
+        this.bdDKUsuario = bdDKUsuario;
     }
-
-    public void setBdFKUsuario(TbUsuario bdFKUsuario) {
-        this.bdFKUsuario = bdFKUsuario;
-    }
-
+  
     public Collection<TbIngrediente> getTbingredienteCollection() {
         return tbingredienteCollection;
     }
@@ -77,7 +82,7 @@ public class TbReceita implements Serializable {
     public void setTbingredienteCollection(Collection<TbIngrediente> tbingredienteCollection) {
         this.tbingredienteCollection = tbingredienteCollection;
     }
-
+   
     public Collection<TbAvaliacao> getTbavaliacaoCollection() {
         return tbavaliacaoCollection;
     }
@@ -85,42 +90,10 @@ public class TbReceita implements Serializable {
     public void setTbavaliacaoCollection(Collection<TbAvaliacao> tbavaliacaoCollection) {
         this.tbavaliacaoCollection = tbavaliacaoCollection;
     }
-
-    public String getBdFkFoto() {
-        return bdFkFoto;
-    }
-
-    public void setBdFkFoto(String bdFkFoto) {
-        this.bdFkFoto = bdFkFoto;
-    }
-
-    public boolean isBdDoceSalgado() {
-        return bdDoceSalgado;
-    }
-
-    public void setBdDoceSalgado(boolean bdDoceSalgado) {
-        this.bdDoceSalgado = bdDoceSalgado;
-    }
-
-    public String getBdTempoPreparo() {
-        return bdTempoPreparo;
-    }
-
-    public void setBdTempoPreparo(String bdTempoPreparo) {
-        this.bdTempoPreparo = bdTempoPreparo;
-    }
-
-    public String getBdRendumento() {
-        return bdRendumento;
-    }
-
-    public void setBdRendumento(String bdRendumento) {
-        this.bdRendumento = bdRendumento;
-    }
-
+   
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbreceita[ bdID=" + bdID + " ]";
     }
-
+    
 }

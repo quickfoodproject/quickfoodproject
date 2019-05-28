@@ -3,30 +3,29 @@ package com.senai.wsquickfood.model;
 import java.io.Serializable;
 
 public class TbIngrediente implements Serializable {
-
-    private int bdID;
-    private String bdNome;
-    private int quantidade;
-    private int bdFkFoto;
+    
+    private int dbID;    
+    private String bdNome; 
+    private int quantidade; 
 
     public TbIngrediente() {
     }
 
-    public TbIngrediente(int bdID) {
-        this.bdID = bdID;
+    public TbIngrediente(int dbID) {
+        this.dbID = dbID;
     }
 
-    public TbIngrediente(int bdID, String bdNome) {
-        this.bdID = bdID;
+    public TbIngrediente(int dbID, String bdNome) {
+        this.dbID = dbID;
         this.bdNome = bdNome;
     }
 
-    public int getBdID() {
-        return bdID;
+    public int getDbID() {
+        return dbID;
     }
 
-    public void setBdID(int bdID) {
-        this.bdID = bdID;
+    public void setDbID(int dbID) {
+        this.dbID = dbID;
     }
 
     public String getBdNome() {
@@ -35,7 +34,7 @@ public class TbIngrediente implements Serializable {
 
     public void setBdNome(String bdNome) {
         this.bdNome = bdNome;
-    }
+    }     
 
     public int getQuantidade() {
         return quantidade;
@@ -44,18 +43,10 @@ public class TbIngrediente implements Serializable {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-
-    public int getBdFkFoto() {
-        return bdFkFoto;
-    }
-
-    public void setBdFkFoto(int bdFkFoto) {
-        this.bdFkFoto = bdFkFoto;
-    }
-
+        
     @Override
     public String toString() {
-        return "com.senai.quickfood.dao.Tbingrediente[ bdID=" + bdID + " ]";
+        return "com.senai.quickfood.dao.Tbingrediente[ dbID=" + dbID + " ]" + "DBNOME = " + bdNome;
     }
-
+    
 }
