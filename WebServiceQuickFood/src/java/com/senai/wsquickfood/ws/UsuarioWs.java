@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.senai.wsquickfood.ws;
+﻿package com.senai.wsquickfood.ws;
 
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
@@ -43,7 +38,8 @@ public class UsuarioWs {
             
             novaSenha = Utils.geradorDeSenhaRandomica();
             titulo = "Solicitação de Senha";            
-            mensagem = "Sua nova senha foi enviada por email. Após o novo login com esta senha, recomendamos você fazer sua alteração.\n\n Nova senha: " + novaSenha;
+            mensagem = "Você solicitou uma nova senha para acesso. Após o novo login com esta senha, recomendamos você fazer sua alteração.\n\nNova senha: " + novaSenha +
+                       "/n/n/nAtenciosamente,\n\nEquipe QuickFood" ;
             dao.gravaNovaSenha(user.getBdID(), novaSenha);
             Utils.enviaEmail(user.getBdEmail(), titulo, mensagem);
         

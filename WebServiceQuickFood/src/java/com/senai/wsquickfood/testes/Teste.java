@@ -1,4 +1,4 @@
-package com.senai.wsquickfood.testes;
+﻿package com.senai.wsquickfood.testes;
 
 import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.model.TbIngrediente;
@@ -6,6 +6,17 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import com.senai.wsquickfood.controller.Utils;
+import com.senai.wsquickfood.dao.UsuarioDAO;
+import com.senai.wsquickfood.model.TbUsuario;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 
 public class Teste {
 
