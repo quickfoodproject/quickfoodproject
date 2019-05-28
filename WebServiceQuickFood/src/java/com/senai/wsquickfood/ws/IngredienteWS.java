@@ -10,7 +10,6 @@ import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.model.TbIngrediente;
 import java.util.List;
 
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -31,52 +30,46 @@ public class IngredienteWS {
 
     public IngredienteWS() {
     }
-  
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Ingrediente/listarIngrediente/")
     public Response listarAllIngrediente() {
         IngredienteDAO dao = new IngredienteDAO();
         List<TbIngrediente> ingredientes = dao.getAll();
-        
-        try {            
+
+        try {
             return Response.status(Response.Status.OK).entity(ingredientes).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Ingrediente/listarIngrediente/{pNome}")
     public Response listarAllIngredienteNome(@PathParam("pNome") String nome) {
         IngredienteDAO dao = new IngredienteDAO();
         List<TbIngrediente> ingredientes = dao.getAllNome(nome);
-        
-        try {            
+
+        try {
             return Response.status(Response.Status.OK).entity(ingredientes).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("Ingrediente/listarIngrediente/{pId}")
+    @Path("Ingrediente/listarIngredienteId/{pId}")
     public Response listarAllIngredienteID(@PathParam("pId") int id) {
         IngredienteDAO dao = new IngredienteDAO();
         TbIngrediente ingrediente = dao.getById(id);
-        
-        try {            
+
+        try {
             return Response.status(Response.Status.OK).entity(ingrediente).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
-    
 }

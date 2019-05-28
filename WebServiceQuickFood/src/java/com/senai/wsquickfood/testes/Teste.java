@@ -1,4 +1,4 @@
-﻿package com.senai.wsquickfood.testes;
+package com.senai.wsquickfood.testes;
 
 import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.model.TbIngrediente;

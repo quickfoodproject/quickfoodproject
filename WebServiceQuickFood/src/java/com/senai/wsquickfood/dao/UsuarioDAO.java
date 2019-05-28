@@ -1,4 +1,4 @@
-﻿package com.senai.wsquickfood.dao;
+package com.senai.wsquickfood.dao;
 
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.model.TbUsuario;
@@ -16,7 +16,7 @@ public class UsuarioDAO {
 
     public TbUsuario recuperaUsuarioEmailDAO(String login) {
 
-        Repository conexao = Repository.getInstace();
+        Repository conexao = Repository.getInstance();
         TbUsuario usuario = new TbUsuario();
 
         try {
