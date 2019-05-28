@@ -46,22 +46,7 @@ public class IngredienteDAO {
             System.err.println("Erro na execução SQL de UPDATE: " + e.toString());
         }
     }
-
-    public void delete(TbIngrediente pIngrediente) {
-        try {
-            Repository conexao = Repository.getInstance();
-            conexao.open();
-
-            conexao.preparedStatement = conexao.conection.prepareStatement(DELETE);
-            conexao.preparedStatement.setString(1, pIngrediente.getDbID() + "");
-            conexao.preparedStatement.execute();
-            conexao.close();
-
-        } catch (SQLException e) {
-            System.err.println("Erro na execução SQL de DELETE: " + e.toString());
-        }
-    }
-
+    
     public List<TbIngrediente> getAll() {
         List<TbIngrediente> ingredientes = new ArrayList();
         TbIngrediente ingrediente = null;
