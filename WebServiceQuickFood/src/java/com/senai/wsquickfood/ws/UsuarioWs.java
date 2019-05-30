@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.senai.wsquickfood.ws;
 
 import com.senai.wsquickfood.controller.Utils;
@@ -14,15 +19,27 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * REST Web Service
+ *
+ * @author Aluno
+ */
 @Path("quickfood")
 public class UsuarioWs {
 
     @Context
     private UriInfo context;
 
+    /**
+     * Creates a new instance of UsuarioTesteWS
+     */
     public UsuarioWs() {
     }
 
+    /**
+     * Retrieves representation of an instance of com.senai.wsquickfood.ws.UsuarioTesteWS
+     * @return an instance of java.lang.String
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/recuperaSenha/{login}")
@@ -52,4 +69,31 @@ public class UsuarioWs {
         }
     }
 
+    /**
+     * PUT method for updating or creating an instance of UsuarioTesteWS
+     * @param content representation for the resource
+     */
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void putJson(String content) {
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/logar/{login}/{senha}")
+    public Response logar(@PathParam("login") String login, @PathParam("senha") String senha) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            TbUsuario user = dao.validaLoginDAO(login, senha);
+            
+            if (user != null) {
+                return Response.status(Response.Status.OK).entity(user).build();
+            } else {
+                throw new Exception("Usuário ou senha inválido(s)");
+            }
+            
+        } catch (Exception e) {
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
 }
