@@ -37,33 +37,38 @@ public class UsuarioWs {
     }
 
     /**
-     * Retrieves representation of an instance of com.senai.wsquickfood.ws.UsuarioTesteWS
+     * Retrieves representation of an instance of
+     * com.senai.wsquickfood.ws.UsuarioTesteWS
+     *
      * @return an instance of java.lang.String
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/recuperaSenha/{login}")
     public Response solicitarNovaSenha(@PathParam("login") String login) {
-        UsuarioDAO dao = new UsuarioDAO();
-        TbUsuario user = dao.recuperaUsuarioEmailDAO(login);
-
-        String novaSenha;
-        String titulo;
-        String mensagem;
-
-        if (user.getBdID() != 0) {
-
-            novaSenha = Utils.geradorDeSenhaRandomica();
-            titulo = "Solicitação de Senha";
-            mensagem = "Você solicitou uma nova senha para acesso. Após o novo login com esta senha, recomendamos você fazer sua alteração.\n\nNova senha: " + novaSenha
-                    + "/n/n/nAtenciosamente,\n\nEquipe QuickFood";
-            dao.gravaNovaSenha(user.getBdID(), novaSenha);
-            Utils.enviaEmail(user.getBdEmail(), titulo, mensagem);
-
-        }
-
         try {
-            return Response.status(Response.Status.OK).entity(user).header("Access-Control-Allow-Origin", "*").build();
+            UsuarioDAO dao = new UsuarioDAO();
+            TbUsuario user = dao.recuperaUsuarioEmailDAO(login);
+
+            String novaSenha;
+            String titulo;
+            String mensagem;
+
+            if (user != null) {
+
+                novaSenha = Utils.geradorDeSenhaRandomica();
+                titulo = "Solicitação de Senha";
+                mensagem = "Você solicitou uma nova senha de acesso. Após o novo login com esta senha, recomendamos fazer sua alteração.\n\nNova senha: " + novaSenha
+                        + "\n\n\nAtenciosamente,\nEquipe QuickFood";
+                dao.gravaNovaSenha(user.getBdID(), novaSenha);
+                Utils.enviaEmail(user.getBdEmail(), titulo, mensagem);
+
+                return Response.status(Response.Status.OK).entity(user).header("Access-Control-Allow-Origin", "*").build();
+
+            } else {
+                throw new Exception("Usuário ou senha inválido(s)");
+            }
+
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
@@ -71,13 +76,14 @@ public class UsuarioWs {
 
     /**
      * PUT method for updating or creating an instance of UsuarioTesteWS
+     *
      * @param content representation for the resource
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/logar/{login}/{senha}")
@@ -85,15 +91,51 @@ public class UsuarioWs {
         try {
             UsuarioDAO dao = new UsuarioDAO();
             TbUsuario user = dao.validaLoginDAO(login, senha);
-            
+
             if (user != null) {
                 return Response.status(Response.Status.OK).entity(user).build();
             } else {
                 throw new Exception("Usuário ou senha inválido(s)");
             }
-            
+
         } catch (Exception e) {
-                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/validasenha/{idusuario}/{senha}")
+    public Response validaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            TbUsuario user = dao.validaSenhaDAO(idusuario, senha);
+
+            if (user != null) {
+                return Response.status(Response.Status.OK).entity(user).build();
+            } else {
+                throw new Exception("Senha incorreta.");
+            }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/gravanovasenha/{idusuario}/{senha}")
+    public Response gravaNovaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            String senhaAlterada = "Senha alterada com sucesso.";
+            dao.gravaNovaSenha(idusuario, senha);
+            
+            return Response.status(Response.Status.OK).entity(senhaAlterada).build();     
+            
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
 }
