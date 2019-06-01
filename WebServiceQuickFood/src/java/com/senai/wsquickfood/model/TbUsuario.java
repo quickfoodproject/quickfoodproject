@@ -17,10 +17,12 @@ public class TbUsuario implements Serializable {
     public TbUsuario() {
     }
 
+    
+    
     public TbUsuario(int bdID) {
         this.bdID = bdID;
     }
-
+    
     public TbUsuario(int bdID, String bdLogin, String bdSenha) {
         this.bdID = bdID;
         this.bdLogin = bdLogin;
@@ -29,6 +31,15 @@ public class TbUsuario implements Serializable {
 
     public int getBdID() {
         return bdID;
+    }
+
+    public TbUsuario(int bdID, String bdLogin, String bdSenha, String bdEmail, boolean bdUsuarioAdministrador, TbPessoa bdFKPessoa) {
+        this.bdID = bdID;
+        this.bdLogin = bdLogin;
+        this.bdSenha = bdSenha;
+        this.bdEmail = bdEmail;
+        this.bdUsuarioAdministrador = bdUsuarioAdministrador;
+        this.bdFKPessoa = bdFKPessoa;
     }
 
     public void setBdID(int bdID) {

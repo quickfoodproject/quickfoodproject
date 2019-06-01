@@ -1,26 +1,21 @@
 package com.senai.wsquickfood.testes;
 
 import com.senai.wsquickfood.dao.IngredienteDAO;
-import com.senai.wsquickfood.model.TbIngrediente;
-import java.util.ArrayList;
-
-import java.util.List;
-
-import com.senai.wsquickfood.controller.Utils;
+import com.senai.wsquickfood.dao.PessoaDAO;
 import com.senai.wsquickfood.dao.UsuarioDAO;
+import com.senai.wsquickfood.model.TbIngrediente;
+import com.senai.wsquickfood.model.TbPessoa;
 import com.senai.wsquickfood.model.TbUsuario;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
+import java.sql.SQLException;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Teste {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
 //        UsuarioTeste u = new UsuarioTeste();
 //        UsuarioTesteDao userDao = new UsuarioTesteDao();
@@ -64,18 +59,48 @@ public class Teste {
 //        System.out.println(user.toString());
 //    
 //Utils.enviaEmail("gregoryalves@hotmail.com", "Teste", "Teste Java");
-        TbIngrediente ingrediente = new TbIngrediente();
-        IngredienteDAO ingredienteDAO = new IngredienteDAO();
-        List<TbIngrediente> ingredientes = new ArrayList();
+//        TbIngrediente ingrediente = new TbIngrediente();
+//        IngredienteDAO ingredienteDAO = new IngredienteDAO();
+//        List<TbIngrediente> ingredientes = new ArrayList();
+//        
+//        ingrediente.setBdNome("Algas");
+//        
+//        ingredienteDAO.save(ingrediente);
+//        ingredientes.addAll(ingredienteDAO.getAllNome(pNome));
+//        
+//        for (TbIngrediente ingrediente1 : ingredientes) {
+//            System.out.println(ingrediente1.toString());
+//            
+//        }
+//      SimpleDateFormat sdf = new SimpleDateFormat();
+//        
+//        TbPessoa p = new TbPessoa();
+//        
+//        p.setBdNome("maria atualizando");
+//        p.setBdSexo("Masculino");
+//        p.setBdDataNascimento(new Date());
+//        
+//        TbUsuario usuario = new TbUsuario();
+        UsuarioDAO uDAO = new UsuarioDAO();
+        System.out.println(uDAO.selecionarLogin("victor"));
+//        usuario.setBdLogin("victor");
+//        usuario.setBdSenha("senha");
+//        usuario.setBdEmail("victor@");
+//        usuario.setBdUsuarioAdministrador(true);
+//        
+//        uDAO.Salvar(usuario, p);
+//        
+//        System.out.println(usuario.getBdID());
+//        TbPessoa pessoa = new TbPessoa();
+//        PessoaDAO pessoaDAO = new PessoaDAO();
+//        List<TbPessoa> pessoas = new ArrayList();
+//        
+//        pessoas.addAll(pessoaDAO.Selecionar(602, "Victor"));
+//        
+//        for (TbPessoa pessoa1 : pessoas) {
+//            System.out.println(pessoa1.toString());
+//            
+//        }
         
-        String pNome = "";
-        
-        ingredientes.addAll(ingredienteDAO.getAllNome(pNome));
-        
-        for (TbIngrediente ingrediente1 : ingredientes) {
-            System.out.println(ingrediente1.toString());
-            
-        }
-
     }
 }
