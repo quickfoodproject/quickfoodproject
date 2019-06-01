@@ -111,7 +111,7 @@ public class UsuarioWs {
             UsuarioDAO dao = new UsuarioDAO();
             TbUsuario user = dao.validaSenhaDAO(idusuario, senha);
 
-            if (user != null) {
+            if (user.getBdID() != 0) {
                 return Response.status(Response.Status.OK).entity(user).build();
             } else {
                 return Response.status(Response.Status.OK).entity("Senha incorreta.").header("Access-Control-Allow-Origin", "*").build();
