@@ -54,7 +54,7 @@ public class UsuarioWs {
             String titulo;
             String mensagem;
 
-            if (user != null) {
+            if (user.getBdID() != 0) {
 
                 novaSenha = Utils.geradorDeSenhaRandomica();
                 titulo = "Solicitação de Senha";
@@ -66,7 +66,7 @@ public class UsuarioWs {
                 return Response.status(Response.Status.OK).entity(user).header("Access-Control-Allow-Origin", "*").build();
 
             } else {
-                throw new Exception("Usuário ou senha inválido(s)");
+                return Response.status(Response.Status.OK).entity("Usuário ou senha inválido(s)").header("Access-Control-Allow-Origin", "*").build();
             }
 
         } catch (Exception e) {
@@ -92,10 +92,10 @@ public class UsuarioWs {
             UsuarioDAO dao = new UsuarioDAO();
             TbUsuario user = dao.validaLoginDAO(login, senha);
 
-            if (user != null) {
+            if (user.getBdID() != 0) {
                 return Response.status(Response.Status.OK).entity(user).build();
             } else {
-                throw new Exception("Usuário ou senha inválido(s)");
+                return Response.status(Response.Status.OK).entity("Usuário ou senha inválido(s)").header("Access-Control-Allow-Origin", "*").build();
             }
 
         } catch (Exception e) {
@@ -114,7 +114,7 @@ public class UsuarioWs {
             if (user != null) {
                 return Response.status(Response.Status.OK).entity(user).build();
             } else {
-                throw new Exception("Senha incorreta.");
+                return Response.status(Response.Status.OK).entity("Senha incorreta.").header("Access-Control-Allow-Origin", "*").build();
             }
 
         } catch (Exception e) {
@@ -128,11 +128,10 @@ public class UsuarioWs {
     public Response gravaNovaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
         try {
             UsuarioDAO dao = new UsuarioDAO();
-            String senhaAlterada = "Senha alterada com sucesso.";
             dao.gravaNovaSenha(idusuario, senha);
-            
-            return Response.status(Response.Status.OK).entity(senhaAlterada).build();     
-            
+
+            return Response.status(Response.Status.OK).entity("Senha alterada com sucesso.").header("Access-Control-Allow-Origin", "*").build();
+
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
