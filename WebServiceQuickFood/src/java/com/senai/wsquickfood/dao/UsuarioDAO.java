@@ -1,6 +1,5 @@
 package com.senai.wsquickfood.dao;
 
-
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.model.TbPessoa;
 import com.senai.wsquickfood.model.TbUsuario;
@@ -8,8 +7,6 @@ import com.senai.wsquickfood.repository.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UsuarioDAO {
 
@@ -19,7 +16,7 @@ public class UsuarioDAO {
     String UPDATE = "UPDATE TBUSUARIO SET BDLOGIN = ?, BDEMAIL = ?, BDUSUARIOADMINISTRADOR = ?, BDFKPESSOA = ? WHERE BDID = ?";
     String SELECT = "SELECT * FROM TBUSUARIO WHERE BDLOGIN = ";
     String SELECTALLLOGIN = "SELECT BDLOGIN FROM TBUSUARIO WHERE BDLOGIN = ?";
-    
+
     String ID = "bdID";
     String EMAIL = "bdEmail";
     String LOGIN = "bdLogin";
@@ -28,33 +25,37 @@ public class UsuarioDAO {
     String FKPESSOA = "bdFKPessoa";
 
     public TbUsuario Salvar(TbUsuario pUsuario, TbPessoa pPessoa) {
+        if (!selecionarLogin(pUsuario.getBdLogin())) {
+            try {
+                TbPessoa pessoaAux = new TbPessoa();
+                PessoaDAO pessoaDao = new PessoaDAO();
+                pessoaAux = pessoaDao.Salvar(pPessoa);
 
-        try {
-            TbPessoa pessoaAux = new TbPessoa();
-            PessoaDAO pessoaDao = new PessoaDAO();
-            pessoaAux = pessoaDao.Salvar(pPessoa);
+                Repository conexao = Repository.getInstance();
 
-            Repository conexao = Repository.getInstance();
+                conexao.open();
 
-            conexao.open();
+                String SenhaCriptografada = Utils.criptografarSHA256(pUsuario.getBdSenha());
 
-            String SenhaCriptografada = Utils.criptografarSHA256(pUsuario.getBdSenha());
+                conexao.preparedStatement = conexao.conection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+                conexao.preparedStatement.setString(1, pUsuario.getBdLogin());
+                conexao.preparedStatement.setString(2, SenhaCriptografada);
+                conexao.preparedStatement.setString(3, pUsuario.getBdEmail());
+                conexao.preparedStatement.setBoolean(4, pUsuario.getBdUsuarioAdministrador());
+                conexao.preparedStatement.setInt(5, pessoaAux.getBdID());
+                conexao.preparedStatement.execute();
+                conexao.close();
 
-            conexao.preparedStatement = conexao.conection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-            conexao.preparedStatement.setString(1, pUsuario.getBdLogin());
-            conexao.preparedStatement.setString(2, SenhaCriptografada);
-            conexao.preparedStatement.setString(3, pUsuario.getBdEmail());
-            conexao.preparedStatement.setBoolean(4, pUsuario.getBdUsuarioAdministrador());
-            conexao.preparedStatement.setInt(5, pessoaAux.getBdID());
-            conexao.preparedStatement.execute();
-            conexao.close();
-
-            System.out.println(pUsuario.getBdID());
-        } catch (SQLException e) {
-            System.err.println("Erro na execução SQL de INSERT: " + e.toString());
+                System.out.println(pUsuario.getBdID());
+            } catch (SQLException e) {
+                System.err.println("Erro na execução SQL de INSERT: " + e.toString());
+            }
+        } else {
+            System.err.println("Não foi possível cadastro por que esse login já existe!");
         }
 
         return pUsuario;
+
     }
 
     public TbUsuario recuperaUsuarioEmailDAO(String login) {
@@ -67,7 +68,7 @@ public class UsuarioDAO {
 
             conexao.statement = conexao.conection.createStatement();
             conexao.resultSet = conexao.statement.executeQuery(SELECT_RECUPERA_SENHA + "'" + login + "'");
-            
+
             while (conexao.resultSet.next()) {
                 usuario.setBdID(conexao.resultSet.getInt(ID));
                 usuario.setBdEmail(conexao.resultSet.getString(EMAIL));
@@ -109,21 +110,22 @@ public class UsuarioDAO {
 
     public boolean selecionarLogin(String pNome) {
         Repository conexao = Repository.getInstance();
-        
+
         try {
             conexao.open();
-                                 
+
             PreparedStatement ps = conexao.conection.prepareStatement(SELECTALLLOGIN);
             ps.setString(1, pNome);
             ResultSet rs = ps.executeQuery();
-            
-            return rs.next();                
-            
+
+            return rs.next();
+
         } catch (Exception e) {
+            System.err.println("Falha ao selecionar o usuário para login = " + e.toString());
         } finally {
             conexao.close();
         }
-        
+
         return false;
     }
 

@@ -73,16 +73,16 @@ public class Teste {
 //            
 //        }
 //      SimpleDateFormat sdf = new SimpleDateFormat();
-//        
-//        TbPessoa p = new TbPessoa();
-//        
-//        p.setBdNome("maria atualizando");
-//        p.setBdSexo("Masculino");
-//        p.setBdDataNascimento(new Date());
-//        
-//        TbUsuario usuario = new TbUsuario();
+        
+        TbPessoa p = new TbPessoa();
+        
+        p.setBdSexo("Masculino");
+        p.setBdDataNascimento(new Date());
+        
+        TbUsuario usuario = new TbUsuario();        
+        
         UsuarioDAO uDAO = new UsuarioDAO();
-        System.out.println(uDAO.selecionarLogin("victor"));
+        uDAO.Salvar(usuario, p);
 //        usuario.setBdLogin("victor");
 //        usuario.setBdSenha("senha");
 //        usuario.setBdEmail("victor@");

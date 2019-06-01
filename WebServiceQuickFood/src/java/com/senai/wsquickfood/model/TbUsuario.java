@@ -15,14 +15,13 @@ public class TbUsuario implements Serializable {
     private TbPessoa bdFKPessoa;
 
     public TbUsuario() {
+
     }
 
-    
-    
     public TbUsuario(int bdID) {
         this.bdID = bdID;
     }
-    
+
     public TbUsuario(int bdID, String bdLogin, String bdSenha) {
         this.bdID = bdID;
         this.bdLogin = bdLogin;
