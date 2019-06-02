@@ -1,8 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.senai.wsquickfood.ws;
 
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
+import com.senai.wsquickfood.model.TbPessoa;
 import com.senai.wsquickfood.model.TbUsuario;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -14,42 +21,89 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * REST Web Service
+ *
+ * @author Aluno
+ */
 @Path("quickfood")
 public class UsuarioWs {
 
     @Context
     private UriInfo context;
 
+    /**
+     * Creates a new instance of UsuarioTesteWS
+     */
     public UsuarioWs() {
     }
 
+    /**
+     * Retrieves representation of an instance of
+     * com.senai.wsquickfood.ws.UsuarioTesteWS
+     *
+     * @return an instance of java.lang.String
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/recuperaSenha/{login}")
     public Response solicitarNovaSenha(@PathParam("login") String login) {
-        UsuarioDAO dao = new UsuarioDAO();
-        TbUsuario user = dao.recuperaUsuarioEmailDAO(login);
-
-        String novaSenha;
-        String titulo;
-        String mensagem;
-
-        if (user.getBdID() != 0) {
-
-            novaSenha = Utils.geradorDeSenhaRandomica();
-            titulo = "Solicitação de Senha";
-            mensagem = "Você solicitou uma nova senha para acesso. Após o novo login com esta senha, recomendamos você fazer sua alteração.\n\nNova senha: " + novaSenha
-                    + "/n/n/nAtenciosamente,\n\nEquipe QuickFood";
-            dao.gravaNovaSenha(user.getBdID(), novaSenha);
-            Utils.enviaEmail(user.getBdEmail(), titulo, mensagem);
-
-        }
-
         try {
-            return Response.status(Response.Status.OK).entity(user).header("Access-Control-Allow-Origin", "*").build();
+            UsuarioDAO dao = new UsuarioDAO();
+            TbUsuario user = dao.recuperaUsuarioEmailDAO(login);
+
+            String novaSenha;
+            String titulo;
+            String mensagem;
+
+            if (user.getBdID() != 0) {
+
+                novaSenha = Utils.geradorDeSenhaRandomica();
+                titulo = "Solicitação de Senha";
+                mensagem = "Você solicitou uma nova senha de acesso. Após o novo login com esta senha, recomendamos fazer sua alteração.\n\nNova senha: " + novaSenha
+                        + "\n\n\nAtenciosamente,\nEquipe QuickFood";
+                dao.gravaNovaSenha(user.getBdID(), novaSenha);
+                Utils.enviaEmail(user.getBdEmail(), titulo, mensagem);
+
+                return Response.status(Response.Status.OK).entity(user).header("Access-Control-Allow-Origin", "*").build();
+
+            } else {
+                return Response.status(Response.Status.OK).entity("Usuário ou senha inválido(s)").header("Access-Control-Allow-Origin", "*").build();
+            }
+
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/SalvarUsuario/{objUsuario}/{objPessoa}")
+    public Response salvarUsuario(@PathParam("objUsuario") List<String> oUsuario, @PathParam("objPessoa") List<String> oPessoa) {
+        UsuarioDAO dao = new UsuarioDAO();
+        
+        try {
+        //String retorno = dao.Salvar(oUsuario, oPessoa);
+        
+        
+           String retorno =""; 
+
+        return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
+
+            
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    /**
+     * PUT method for updating or creating an instance of UsuarioTesteWS
+     *
+     * @param content representation for the resource
+     */
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void putJson(String content) {
     }
 
 }

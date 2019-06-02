@@ -26,8 +26,14 @@ public class UsuarioDAO {
     String USUARIO_ADMINISTRADOR = "bdUsuarioAdministrador";
     String FKPESSOA = "bdFKPessoa";
 
-    public TbUsuario Salvar(TbUsuario pUsuario, TbPessoa pPessoa) {
-        if (!validarEmail(pUsuario.getBdEmail())) {
+    public String Salvar(TbUsuario pUsuario, TbPessoa pPessoa) {
+        TbPessoa pessoaAux = new TbPessoa();
+        PessoaDAO pessoaDao = new PessoaDAO();
+        pessoaAux = pessoaDao.Salvar(pPessoa);
+
+        Repository conexao = Repository.getInstance();
+
+        if (!Utils.validarEmail(pUsuario.getBdEmail())) {
             System.err.println("O email informado não é válido");
             return null;
         }
@@ -37,12 +43,6 @@ public class UsuarioDAO {
             return null;
         }
         try {
-            TbPessoa pessoaAux = new TbPessoa();
-            PessoaDAO pessoaDao = new PessoaDAO();
-            pessoaAux = pessoaDao.Salvar(pPessoa);
-
-            Repository conexao = Repository.getInstance();
-
             conexao.open();
 
             String SenhaCriptografada = Utils.criptografarSHA256(pUsuario.getBdSenha());
@@ -54,28 +54,17 @@ public class UsuarioDAO {
             conexao.preparedStatement.setBoolean(4, pUsuario.getBdUsuarioAdministrador());
             conexao.preparedStatement.setInt(5, pessoaAux.getBdID());
             conexao.preparedStatement.execute();
-            conexao.close();
 
             System.out.println(pUsuario.getBdID());
         } catch (SQLException e) {
-            System.err.println("Erro na execução SQL de INSERT: " + e.toString());
+            System.err.println("Erro ao salvar usuário: " + e.toString());
+            return "Erro ao salvar usuário";
+        } finally {
+            conexao.close();
         }
 
-        return pUsuario;
+        return "Usuário salvo com sucesso";
 
-    }
-
-    public static boolean validarEmail(String email) {
-        boolean isEmailIdValid = false;
-        if (email != null && email.length() > 0) {
-            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(email);
-            if (matcher.matches()) {
-                isEmailIdValid = true;
-            }
-        }
-        return isEmailIdValid;
     }
 
     public TbUsuario recuperaUsuarioEmailDAO(String login) {
@@ -105,11 +94,7 @@ public class UsuarioDAO {
     }
 
     public void atualizar(TbUsuario pUsuario, Integer pPessoaID) {
-        
-        if (!validarEmail(pUsuario.getBdEmail())) {
-            System.err.println("O email informado não é válido");
-            return;
-        }
+
         Repository conexao = Repository.getInstance();
         String senhaCriptografada = Utils.criptografarSHA256(pUsuario.getBdSenha());
 
