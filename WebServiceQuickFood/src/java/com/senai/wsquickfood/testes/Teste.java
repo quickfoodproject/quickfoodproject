@@ -80,9 +80,9 @@ public class Teste {
         p.setBdDataNascimento(new Date());
         
         TbUsuario usuario = new TbUsuario();        
-        
+        usuario.setBdEmail("victorcordova014@gmail.com");
         UsuarioDAO uDAO = new UsuarioDAO();
-        uDAO.Salvar(usuario, p);
+        uDAO.atualizar(usuario, p.getBdID());
 //        usuario.setBdLogin("victor");
 //        usuario.setBdSenha("senha");
 //        usuario.setBdEmail("victor@");

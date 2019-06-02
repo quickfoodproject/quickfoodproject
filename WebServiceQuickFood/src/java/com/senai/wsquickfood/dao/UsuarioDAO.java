@@ -7,6 +7,8 @@ import com.senai.wsquickfood.repository.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UsuarioDAO {
 
@@ -25,37 +27,55 @@ public class UsuarioDAO {
     String FKPESSOA = "bdFKPessoa";
 
     public TbUsuario Salvar(TbUsuario pUsuario, TbPessoa pPessoa) {
+        if (!validarEmail(pUsuario.getBdEmail())) {
+            System.err.println("O email informado não é válido");
+            return null;
+        }
+
         if (!selecionarLogin(pUsuario.getBdLogin())) {
-            try {
-                TbPessoa pessoaAux = new TbPessoa();
-                PessoaDAO pessoaDao = new PessoaDAO();
-                pessoaAux = pessoaDao.Salvar(pPessoa);
-
-                Repository conexao = Repository.getInstance();
-
-                conexao.open();
-
-                String SenhaCriptografada = Utils.criptografarSHA256(pUsuario.getBdSenha());
-
-                conexao.preparedStatement = conexao.conection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-                conexao.preparedStatement.setString(1, pUsuario.getBdLogin());
-                conexao.preparedStatement.setString(2, SenhaCriptografada);
-                conexao.preparedStatement.setString(3, pUsuario.getBdEmail());
-                conexao.preparedStatement.setBoolean(4, pUsuario.getBdUsuarioAdministrador());
-                conexao.preparedStatement.setInt(5, pessoaAux.getBdID());
-                conexao.preparedStatement.execute();
-                conexao.close();
-
-                System.out.println(pUsuario.getBdID());
-            } catch (SQLException e) {
-                System.err.println("Erro na execução SQL de INSERT: " + e.toString());
-            }
-        } else {
             System.err.println("Não foi possível cadastro por que esse login já existe!");
+            return null;
+        }
+        try {
+            TbPessoa pessoaAux = new TbPessoa();
+            PessoaDAO pessoaDao = new PessoaDAO();
+            pessoaAux = pessoaDao.Salvar(pPessoa);
+
+            Repository conexao = Repository.getInstance();
+
+            conexao.open();
+
+            String SenhaCriptografada = Utils.criptografarSHA256(pUsuario.getBdSenha());
+
+            conexao.preparedStatement = conexao.conection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+            conexao.preparedStatement.setString(1, pUsuario.getBdLogin());
+            conexao.preparedStatement.setString(2, SenhaCriptografada);
+            conexao.preparedStatement.setString(3, pUsuario.getBdEmail());
+            conexao.preparedStatement.setBoolean(4, pUsuario.getBdUsuarioAdministrador());
+            conexao.preparedStatement.setInt(5, pessoaAux.getBdID());
+            conexao.preparedStatement.execute();
+            conexao.close();
+
+            System.out.println(pUsuario.getBdID());
+        } catch (SQLException e) {
+            System.err.println("Erro na execução SQL de INSERT: " + e.toString());
         }
 
         return pUsuario;
 
+    }
+
+    public static boolean validarEmail(String email) {
+        boolean isEmailIdValid = false;
+        if (email != null && email.length() > 0) {
+            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(email);
+            if (matcher.matches()) {
+                isEmailIdValid = true;
+            }
+        }
+        return isEmailIdValid;
     }
 
     public TbUsuario recuperaUsuarioEmailDAO(String login) {
@@ -85,7 +105,11 @@ public class UsuarioDAO {
     }
 
     public void atualizar(TbUsuario pUsuario, Integer pPessoaID) {
-
+        
+        if (!validarEmail(pUsuario.getBdEmail())) {
+            System.err.println("O email informado não é válido");
+            return;
+        }
         Repository conexao = Repository.getInstance();
         String senhaCriptografada = Utils.criptografarSHA256(pUsuario.getBdSenha());
 

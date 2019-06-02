@@ -15,7 +15,7 @@ public class TbUsuario implements Serializable {
     private TbPessoa bdFKPessoa;
 
     public TbUsuario() {
-
+      
     }
 
     public TbUsuario(int bdID) {

@@ -2,6 +2,8 @@ package com.senai.wsquickfood.dao;
 
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.repository.Repository;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +15,12 @@ public class IngredienteDAO {
     String DELETE = "DELETE FROM TBINGREDIENTE WHERE ID = ?";
     String SELECTALL = "SELECT * FROM TBINGREDIENTE ORDER BY BDNOME";
     String SELECTBYID = "SELECT * FROM TBINGREDIENTE WHERE BDID = ";
-
+    String SELECTNOME = "SELECT * FROM TBINGREDIENTE WHERE BDNOME = ?";
+    
     public void save(TbIngrediente pIngrediente) {
+        if (!verificaNome(pIngrediente.getBdNome())) {
+            System.out.println("O nome informado já existe");
+        }
         try {
             Repository conexao = Repository.getInstance();
             conexao.open();
@@ -75,6 +81,27 @@ public class IngredienteDAO {
         return ingredientes;
     }
 
+    public boolean verificaNome(String pNome) {
+        Repository conexao = Repository.getInstance();
+
+        try {
+            conexao.open();
+
+            PreparedStatement ps = conexao.conection.prepareStatement(SELECTNOME);
+            ps.setString(1, pNome);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+            System.err.println("Ocorreu um erro ao tentar selecionar o nome do ingrediente = " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return false;
+    }
+    
     public List<TbIngrediente> getAllNome(String pNome) {
         List<TbIngrediente> ingredientes = new ArrayList();
         TbIngrediente ingrediente = null;
