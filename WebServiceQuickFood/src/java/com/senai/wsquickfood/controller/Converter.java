@@ -4,7 +4,7 @@ import com.senai.wsquickfood.model.TbUsuario;
 import java.util.List;
 
 
-public class Conveter {
+public class Converter {
     
     public static TbUsuario converUsuario(List<String> pListaUsuario) {
         TbUsuario usuario = new TbUsuario();
