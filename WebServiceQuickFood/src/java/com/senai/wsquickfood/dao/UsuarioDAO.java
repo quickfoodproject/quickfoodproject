@@ -58,9 +58,9 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             System.err.println("Erro na execução SQL: UsuarioDAO.gravaNovaSenha - " + e.toString());
         } finally {
-            conexao.close();
+            conexao.close();            
         }
-
+        
     }
 
     public TbUsuario validaLoginDAO(String login, String senha) {
@@ -73,7 +73,7 @@ public class UsuarioDAO {
             conexao.open();
 
             conexao.statement = conexao.conection.createStatement();
-            conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM TBUSUARIO WHERE LOGIN = '" + login + "' AND SENHA = '" + senhaCriptografada + "'");
+            conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM TBUSUARIO WHERE BDLOGIN = '" + login + "' AND BDSENHA = '" + senhaCriptografada + "'");
 
             while (conexao.resultSet.next()) {
                 usuario.setBdID(conexao.resultSet.getInt(ID));
@@ -83,6 +83,33 @@ public class UsuarioDAO {
 
         } catch (SQLException e) {
             System.err.println("Erro na execução SQL: UsuarioDAO.validaLoginDAO - " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return usuario;
+    }
+
+    public TbUsuario validaSenhaDAO(int idUsuario, String senha) {
+
+        Repository conexao = Repository.getInstance();
+        String senhaCriptografada = Utils.criptografarSHA256(senha);
+        TbUsuario usuario = new TbUsuario();
+
+        try {
+            conexao.open();
+
+            conexao.statement = conexao.conection.createStatement();
+            conexao.resultSet = conexao.statement.executeQuery("SELECT * FROM TBUSUARIO WHERE BDID = '" + idUsuario + "' AND BDSENHA = '" + senhaCriptografada + "'");
+
+            while (conexao.resultSet.next()) {
+                usuario.setBdID(conexao.resultSet.getInt(ID));
+                usuario.setBdEmail(conexao.resultSet.getString(EMAIL));
+                usuario.setBdLogin(conexao.resultSet.getString(LOGIN));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro na execução SQL: UsuarioDAO.validaSenhaDAO - " + e.toString());
         } finally {
             conexao.close();
         }
