@@ -134,9 +134,9 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             System.err.println("Erro na execução SQL: UsuarioDAO.gravaNovaSenha - " + e.toString());
         } finally {
-            conexao.close();
+            conexao.close();            
         }
-
+        
     }
 
     public boolean selecionarLogin(String pNome) {
