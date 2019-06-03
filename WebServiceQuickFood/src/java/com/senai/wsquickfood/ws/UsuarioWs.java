@@ -76,31 +76,6 @@ public class UsuarioWs {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
-    
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("Usuario/SalvarUsuario/{objUsuario}/{objPessoa}")
-    public Response salvarUsuario(@PathParam("objUsuario") String oUsuario, @PathParam("objPessoa") String oPessoa) {
-        UsuarioDAO dao = new UsuarioDAO();
-        
-        Gson gson = new Gson();
-        TbUsuario usuario = gson.fromJson(oUsuario, TbUsuario.class);
-        
-        TbPessoa pessoa = gson.fromJson(oPessoa, TbPessoa.class);
-        
-        try {
-        //String retorno = dao.Salvar(oUsuario, oPessoa);
-        String retorno = "";
-        
-        
-
-        return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
-
-            
-        } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
-        }
-    }
 
     /**
      * PUT method for updating or creating an instance of UsuarioTesteWS
@@ -110,6 +85,81 @@ public class UsuarioWs {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/logar/{login}/{senha}")
+    public Response logar(@PathParam("login") String login, @PathParam("senha") String senha) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            TbUsuario user = dao.validaLoginDAO(login, senha);
+
+            if (user.getBdID() != 0) {
+                return Response.status(Response.Status.OK).entity(user).build();
+            } else {
+                return Response.status(Response.Status.OK).entity("Usuário ou senha inválido(s)").header("Access-Control-Allow-Origin", "*").build();
+            }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/SalvarUsuario/{objUsuario}/{objPessoa}")
+    public Response salvarUsuario(@PathParam("objUsuario") String oUsuario, @PathParam("objPessoa") String oPessoa) {
+        UsuarioDAO dao = new UsuarioDAO();
+
+        Gson gson = new Gson();
+        TbUsuario usuario = gson.fromJson(oUsuario, TbUsuario.class);
+
+        TbPessoa pessoa = gson.fromJson(oPessoa, TbPessoa.class);
+
+        try {
+            //String retorno = dao.Salvar(oUsuario, oPessoa);
+            String retorno = "";
+
+            return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/validasenha/{idusuario}/{senha}")
+    public Response validaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            TbUsuario user = dao.validaSenhaDAO(idusuario, senha);
+
+            if (user.getBdID() != 0) {
+                return Response.status(Response.Status.OK).entity(user).build();
+            } else {
+                return Response.status(Response.Status.OK).entity("Senha incorreta.").header("Access-Control-Allow-Origin", "*").build();
+            }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/gravanovasenha/{idusuario}/{senha}")
+    public Response gravaNovaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            dao.gravaNovaSenha(idusuario, senha);
+
+            return Response.status(Response.Status.OK).entity("Senha alterada com sucesso.").header("Access-Control-Allow-Origin", "*").build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
     }
 
 }
