@@ -45,6 +45,7 @@ public class Repository {
         try {
             System.out.println("Conectando ao banco de dados...");
             conection = DriverManager.getConnection(URL, USER, PASSWORD);
+            
             System.out.println("Conexão efetuada com sucesso...");
         } catch (SQLException e) {
             System.out.println("Falha na conexão com o banco de dados...");
