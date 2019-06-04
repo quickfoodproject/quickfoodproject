@@ -38,7 +38,7 @@ public class UsuarioDAO {
             return null;
         }
 
-        if (!selecionarLogin(pUsuario.getBdLogin())) {
+        if (selecionarLogin(pUsuario.getBdLogin())) {
             System.err.println("Não foi possível cadastro por que esse login já existe!");
             return null;
         }
