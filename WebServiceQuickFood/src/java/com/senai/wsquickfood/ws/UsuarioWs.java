@@ -1,4 +1,4 @@
-﻿/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,7 +10,6 @@ import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
 import com.senai.wsquickfood.model.TbPessoa;
 import com.senai.wsquickfood.model.TbUsuario;
-import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
