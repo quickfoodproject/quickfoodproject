@@ -86,6 +86,7 @@ public class UsuarioWs {
     public void putJson(String content) {
     }
 
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/logar/{login}/{senha}")
