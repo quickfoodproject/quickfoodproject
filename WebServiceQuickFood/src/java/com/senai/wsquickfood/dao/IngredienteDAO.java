@@ -17,9 +17,9 @@ public class IngredienteDAO {
     String SELECTBYID = "SELECT * FROM TBINGREDIENTE WHERE BDID = ";
     String SELECTNOME = "SELECT * FROM TBINGREDIENTE WHERE BDNOME = ?";
     
-    public void save(TbIngrediente pIngrediente) {
-        if (!verificaNome(pIngrediente.getBdNome())) {
-            System.out.println("O nome informado já existe");
+    public String salvar(TbIngrediente pIngrediente) {
+        if (validaNome(pIngrediente.getBdNome())) {
+            return "O nome informado já existe";
         }
         try {
             Repository conexao = Repository.getInstance();
@@ -34,6 +34,8 @@ public class IngredienteDAO {
         } catch (SQLException e) {
             System.err.println("Erro na execução SQL de INSERT: " + e.toString());
         }
+        
+        return "Ingrediente salvo com sucesso";
     }
 
     public void update(TbIngrediente pIngrediente) {
@@ -81,7 +83,7 @@ public class IngredienteDAO {
         return ingredientes;
     }
 
-    public boolean verificaNome(String pNome) {
+    public boolean validaNome(String pNome) {
         Repository conexao = Repository.getInstance();
 
         try {

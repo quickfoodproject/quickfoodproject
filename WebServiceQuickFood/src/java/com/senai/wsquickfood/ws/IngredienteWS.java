@@ -6,9 +6,10 @@
 package com.senai.wsquickfood.ws;
 
 import com.google.gson.Gson;
+import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.dao.PessoaDAO;
+import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.model.TbPessoa;
-import com.senai.wsquickfood.model.TbUsuario;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -25,39 +26,39 @@ import javax.ws.rs.core.Response;
  *
  * @author victo
  */
-@Path("generic")
-public class GenericResource {
+@Path("quickfood")
+public class IngredienteWS {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of GenericResource
+     * Creates a new instance of IngredienteWS
      */
-    public GenericResource() {
+    public IngredienteWS() {
     }
 
     /**
-     * Retrieves representation of an instance of com.senai.wsquickfood.ws.GenericResource
+     * Retrieves representation of an instance of com.senai.wsquickfood.ws.IngredienteWS
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("{name}")
+    @Path("Ingrediente/SalvarIngrediente/{objIngrediente}")
     @Produces(MediaType.APPLICATION_XML)
-    public Response salvarIngrediente(@PathParam("name") String name) {
+    public Response salvarIngrediente(@PathParam("objIngrediente") String objIngrediente) {
         //TODO return proper representation object
         Gson google = new Gson();
         
-        TbPessoa tpessoa = new TbPessoa();
-        PessoaDAO dao = new PessoaDAO();
+        TbIngrediente tIngrediente = new TbIngrediente();
+        IngredienteDAO iDao = new IngredienteDAO();               
         
-        tpessoa = google.fromJson(name, TbPessoa.class);
+        tIngrediente = google.fromJson(objIngrediente, TbIngrediente.class);
         
-        return Response.status(200).entity(dao.Salvar(tpessoa)).build();
+        return Response.status(200).entity(iDao.salvar(tIngrediente)).build();
     }
 
     /**
-     * PUT method for updating or creating an instance of GenericResource
+     * PUT method for updating or creating an instance of IngredienteWS
      * @param content representation for the resource
      */
     @PUT

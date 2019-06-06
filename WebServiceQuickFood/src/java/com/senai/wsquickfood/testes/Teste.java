@@ -74,7 +74,6 @@ public class Teste {
 //            
 //        }
 //      SimpleDateFormat sdf = new SimpleDateFormat();
-        
 //        TbPessoa p = new TbPessoa();
 //        
 //        p.setBdSexo("Masculino");
@@ -102,16 +101,24 @@ public class Teste {
 //            System.out.println(pessoa1.toString());
 //            
 //        }
+//        Gson google = new Gson();
+//        
+//        TbUsuario tusuario = new TbUsuario();
+//        UsuarioDAO udao = new UsuarioDAO();             
+//        TbPessoa tpessoa = new TbPessoa();
+//        PessoaDAO pdao = new PessoaDAO();
+//        
+//        tusuario = google.fromJson("{	\"bdLogin\": \"123qwe12345\",	\"bdSenha\": \"123qwe123\",	\"bdEmail\": \"123qwe@gmai.com\",	\"bdUsuarioAdministrador\": null    }", TbUsuario.class);
+//        tpessoa = google.fromJson("{	\"bdNome\": \"Victor cordova\",	\"bdSexo\": \"123qwe\",	\"bdDataNascimento\": null      }", TbPessoa.class);
+//        
+//        udao.Salvar(tusuario, tpessoa);
         Gson google = new Gson();
         
-        TbUsuario tusuario = new TbUsuario();
-        UsuarioDAO udao = new UsuarioDAO();             
-        TbPessoa tpessoa = new TbPessoa();
-        PessoaDAO pdao = new PessoaDAO();
+        TbIngrediente tIngrediente = new TbIngrediente();
+        IngredienteDAO iDao = new IngredienteDAO();               
         
-        tusuario = google.fromJson("{	\"bdLogin\": \"123qwe12345\",	\"bdSenha\": \"123qwe123\",	\"bdEmail\": \"123qwe@gmai.com\",	\"bdUsuarioAdministrador\": null    }", TbUsuario.class);
-        tpessoa = google.fromJson("{	\"bdNome\": \"Victor cordova\",	\"bdSexo\": \"123qwe\",	\"bdDataNascimento\": null      }", TbPessoa.class);
+        tIngrediente = google.fromJson("{	\"bdNome\": \"teste ingrediente\"      }", TbIngrediente.class);
         
-        udao.Salvar(tusuario, tpessoa);
+        System.out.println(iDao.salvar(tIngrediente));
     }
 }
