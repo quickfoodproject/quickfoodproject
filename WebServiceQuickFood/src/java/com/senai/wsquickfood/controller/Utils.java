@@ -4,24 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
 public class Utils {
-
-    public static boolean retornaUsuarioAdm(String prString) {
-        boolean retorno = false;
-
-        if (prString.equals("0")) {
-            retorno = true;
-        }
-        
-        return retorno;
-
-    }
 
     public static String criptografarSHA256(String pConteudo) {
         String senhaHex = "";
@@ -78,21 +65,8 @@ public class Utils {
     public static String geradorDeSenhaRandomica() {
 
         UUID randomico = UUID.randomUUID();
-        String senha = randomico.toString().substring(0, 8);
+        String senha = randomico.toString().substring(0,8);
 
         return senha;
-    }
-
-    public static boolean validarEmail(String email) {
-        boolean isEmailIdValid = false;
-        if (email != null && email.length() > 0) {
-            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(email);
-            if (matcher.matches()) {
-                isEmailIdValid = true;
-            }
-        }
-        return isEmailIdValid;
     }
 }
