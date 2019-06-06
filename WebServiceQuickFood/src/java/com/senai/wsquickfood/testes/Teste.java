@@ -1,5 +1,6 @@
 package com.senai.wsquickfood.testes;
 
+import com.google.gson.Gson;
 import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.dao.PessoaDAO;
 import com.senai.wsquickfood.dao.UsuarioDAO;
@@ -74,15 +75,15 @@ public class Teste {
 //        }
 //      SimpleDateFormat sdf = new SimpleDateFormat();
         
-        TbPessoa p = new TbPessoa();
-        
-        p.setBdSexo("Masculino");
-        p.setBdDataNascimento(new Date());
-        
-        TbUsuario usuario = new TbUsuario();        
-        usuario.setBdEmail("victorcordova014@gmail.com");
-        UsuarioDAO uDAO = new UsuarioDAO();
-        uDAO.atualizar(usuario, p.getBdID());
+//        TbPessoa p = new TbPessoa();
+//        
+//        p.setBdSexo("Masculino");
+//        p.setBdDataNascimento(new Date());
+//        
+//        TbUsuario usuario = new TbUsuario();        
+//        usuario.setBdEmail("victorcordova014@gmail.com");
+//        UsuarioDAO uDAO = new UsuarioDAO();
+//        uDAO.atualizar(usuario, p.getBdID());
 //        usuario.setBdLogin("victor");
 //        usuario.setBdSenha("senha");
 //        usuario.setBdEmail("victor@");
@@ -101,6 +102,16 @@ public class Teste {
 //            System.out.println(pessoa1.toString());
 //            
 //        }
+        Gson google = new Gson();
         
+        TbUsuario tusuario = new TbUsuario();
+        UsuarioDAO udao = new UsuarioDAO();             
+        TbPessoa tpessoa = new TbPessoa();
+        PessoaDAO pdao = new PessoaDAO();
+        
+        tusuario = google.fromJson("{	\"bdLogin\": \"123qwe12345\",	\"bdSenha\": \"123qwe123\",	\"bdEmail\": \"123qwe@gmai.com\",	\"bdUsuarioAdministrador\": null    }", TbUsuario.class);
+        tpessoa = google.fromJson("{	\"bdNome\": \"Victor cordova\",	\"bdSexo\": \"123qwe\",	\"bdDataNascimento\": null      }", TbPessoa.class);
+        
+        udao.Salvar(tusuario, tpessoa);
     }
 }
