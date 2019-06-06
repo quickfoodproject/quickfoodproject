@@ -5,8 +5,10 @@
  */
 package com.senai.wsquickfood.ws;
 
+import com.google.gson.Gson;
 import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.dao.UsuarioDAO;
+import com.senai.wsquickfood.model.TbPessoa;
 import com.senai.wsquickfood.model.TbUsuario;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -84,6 +86,7 @@ public class UsuarioWs {
     public void putJson(String content) {
     }
 
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/logar/{login}/{senha}")
@@ -97,6 +100,28 @@ public class UsuarioWs {
             } else {
                 return Response.status(Response.Status.OK).entity("Usuário ou senha inválido(s)").header("Access-Control-Allow-Origin", "*").build();
             }
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/SalvarUsuario/{objUsuario}/{objPessoa}")
+    public Response salvarUsuario(@PathParam("objUsuario") String oUsuario, @PathParam("objPessoa") String oPessoa) {
+        UsuarioDAO dao = new UsuarioDAO();
+
+        Gson gson = new Gson();
+        TbUsuario usuario = gson.fromJson(oUsuario, TbUsuario.class);
+
+        TbPessoa pessoa = gson.fromJson(oPessoa, TbPessoa.class);
+
+        try {
+            //String retorno = dao.Salvar(oUsuario, oPessoa);
+            String retorno = "";
+
+            return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
