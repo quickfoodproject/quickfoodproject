@@ -40,6 +40,7 @@ public class UsuarioWs {
      * Retrieves representation of an instance of
      * com.senai.wsquickfood.ws.UsuarioTesteWS
      *
+     * @param login
      * @return an instance of java.lang.String
      */
     @GET
