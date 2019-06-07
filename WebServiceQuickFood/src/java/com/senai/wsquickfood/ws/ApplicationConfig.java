@@ -6,9 +6,11 @@
 package com.senai.wsquickfood.ws;
 
 import java.util.Set;
+import javax.servlet.annotation.WebServlet;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+@WebServlet(loadOnStartup=1)
 @ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
 
