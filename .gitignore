@@ -8,3 +8,6 @@ WebServiceQuickFood/nbproject/ant-deploy.xml
 WebServiceQuickFood/nbproject/private/private.xml
 WebServiceQuickFood/nbproject/project.properties
 /ProjetoQuickFood/nbproject/private/
+/mavenproject1/target/
+WebServiceQuickFood/src/java/com/senai/wsquickfood/ws/ApplicationConfig.java
+WebServiceQuickFood/src/java/com/senai/wsquickfood/ws/ApplicationConfig.java
