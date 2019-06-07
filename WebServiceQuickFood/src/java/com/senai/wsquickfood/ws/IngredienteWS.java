@@ -56,6 +56,16 @@ public class IngredienteWS {
         
         return Response.status(200).entity(iDao.salvar(tIngrediente)).build();
     }
+    
+    @GET
+    @Path("Ingrediente/getAll/")
+    @Produces(MediaType.APPLICATION_XML)
+    public Response getAll() {
+        //TODO return proper representation object
+        IngredienteDAO iDao = new IngredienteDAO();               
+                
+        return Response.status(200).entity(iDao.getAll()).build();
+    }
 
     /**
      * PUT method for updating or creating an instance of IngredienteWS

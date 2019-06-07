@@ -117,8 +117,8 @@ public class Teste {
         TbIngrediente tIngrediente = new TbIngrediente();
         IngredienteDAO iDao = new IngredienteDAO();               
         
-        tIngrediente = google.fromJson("{	\"bdNome\": \"teste ingrediente\"      }", TbIngrediente.class);
+        //tIngrediente = google.fromJson("{	\"bdNome\": \"teste ingrediente\"      }", TbIngrediente.class);
         
-        System.out.println(iDao.salvar(tIngrediente));
+        System.out.println(iDao.getAll());
     }
 }
