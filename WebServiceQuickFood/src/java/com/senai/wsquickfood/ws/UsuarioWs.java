@@ -118,8 +118,7 @@ public class UsuarioWs {
         TbPessoa pessoa = gson.fromJson(oPessoa, TbPessoa.class);
 
         try {
-            //String retorno = dao.Salvar(oUsuario, oPessoa);
-            String retorno = "";
+            String retorno = dao.Salvar(usuario, pessoa);
 
             return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
 

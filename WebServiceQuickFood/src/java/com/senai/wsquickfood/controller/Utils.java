@@ -83,7 +83,7 @@ public class Utils {
         return senha;
     }
 
-    public static boolean validarEmail(String email) {
+    public static boolean verificaEmail(String email) {
         boolean isEmailIdValid = false;
         if (email != null && email.length() > 0) {
             String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
