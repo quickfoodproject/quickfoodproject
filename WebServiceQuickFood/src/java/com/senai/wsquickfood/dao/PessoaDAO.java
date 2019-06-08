@@ -1,6 +1,6 @@
 package com.senai.wsquickfood.dao;
 
-import com.mysql.jdbc.PreparedStatement;
+import java.sql.PreparedStatement;
 import com.senai.wsquickfood.model.TbPessoa;
 import com.senai.wsquickfood.repository.Repository;
 import java.sql.ResultSet;
