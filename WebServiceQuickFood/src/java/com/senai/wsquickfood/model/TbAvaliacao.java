@@ -8,6 +8,7 @@ public class TbAvaliacao implements Serializable {
     private boolean bdJaCurtiu;
     private TbReceita bdFKReceita;
     private TbUsuario bdFKUsuario;
+    private String bdDescricao;
 
     public TbAvaliacao() {
     }

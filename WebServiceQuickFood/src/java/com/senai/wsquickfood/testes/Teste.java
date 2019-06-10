@@ -1,6 +1,7 @@
 package com.senai.wsquickfood.testes;
 
 import com.google.gson.Gson;
+import com.senai.wsquickfood.dao.AvaliacaoDao;
 import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.dao.PessoaDAO;
 import com.senai.wsquickfood.dao.UsuarioDAO;
@@ -112,13 +113,17 @@ public class Teste {
 //        tpessoa = google.fromJson("{	\"bdNome\": \"Victor cordova\",	\"bdSexo\": \"123qwe\",	\"bdDataNascimento\": null      }", TbPessoa.class);
 //        
 //        udao.Salvar(tusuario, tpessoa);
-        Gson google = new Gson();
-        
-        TbIngrediente tIngrediente = new TbIngrediente();
-        IngredienteDAO iDao = new IngredienteDAO();               
-        
-        //tIngrediente = google.fromJson("{	\"bdNome\": \"teste ingrediente\"      }", TbIngrediente.class);
-        
-        System.out.println(iDao.getAll());
+//        Gson google = new Gson();
+//        
+//        TbIngrediente tIngrediente = new TbIngrediente();
+//        IngredienteDAO iDao = new IngredienteDAO();               
+//        
+//        //tIngrediente = google.fromJson("{	\"bdNome\": \"teste ingrediente\"      }", TbIngrediente.class);
+//        
+//        System.out.println(iDao.getAll());
+
+        AvaliacaoDao dao = new AvaliacaoDao();
+        dao.insereComentario(12, 1, "TesteReceitaaaaaaaa");
+
     }
 }

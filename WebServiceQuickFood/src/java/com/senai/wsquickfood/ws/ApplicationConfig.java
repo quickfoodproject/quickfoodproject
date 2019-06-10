@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@WebServlet(loadOnStartup=1)
+@WebServlet(loadOnStartup = 1)
 @ApplicationPath("webresources")
 public class ApplicationConfig extends Application {
 
@@ -22,9 +22,9 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.senai.wsquickfood.ws.GenericResource.class);
+        resources.add(com.senai.wsquickfood.ws.AvaliacaoWs.class);
         resources.add(com.senai.wsquickfood.ws.IngredienteWS.class);
         resources.add(com.senai.wsquickfood.ws.UsuarioWs.class);
     }
-    
+
 }
