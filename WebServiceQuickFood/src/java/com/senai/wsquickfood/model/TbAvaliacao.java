@@ -8,7 +8,7 @@ public class TbAvaliacao implements Serializable {
     private boolean bdJaCurtiu;
     private TbReceita bdFKReceita;
     private TbUsuario bdFKUsuario;
-    private String bdComentario;
+    private String bdDescricao;
 
     public TbAvaliacao() {
     }
@@ -25,13 +25,13 @@ public class TbAvaliacao implements Serializable {
         this.bdJaCurtiu = bdJaCurtiu;
     }
 
-    public String getBdComentario() {
-        return bdComentario;
+    public String getBdDescricao() {
+        return bdDescricao;
     }
 
-    public void setBdComentario(String bdComentario) {
-        this.bdComentario = bdComentario;
-    }
+    public void setBdDescricao(String bdDescricao) {
+        this.bdDescricao = bdDescricao;
+    }    
 
     public int getBdID() {
         return bdID;

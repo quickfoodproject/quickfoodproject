@@ -92,7 +92,7 @@ public class ReceitaDao {
                 }
 
                 if (!rs.getString(COMENTARIO).equals(comentario)) {
-                    avaliacao.setBdComentario(rs.getString(COMENTARIO));
+                    avaliacao.setBdDescricao(rs.getString(COMENTARIO));
                     comentario = rs.getString(COMENTARIO);
                     listaComentario.add(avaliacao);
                 }
