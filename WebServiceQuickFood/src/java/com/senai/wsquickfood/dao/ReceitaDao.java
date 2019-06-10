@@ -18,13 +18,16 @@ import java.util.List;
 public class ReceitaDao {
 
     private String SELECIONARBYID = "SELECT C.BDNOME NOMERECEITA,\n"
-            + "C.BDDESCRICAO DESCRICAORECEITA,\n"
+            + "C.BDID IDRECEITA,\n"
+            + "C.BDDESCRICAO DESCRICAORECEITA,\n"            
             + "C.BDCURTIDAS CURTIDASRECEITA,\n"
-            + "D. BDFOTO FOTORECEITA,\n"
+            + "D.BDFOTO FOTORECEITA,\n"            
+            + "A.BDID IDINGREDIENTE,\n"
             + "A.BDNOME NOMEINGREDIENTE,\n"
             + "B.BDQUANTIDADEINGREDIENTE QUANTIDADEINGREDIENTE,\n"
             + "F.BDUNIDADE UNIDADEMEDIDA,\n"
-            + "E.BDDESCRICAO COMENTARIO\n"
+            + "E.BDID IDAVALIACAO,\n"
+            + "E.BDDESCRICAO COMENTARIO\n"            
             + "FROM TBINGREDIENTE A\n"
             + "INNER JOIN TBINGREDIENTERECEITA B ON (A.BDID = B.BDFKINGREDIENTE)\n"
             + "INNER JOIN TBRECEITA C ON (B.BDFKRECEITA = C.BDID)\n"
@@ -34,12 +37,15 @@ public class ReceitaDao {
             + "WHERE C.BDID = ? ORDER BY E.BDDESCRICAO";
 
     private String NOMERECEITA = "NOMERECEITA";
+    private String IDRECEITA = "IDRECEITA";    
     private String DESCRICAORECEITA = "DESCRICAORECEITA";
     private String CURTIDASRECEITA = "CURTIDASRECEITA";
     private String FOTORECEITA = "FOTORECEITA";
+    private String IDINGREDIENTE = "IDINGREDIENTE";
     private String NOMEINGREDIENTE = "NOMEINGREDIENTE";
     private String QUANTIDADEINGREDIENTE = "QUANTIDADEINGREDIENTE";
     private String UNIDADEMEDIDA = "UNIDADEMEDIDA";
+    private String IDAVALIACAO = "IDAVALIACAO";
     private String COMENTARIO = "COMENTARIO";
 
     public String selecionarReceitaById(Integer pIdReceita) {
@@ -60,6 +66,7 @@ public class ReceitaDao {
         String descricao = "";
         String comentario = "";
         String nomeIngrediente = "";
+        int idReceita = 0;
         
         try {
             conexao.open();
@@ -71,8 +78,9 @@ public class ReceitaDao {
             while (rs.next()) {
                 avaliacao = new TbAvaliacao();
                 ingrediente = new TbIngrediente();
-                if ((!rs.getString(NOMERECEITA).equals(nome)) & (!rs.getString(DESCRICAORECEITA).equals(descricao))) {
-
+                if (!((rs.getInt(IDRECEITA)) == idReceita)) {
+                    
+                    receita.setBdID(rs.getInt(IDRECEITA));
                     receita.setBdNome(rs.getString(NOMERECEITA));
                     receita.setBdDescricao(rs.getString(DESCRICAORECEITA));
                     receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
@@ -80,9 +88,11 @@ public class ReceitaDao {
 
                     nome = rs.getString(NOMERECEITA);
                     descricao = rs.getString(DESCRICAORECEITA);
+                    idReceita = rs.getInt(IDRECEITA);
                 }
                 if (!rs.getString(NOMEINGREDIENTE).equals(nomeIngrediente)) {
 
+                    ingrediente.setDbID(rs.getInt(IDINGREDIENTE));
                     ingrediente.setBdNome(rs.getString(NOMEINGREDIENTE));
                     ingrediente.setQuantidade(rs.getDouble(QUANTIDADEINGREDIENTE));
                     ingrediente.setUnidadeMedida(rs.getString(UNIDADEMEDIDA));
@@ -92,20 +102,22 @@ public class ReceitaDao {
                 }
 
                 if (!rs.getString(COMENTARIO).equals(comentario)) {
+                    
+                    avaliacao.setBdID(rs.getInt(IDAVALIACAO));
                     avaliacao.setBdDescricao(rs.getString(COMENTARIO));
                     comentario = rs.getString(COMENTARIO);
                     listaComentario.add(avaliacao);
                 }
 
             }
-
+            
             receita.setTbingredienteCollection(listaIngrediente);
             receita.setTbavaliacaoCollection(listaComentario);
 
             json = google.toJson(receita);
 
         } catch (Exception e) {
-            return "Erro";
+            return e.getMessage();
         } finally {
             conexao.close();
         }

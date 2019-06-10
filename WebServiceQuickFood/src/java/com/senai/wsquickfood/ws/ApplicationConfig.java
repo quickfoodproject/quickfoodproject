@@ -25,7 +25,6 @@ public class ApplicationConfig extends Application {
         resources.add(com.senai.wsquickfood.ws.IngredienteWS.class);
         resources.add(com.senai.wsquickfood.ws.ReceitaWs.class);
         resources.add(com.senai.wsquickfood.ws.UsuarioWs.class);
-        resources.add(com.senai.wsquickfood.ws.avaliacaoWs.class);
     }
     
 }
