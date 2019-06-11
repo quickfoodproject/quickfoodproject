@@ -5,7 +5,12 @@
  */
 package com.senai.wsquickfood.ws;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.senai.wsquickfood.dao.ReceitaDao;
+import java.util.List;
+
+import javax.json.Json;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -45,16 +50,38 @@ public class ReceitaWs {
     @Produces(MediaType.APPLICATION_JSON)
     public Response selecionarById(@PathParam("idReceita") Integer idReceita) {
         ReceitaDao receitaDao = new ReceitaDao();
-        
+
         try {
 
             return Response.status(200).entity(receitaDao.selecionarReceitaById(idReceita)).build();
-        
+
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
-        } 
-        
-        
+        }
+
+    }
+
+    @GET
+    @Path("receita/selecionarByIngrediente/{ingredientes}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response selecionarByIngrediente(@PathParam("ingredientes") String ingredientes) {
+        ReceitaDao receitaDao = new ReceitaDao();
+        Gson google = new Gson();
+
+        TypeToken token = new TypeToken<List<String>>() {
+        };
+
+        //Conversao json para List<Usuario>
+        List<String> json = google.fromJson(ingredientes, token.getType());
+
+        try {
+
+            return Response.status(200).entity(receitaDao.selecionarByIngrediente(json)).build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+
     }
 
     /**
