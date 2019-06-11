@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.senai.wsquickfood.dao.AvaliacaoDao;
 import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.dao.PessoaDAO;
+import com.senai.wsquickfood.dao.ReceitaDao;
 import com.senai.wsquickfood.dao.UsuarioDAO;
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.model.TbPessoa;
