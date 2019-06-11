@@ -38,7 +38,7 @@ public class ReceitaDao {
             + "WHERE C.BDID = ? ORDER BY E.BDDESCRICAO";
 
     private String SELECIONARBYINGREDIENTE = "SELECT DISTINCT C.BDID IDRECEITA,\n"
-            + "D. BDFOTO FOTORECEITA,\n"
+            + "D.BDFOTO FOTORECEITA,\n"
             + "C.BDNOME NOMERECEITA,\n"
             + "C.BDCURTIDAS CURTIDASRECEITA\n"
             + "FROM TBINGREDIENTE A\n"
@@ -47,6 +47,15 @@ public class ReceitaDao {
             + "LEFT JOIN TBFOTO D ON (C.BDFKFOTO = D.BDID)\n"
             + "WHERE A.BDNOME IN (?)\n"
             + "ORDER BY C.BDCURTIDAS DESC";
+
+    private String SELECIONARRECEITASTOP5 = "SELECT DISTINCT A.BDID IDRECEITA,\n"
+            + " B.BDFOTO FOTORECEITA,\n"
+            + " A.BDNOME NOMERECEITA,\n"
+            + " A.BDCURTIDAS CURTIDASRECEITA\n"
+            + " FROM TBRECEITA A\n"
+            + " LEFT JOIN TBFOTO B ON (A.BDFKFOTO = B.BDID)\n"
+            + " ORDER BY A.BDCURTIDAS DESC\n"
+            + " LIMIT 5";
 
     private String NOMERECEITA = "NOMERECEITA";
     private String IDRECEITA = "IDRECEITA";
@@ -153,7 +162,40 @@ public class ReceitaDao {
                 receita.setBdID(rs.getInt(IDRECEITA));
                 receita.setBdNome(rs.getString(NOMERECEITA));
                 receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
-                receita.setBdURLlmagem(rs.getString(FOTORECEITA));                
+                receita.setBdURLlmagem(rs.getString(FOTORECEITA));
+            }
+
+            json = google.toJson(receita);
+
+        } catch (Exception e) {
+            return e.getMessage();
+        } finally {
+            conexao.close();
+        }
+
+        return json;
+    }
+    
+    public String listarReceitasTop() {
+
+        Repository conexao = Repository.getInstance();
+
+        Gson google = new Gson();
+
+        TbReceita receita = new TbReceita();
+        String json = "";
+
+        try {
+            conexao.open();
+
+            PreparedStatement ps = conexao.conection.prepareStatement(SELECIONARRECEITASTOP5);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                receita.setBdID(rs.getInt(IDRECEITA));
+                receita.setBdNome(rs.getString(NOMERECEITA));
+                receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
+                receita.setBdURLlmagem(rs.getString(FOTORECEITA));
             }
 
             json = google.toJson(receita);
