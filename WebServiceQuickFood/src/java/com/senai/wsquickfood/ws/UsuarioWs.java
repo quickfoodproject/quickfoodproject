@@ -26,7 +26,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Aluno
  */
-@Path("quickfood")
+@Path("quickfoodUsuario")
 public class UsuarioWs {
 
     @Context

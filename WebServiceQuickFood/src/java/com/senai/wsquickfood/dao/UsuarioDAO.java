@@ -7,8 +7,6 @@ import com.senai.wsquickfood.repository.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UsuarioDAO {
 
