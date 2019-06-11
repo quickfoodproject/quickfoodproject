@@ -6,6 +6,7 @@
 package com.senai.wsquickfood.dao;
 
 import com.google.gson.Gson;
+import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.model.TbAvaliacao;
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.model.TbReceita;
@@ -19,15 +20,15 @@ public class ReceitaDao {
 
     private String SELECIONARBYID = "SELECT C.BDNOME NOMERECEITA,\n"
             + "C.BDID IDRECEITA,\n"
-            + "C.BDDESCRICAO DESCRICAORECEITA,\n"            
+            + "C.BDDESCRICAO DESCRICAORECEITA,\n"
             + "C.BDCURTIDAS CURTIDASRECEITA,\n"
-            + "D.BDFOTO FOTORECEITA,\n"            
+            + "D.BDFOTO FOTORECEITA,\n"
             + "A.BDID IDINGREDIENTE,\n"
             + "A.BDNOME NOMEINGREDIENTE,\n"
             + "B.BDQUANTIDADEINGREDIENTE QUANTIDADEINGREDIENTE,\n"
             + "F.BDUNIDADE UNIDADEMEDIDA,\n"
             + "E.BDID IDAVALIACAO,\n"
-            + "E.BDDESCRICAO COMENTARIO\n"            
+            + "E.BDDESCRICAO COMENTARIO\n"
             + "FROM TBINGREDIENTE A\n"
             + "INNER JOIN TBINGREDIENTERECEITA B ON (A.BDID = B.BDFKINGREDIENTE)\n"
             + "INNER JOIN TBRECEITA C ON (B.BDFKRECEITA = C.BDID)\n"
@@ -36,8 +37,19 @@ public class ReceitaDao {
             + "INNER JOIN TBUNIDADEMEDIDA F ON (B.BDFKUNIDADEMEDIDA = F.BDID)\n"
             + "WHERE C.BDID = ? ORDER BY E.BDDESCRICAO";
 
+    private String SELECIONARBYINGREDIENTE = "SELECT DISTINCT C.BDID IDRECEITA,\n"
+            + "D. BDFOTO FOTORECEITA,\n"
+            + "C.BDNOME NOMERECEITA,\n"
+            + "C.BDCURTIDAS CURTIDASRECEITA\n"
+            + "FROM TBINGREDIENTE A\n"
+            + "INNER JOIN TBINGREDIENTERECEITA B ON (A.BDID = B.BDFKINGREDIENTE)\n"
+            + "INNER JOIN TBRECEITA C ON (B.BDFKRECEITA = C.BDID)\n"
+            + "LEFT JOIN TBFOTO D ON (C.BDFKFOTO = D.BDID)\n"
+            + "WHERE A.BDNOME IN (?)\n"
+            + "ORDER BY C.BDCURTIDAS DESC";
+
     private String NOMERECEITA = "NOMERECEITA";
-    private String IDRECEITA = "IDRECEITA";    
+    private String IDRECEITA = "IDRECEITA";
     private String DESCRICAORECEITA = "DESCRICAORECEITA";
     private String CURTIDASRECEITA = "CURTIDASRECEITA";
     private String FOTORECEITA = "FOTORECEITA";
@@ -49,7 +61,7 @@ public class ReceitaDao {
     private String COMENTARIO = "COMENTARIO";
 
     public String selecionarReceitaById(Integer pIdReceita) {
-        
+
         Repository conexao = Repository.getInstance();
         List<TbIngrediente> listaIngrediente = new ArrayList<>();
         List<TbAvaliacao> listaComentario = new ArrayList<>();
@@ -62,12 +74,10 @@ public class ReceitaDao {
 
         String json = "";
 
-        String nome = "";
-        String descricao = "";
         String comentario = "";
         String nomeIngrediente = "";
         int idReceita = 0;
-        
+
         try {
             conexao.open();
 
@@ -79,15 +89,13 @@ public class ReceitaDao {
                 avaliacao = new TbAvaliacao();
                 ingrediente = new TbIngrediente();
                 if (!((rs.getInt(IDRECEITA)) == idReceita)) {
-                    
+
                     receita.setBdID(rs.getInt(IDRECEITA));
                     receita.setBdNome(rs.getString(NOMERECEITA));
                     receita.setBdDescricao(rs.getString(DESCRICAORECEITA));
                     receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
                     receita.setBdURLlmagem(rs.getString(FOTORECEITA));
 
-                    nome = rs.getString(NOMERECEITA);
-                    descricao = rs.getString(DESCRICAORECEITA);
                     idReceita = rs.getInt(IDRECEITA);
                 }
                 if (!rs.getString(NOMEINGREDIENTE).equals(nomeIngrediente)) {
@@ -102,7 +110,7 @@ public class ReceitaDao {
                 }
 
                 if (!rs.getString(COMENTARIO).equals(comentario)) {
-                    
+
                     avaliacao.setBdID(rs.getInt(IDAVALIACAO));
                     avaliacao.setBdDescricao(rs.getString(COMENTARIO));
                     comentario = rs.getString(COMENTARIO);
@@ -110,9 +118,43 @@ public class ReceitaDao {
                 }
 
             }
-            
+
             receita.setTbingredienteCollection(listaIngrediente);
             receita.setTbavaliacaoCollection(listaComentario);
+
+            json = google.toJson(receita);
+
+        } catch (Exception e) {
+            return e.getMessage();
+        } finally {
+            conexao.close();
+        }
+
+        return json;
+    }
+
+    public String selecionarByIngrediente(List<String> pNomeIngredientes) {
+
+        Repository conexao = Repository.getInstance();
+
+        Gson google = new Gson();
+
+        TbReceita receita = new TbReceita();
+        String json = "";
+
+        try {
+            conexao.open();
+
+            PreparedStatement ps = conexao.conection.prepareStatement(SELECIONARBYINGREDIENTE);
+            ps.setString(1, Utils.listaParaString(pNomeIngredientes, ','));
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                receita.setBdID(rs.getInt(IDRECEITA));
+                receita.setBdNome(rs.getString(NOMERECEITA));
+                receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
+                receita.setBdURLlmagem(rs.getString(FOTORECEITA));                
+            }
 
             json = google.toJson(receita);
 

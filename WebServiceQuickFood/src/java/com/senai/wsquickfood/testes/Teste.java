@@ -121,8 +121,15 @@ public class Teste {
 //        //tIngrediente = google.fromJson("{	\"bdNome\": \"teste ingrediente\"      }", TbIngrediente.class);
 //        
 //        System.out.println(iDao.getAll());
-          ReceitaDao dao = new ReceitaDao();
-          
-          System.out.println(dao.selecionarReceitaById(1));
+//          ReceitaDao dao = new ReceitaDao();
+//          
+//          System.out.println(dao.selecionarReceitaById(1));
+
+            ReceitaDao reDao = new ReceitaDao();
+            List<String> lista = new ArrayList<>();
+            
+            lista.add("Açúcar");
+            
+            System.out.println(reDao.selecionarByIngrediente(lista));
     }
 }

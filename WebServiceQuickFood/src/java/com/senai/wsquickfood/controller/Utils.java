@@ -3,6 +3,7 @@ package com.senai.wsquickfood.controller;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -94,5 +95,16 @@ public class Utils {
             }
         }
         return isEmailIdValid;
+    }
+    
+    public static String listaParaString(List<String> listaString,char caracter) {
+        String retorno = "";
+        
+            for (String string : listaString) {                
+                retorno = retorno + string + caracter;
+        }
+            retorno = retorno.substring(0, retorno.length()-1);
+                    
+        return retorno;
     }
 }
