@@ -26,7 +26,7 @@ import javax.ws.rs.core.Response;
  *
  * @author victo
  */
-@Path("quickfood")
+@Path("ingrediente")
 public class IngredienteWS {
 
     @Context
@@ -44,7 +44,7 @@ public class IngredienteWS {
      */
     @GET
     @Path("Ingrediente/SalvarIngrediente/{objIngrediente}")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response salvarIngrediente(@PathParam("objIngrediente") String objIngrediente) {
         //TODO return proper representation object
         Gson google = new Gson();
@@ -59,7 +59,7 @@ public class IngredienteWS {
     
     @GET
     @Path("Ingrediente/getAll/")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         //TODO return proper representation object
         IngredienteDAO iDao = new IngredienteDAO();               
@@ -72,7 +72,7 @@ public class IngredienteWS {
      * @param content representation for the resource
      */
     @PUT
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.APPLICATION_JSON)
     public void putXml(String content) {
     }
 }
