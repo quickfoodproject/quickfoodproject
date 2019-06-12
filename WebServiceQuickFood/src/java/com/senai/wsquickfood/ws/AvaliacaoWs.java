@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Aluno
  */
-@Path("quickfoodAvaliacao")
+@Path("avaliacao")
 public class AvaliacaoWs {
 
     @Context
