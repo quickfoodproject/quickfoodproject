@@ -67,7 +67,7 @@ public class TbAvaliacao implements Serializable {
 
     @Override
     public String toString() {
-        return "com.senai.quickfood.dao.Tbavaliacao[ bdID=" + bdID + " ]";
+        return "com.senai.quickfood.dao.Tbavaliacao[ bdID=" + bdID + " bdDescricao=" + bdDescricao +" ]";
     }
     
 }

@@ -2,16 +2,28 @@ package com.senai.wsquickfood.dao;
 
 import com.senai.wsquickfood.model.TbAvaliacao;
 import com.senai.wsquickfood.repository.Repository;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AvaliacaoDao {
 
-    String INSERECOMENTARIO = "INSERT INTO TBAVALIACAO (BDFKUSUARIO, BDFKRECEITA, BDDESCRICAO)\n"
+    private String INSERECOMENTARIO = "INSERT INTO TBAVALIACAO (BDFKUSUARIO, BDFKRECEITA, BDDESCRICAO)\n"
             + "VALUES (?, ?, ?)";
 
-    String EDITACOMENTARIO = "UPDATE TBAVALIACAO SET BDDESCRICAO = ? WHERE BDID = ?";
+    private String EDITACOMENTARIO = "UPDATE TBAVALIACAO SET BDDESCRICAO = ? WHERE BDID = ?";
 
-    String EXCUICOMENTARIO = "DELETE FROM TBAVALIACAO WHERE BDID = ?";
+    private String EXCUICOMENTARIO = "DELETE FROM TBAVALIACAO WHERE BDID = ?";
+
+    private String BUSCACOMENTARIOSRECEITA = "SELECT BDID IDAVALIACAO,\n"
+            + "BDDESCRICAO COMENTARIO\n"
+            + "FROM TBAVALIACAO\n"
+            + "WHERE BDFKRECEITA = ?";
+
+    private String IDAVALIACAO = "IDAVALIACAO";
+    private String COMENTARIO = "COMENTARIO";
 
     public String insereComentario(int idUsuario, int idReceita, String comentario) {
 
@@ -83,6 +95,40 @@ public class AvaliacaoDao {
         }
 
         return "Comentário excluído com sucesso.";
+    }
+
+    public List<TbAvaliacao> buscaComentariosDaReceita(int idReceita) {
+
+        Repository conexao = Repository.getInstance();
+        TbAvaliacao avaliacao;
+        List<TbAvaliacao> listaComentario = new ArrayList<>();
+
+        try {
+
+            conexao.open();
+
+            PreparedStatement ps = conexao.conection.prepareStatement(BUSCACOMENTARIOSRECEITA);
+            ps.setInt(1, idReceita);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                if (!rs.getString(COMENTARIO).isEmpty()) {
+
+                    avaliacao = new TbAvaliacao();
+                    avaliacao.setBdID(rs.getInt(IDAVALIACAO));
+                    avaliacao.setBdDescricao(rs.getString(COMENTARIO));
+                    listaComentario.add(avaliacao);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar comentários: " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return listaComentario;
     }
 
 }
