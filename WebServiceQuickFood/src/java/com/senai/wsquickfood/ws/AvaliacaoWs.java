@@ -54,7 +54,39 @@ public class AvaliacaoWs {
         }
     }
 
-    /**     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Avaliacao/editarComentario/{idAvaliacao}/{descricao}")
+    public Response editarComentario(@PathParam("idAvaliacao") int idAvaliacao, @PathParam("descricao") String descricao) {
+        try {
+            AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
+
+            String retorno = avaliacaoDao.editaComentario(idAvaliacao, descricao);
+
+            return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Avaliacao/excluirComentario/{idAvaliacao}")
+    public Response excluirComentario(@PathParam("idAvaliacao") int idAvaliacao) {
+        try {
+            AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
+
+            String retorno = avaliacaoDao.excluiComentario(idAvaliacao);
+
+            return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+    }
+
+    /**
      *
      * @param content representation for the resource
      */
