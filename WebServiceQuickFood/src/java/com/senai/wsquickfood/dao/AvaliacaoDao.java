@@ -15,7 +15,7 @@ public class AvaliacaoDao {
 
     private String EDITACOMENTARIO = "UPDATE TBAVALIACAO SET BDDESCRICAO = ? WHERE BDID = ?";
 
-    private String EXCUICOMENTARIO = "DELETE FROM TBAVALIACAO WHERE BDID = ?";
+    private String APAGACOMENTARIO = "UPDATE TBAVALIACAO SET BDDESCRICAO = ? WHERE BDID = ?";
 
     private String BUSCACOMENTARIOSRECEITA = "SELECT BDID IDAVALIACAO,\n"
             + "BDDESCRICAO COMENTARIO\n"
@@ -74,7 +74,7 @@ public class AvaliacaoDao {
         return "Comentário editado com sucesso.";
     }
 
-    public String excluiComentario(int idAvaliacao) {
+    public String apagaComentario(int idAvaliacao) {
 
         Repository conexao = Repository.getInstance();
         TbAvaliacao avaliacao = new TbAvaliacao();
@@ -83,8 +83,9 @@ public class AvaliacaoDao {
 
             conexao.open();
 
-            conexao.preparedStatement = conexao.conection.prepareStatement(EXCUICOMENTARIO);
-            conexao.preparedStatement.setInt(1, idAvaliacao);
+            conexao.preparedStatement = conexao.conection.prepareStatement(APAGACOMENTARIO);
+            conexao.preparedStatement.setString(1, "");
+            conexao.preparedStatement.setInt(2, idAvaliacao);
             conexao.preparedStatement.execute();
 
         } catch (SQLException e) {

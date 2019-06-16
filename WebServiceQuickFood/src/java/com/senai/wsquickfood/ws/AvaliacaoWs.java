@@ -77,7 +77,7 @@ public class AvaliacaoWs {
         try {
             AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
 
-            String retorno = avaliacaoDao.excluiComentario(idAvaliacao);
+            String retorno = avaliacaoDao.apagaComentario(idAvaliacao);
 
             return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
 
