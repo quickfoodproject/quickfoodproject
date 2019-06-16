@@ -84,6 +84,21 @@ public class ReceitaWs {
 
     }
 
+    @GET
+    @Path("receita/listarReceitasTop/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response listarReceitasTop() {
+        ReceitaDao receitaDao = new ReceitaDao();
+        Gson google = new Gson();
+
+        try {
+            return Response.status(200).entity(receitaDao.listarReceitasTop()).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+
+    }
+
     /**
      * PUT method for updating or creating an instance of ReceitaWs
      *
