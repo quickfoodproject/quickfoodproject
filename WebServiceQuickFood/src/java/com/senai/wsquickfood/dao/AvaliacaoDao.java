@@ -70,15 +70,15 @@ public class AvaliacaoDao {
 
         Repository conexao = Repository.getInstance();
         TbAvaliacao avaliacao = new TbAvaliacao();
-        boolean possuiComentario = false;
+        boolean PossuiAvaliacaoSemComentario = false;
 
-        possuiComentario = ususarioPossuiAvaliacaoSemComentario(idUsuario, idReceita);
+        PossuiAvaliacaoSemComentario = ususarioPossuiAvaliacaoSemComentario(idUsuario, idReceita);
 
         try {
 
             conexao.open();
 
-            if (possuiComentario) {
+            if (PossuiAvaliacaoSemComentario) {
                 conexao.preparedStatement = conexao.conection.prepareStatement(INSERECOMENTARIOAVALIACAOEXISTENTE);
                 conexao.preparedStatement.setString(1, comentario);
                 conexao.preparedStatement.setInt(2, idReceita);
