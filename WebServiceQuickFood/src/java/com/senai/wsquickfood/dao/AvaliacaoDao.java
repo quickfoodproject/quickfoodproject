@@ -13,6 +13,8 @@ public class AvaliacaoDao {
     private String INSERECOMENTARIO = "INSERT INTO TBAVALIACAO (BDFKUSUARIO, BDFKRECEITA, BDDESCRICAO)\n"
             + "VALUES (?, ?, ?)";
 
+    private String INSERECOMENTARIOAVALIACAOEXISTENTE = "UPDATE TBAVALIACAO SET BDDESCRICAO = ? WHERE BDFKRECEITA = ? AND BDFKUSUARIO = ? AND BDDESCRICAO = ?";
+
     private String EDITACOMENTARIO = "UPDATE TBAVALIACAO SET BDDESCRICAO = ? WHERE BDID = ?";
 
     private String APAGACOMENTARIO = "UPDATE TBAVALIACAO SET BDDESCRICAO = ? WHERE BDID = ?";
@@ -22,23 +24,75 @@ public class AvaliacaoDao {
             + "FROM TBAVALIACAO\n"
             + "WHERE BDFKRECEITA = ?";
 
+    private String BUSCACOMENTARIOAVALIACOESUSUARIO = "SELECT BDID IDAVALIACAO, \n"
+            + "BDJACURTIU JACURTIU, \n"
+            + "BDFKUSUARIO IDUSUARIO, \n"
+            + "BDFKRECEITA IDRECEITA \n"
+            + "FROM TBAVALIACAO\n"
+            + "WHERE BDFKUSUARIO = ?\n"
+            + "AND BDFKRECEITA = ?\n"
+            + "AND BDDESCRICAO = ?";
+
     private String IDAVALIACAO = "IDAVALIACAO";
     private String COMENTARIO = "COMENTARIO";
 
-    public String insereComentario(int idUsuario, int idReceita, String comentario) {
+    public boolean ususarioPossuiAvaliacaoSemComentario(int idUsuario, int idReceita) {
 
+        TbAvaliacao avaliacao;
+        boolean retorno = false;
         Repository conexao = Repository.getInstance();
-        TbAvaliacao avaliacao = new TbAvaliacao();
 
         try {
 
             conexao.open();
 
-            conexao.preparedStatement = conexao.conection.prepareStatement(INSERECOMENTARIO);
-            conexao.preparedStatement.setInt(1, idUsuario);
-            conexao.preparedStatement.setInt(2, idReceita);
-            conexao.preparedStatement.setString(3, comentario);
-            conexao.preparedStatement.execute();
+            PreparedStatement ps = conexao.conection.prepareStatement(BUSCACOMENTARIOAVALIACOESUSUARIO);
+            ps.setInt(1, idUsuario);
+            ps.setInt(2, idReceita);
+            ps.setString(3, "");
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                retorno = true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar avaliacoes: " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return retorno;
+
+    }
+
+    public String insereComentario(int idUsuario, int idReceita, String comentario) {
+
+        Repository conexao = Repository.getInstance();
+        TbAvaliacao avaliacao = new TbAvaliacao();
+        boolean possuiComentario = false;
+
+        possuiComentario = ususarioPossuiAvaliacaoSemComentario(idUsuario, idReceita);
+
+        try {
+
+            conexao.open();
+
+            if (possuiComentario) {
+                conexao.preparedStatement = conexao.conection.prepareStatement(INSERECOMENTARIOAVALIACAOEXISTENTE);
+                conexao.preparedStatement.setString(1, comentario);
+                conexao.preparedStatement.setInt(2, idReceita);
+                conexao.preparedStatement.setInt(3, idUsuario);
+                conexao.preparedStatement.setString(4, "");
+                conexao.preparedStatement.execute();
+
+            } else {
+                conexao.preparedStatement = conexao.conection.prepareStatement(INSERECOMENTARIO);
+                conexao.preparedStatement.setInt(1, idUsuario);
+                conexao.preparedStatement.setInt(2, idReceita);
+                conexao.preparedStatement.setString(3, comentario);
+                conexao.preparedStatement.execute();
+            }
 
         } catch (SQLException e) {
             System.err.println("Erro ao salvar comentário: " + e.toString());
