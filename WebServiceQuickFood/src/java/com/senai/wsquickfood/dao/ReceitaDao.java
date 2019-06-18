@@ -65,6 +65,14 @@ public class ReceitaDao {
             + " ORDER BY A.BDCURTIDAS DESC\n"
             + " LIMIT 5";
 
+    private String BUSCALIKESRECEITA = "SELECT BDCURTIDAS CURTIDASRECEITA \n"
+            + "FROM TBRECEITA \n"
+            + "WHERE BDID = ?";
+
+    private String UPDATELIKESDARECEITA = "UPDATE TBRECEITA \n"
+            + "SET BDCURTIDAS = ? \n"
+            + "WHERE BDID = ?";
+
     private String NOMERECEITA = "NOMERECEITA";
     private String IDRECEITA = "IDRECEITA";
     private String DESCRICAORECEITA = "DESCRICAORECEITA";
@@ -74,6 +82,60 @@ public class ReceitaDao {
     private String NOMEINGREDIENTE = "NOMEINGREDIENTE";
     private String QUANTIDADEINGREDIENTE = "QUANTIDADEINGREDIENTE";
     private String UNIDADEMEDIDA = "UNIDADEMEDIDA";
+
+    public int updateCurtidasReceita(int idReceita, boolean incrementa) {
+
+        int totalCurtidas = 0;
+        totalCurtidas = buscaCurtidas(idReceita);
+
+        if (incrementa) {
+            totalCurtidas++;
+        } else {
+            totalCurtidas--;
+        }
+
+        Repository conexao = Repository.getInstance();
+
+        try {
+            conexao.open();
+
+            conexao.preparedStatement = conexao.conection.prepareStatement(UPDATELIKESDARECEITA);
+            conexao.preparedStatement.setInt(1, totalCurtidas);
+            conexao.preparedStatement.setInt(2, idReceita);
+            conexao.preparedStatement.execute();
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao atualizar curtidas: " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return totalCurtidas;
+    }
+
+    public int buscaCurtidas(int idReceita) {
+        int retorno = 0;
+        Repository conexao = Repository.getInstance();
+
+        try {
+            conexao.open();
+
+            PreparedStatement ps = conexao.conection.prepareStatement(BUSCALIKESRECEITA);
+            ps.setInt(1, idReceita);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                retorno = rs.getInt(CURTIDASRECEITA);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro: " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return retorno;
+    }
 
     public String selecionarReceitaById(Integer pIdReceita) {
 
@@ -118,11 +180,11 @@ public class ReceitaDao {
                     ingrediente.setBdNome(rs.getString(NOMEINGREDIENTE));
                     ingrediente.setQuantidade(rs.getDouble(QUANTIDADEINGREDIENTE));
                     ingrediente.setUnidadeMedida(rs.getString(UNIDADEMEDIDA));
-                    
+
                     idIngrediente = rs.getInt(IDINGREDIENTE);
-                    
+
                     listaIngrediente.add(ingrediente);
-                }                
+                }
 
             }
 

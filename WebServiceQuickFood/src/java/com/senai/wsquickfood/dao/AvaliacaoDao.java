@@ -33,8 +33,99 @@ public class AvaliacaoDao {
             + "AND BDFKRECEITA = ?\n"
             + "AND BDDESCRICAO = ?";
 
+    private String BUSCALIKEUSUARIO = "SELECT BDID IDAVALIACAO, \n"
+            + "BDJACURTIU JACURTIU, \n"
+            + "BDFKUSUARIO IDUSUARIO, \n"
+            + "BDFKRECEITA IDRECEITA \n"
+            + "FROM TBAVALIACAO\n"
+            + "WHERE BDFKUSUARIO = ?\n"
+            + "AND BDFKRECEITA = ?";
+
+    private String UPDATELIKE = "UPDATE TBAVALIACAO \n"
+            + "SET BDJACURTIU = ? \n"
+            + "WHERE BDFKUSUARIO = ? \n"
+            + "AND BDFKRECEITA = ?";
+
+    private String INSERTLIKE = "INSERT INTO TBAVALIACAO (BDJACURTIU, BDFKUSUARIO, BDFKRECEITA) \n"
+            + "VALUES (?, ?, ?)";
+
     private String IDAVALIACAO = "IDAVALIACAO";
     private String COMENTARIO = "COMENTARIO";
+    private String IDLIKE = "IDAVALIACAO";
+    private String JACURTIU = "JACURTIU";
+
+    public boolean insereLikeDeslikeUsuario(int idUsuadio, int idReceita) {
+
+        ReceitaDao receita = new ReceitaDao();
+        TbAvaliacao avaliacao = new TbAvaliacao();
+        avaliacao = buscaIdLikeDeslike(idUsuadio, idReceita);
+        Repository conexao = Repository.getInstance();
+
+        try {
+            conexao.open();
+
+            if (avaliacao.getBdID() > 0) {
+                conexao.preparedStatement = conexao.conection.prepareStatement(UPDATELIKE);
+
+                if (avaliacao.getBdJaCurtiu()) {
+                    conexao.preparedStatement.setBoolean(1, false);
+                } else {
+                    conexao.preparedStatement.setBoolean(1, true);
+                }
+
+                conexao.preparedStatement.setInt(2, idUsuadio);
+                conexao.preparedStatement.setInt(3, idReceita);
+                conexao.preparedStatement.execute();
+
+            } else {
+                conexao.preparedStatement = conexao.conection.prepareStatement(INSERTLIKE);
+                conexao.preparedStatement.setBoolean(1, true);
+                conexao.preparedStatement.setInt(2, idUsuadio);
+                conexao.preparedStatement.setInt(3, idReceita);
+                conexao.preparedStatement.execute();
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao editar comentário: " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        if (avaliacao.getBdID() > 0 && avaliacao.getBdJaCurtiu()) {
+            receita.updateCurtidasReceita(idReceita, false);
+        } else {
+            receita.updateCurtidasReceita(idReceita, true);
+        }
+
+        return true;
+    }
+
+    public TbAvaliacao buscaIdLikeDeslike(int idUsuario, int idReceita) {
+
+        TbAvaliacao avaliacao = new TbAvaliacao();
+        Repository conexao = Repository.getInstance();
+
+        try {
+            conexao.open();
+
+            PreparedStatement ps = conexao.conection.prepareStatement(BUSCALIKEUSUARIO);
+            ps.setInt(1, idUsuario);
+            ps.setInt(2, idReceita);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                avaliacao.setBdID(rs.getInt(IDLIKE));
+                avaliacao.setBdJaCurtiu(rs.getBoolean(JACURTIU));
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar likes: " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return avaliacao;
+    }
 
     public boolean ususarioPossuiAvaliacaoSemComentario(int idUsuario, int idReceita) {
 
