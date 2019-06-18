@@ -86,6 +86,21 @@ public class AvaliacaoWs {
         }
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Avaliacao/darLikeDeslike/{idUsuario}/{idReceita}")
+    public Response darLikeDeslike(@PathParam("idUsuario") int idUsuario, @PathParam("idReceita") int idReceita) {
+        try {
+            AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
+            avaliacaoDao.insereLikeDeslikeUsuario(idUsuario, idReceita);
+
+            return Response.status(Response.Status.OK).entity("LikeDeslike com sucesso.").header("Access-Control-Allow-Origin", "*").build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).entity("Erro ao dar LikeDeslike.").header("Access-Control-Allow-Origin", "*").build();
+        }
+    }
+
     /**
      *
      * @param content representation for the resource
