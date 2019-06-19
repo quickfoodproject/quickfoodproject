@@ -12,6 +12,6 @@ export class UsuarioService {
   constructor(private http: HttpClient) { }
 
   logar(user: Usuario) {
-    this.http.post<Usuario>(this.urlLogar, user);
+    return this.http.post<Usuario>(this.urlLogar, user);
   }
 }
