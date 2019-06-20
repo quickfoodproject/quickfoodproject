@@ -8,6 +8,8 @@ package com.senai.wsquickfood.ws;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.senai.wsquickfood.dao.ReceitaDao;
+import com.senai.wsquickfood.model.TbIngrediente;
+import com.senai.wsquickfood.model.TbReceita;
 import java.util.List;
 
 import javax.json.Json;
@@ -77,6 +79,30 @@ public class ReceitaWs {
         try {
 
             return Response.status(200).entity(receitaDao.selecionarByIngrediente(json)).build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+
+    }
+    
+    @GET
+    @Path("receita/cadastrarReceita/{receita}/{ingredientes}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response cadastrarReceita(@PathParam("receita") String jSonReceita, @PathParam("ingredientes") String ingredientes) {
+        ReceitaDao receitaDao = new ReceitaDao();
+        Gson google = new Gson();
+        TbReceita receita = new TbReceita();
+        
+        TypeToken token = new TypeToken<List<TbIngrediente>>() {
+        };
+
+        //Conversao json para List<Usuario>
+        List<TbIngrediente> listaIngredientes = google.fromJson(ingredientes, token.getType());
+        receita = google.fromJson(jSonReceita, TbReceita.class);
+        try {
+
+            return Response.status(200).entity(receitaDao.cadastrarReceita(receita, listaIngredientes)).build();
 
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();

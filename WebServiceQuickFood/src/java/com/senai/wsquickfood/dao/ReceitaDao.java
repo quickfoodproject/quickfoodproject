@@ -10,6 +10,7 @@ import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.model.TbAvaliacao;
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.model.TbReceita;
+import com.senai.wsquickfood.model.TbUnidadeMedida;
 import com.senai.wsquickfood.repository.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,6 +74,10 @@ public class ReceitaDao {
             + "SET BDCURTIDAS = ? \n"
             + "WHERE BDID = ?";
 
+    private String INSERTRECEITA = "INSERT INTO TBRECEITA(BDID, BDNOME, BDDESCRICAO, BDFKFOTO, BDFKUSUARIO) VALUES (0, ?, ?, ?, ?)";
+    private String INSERTINGREDIENTERECEITA = "INSERT INTO TBINGREDIENTERECEITA (BDQUANTIDADEINGREDIENTE, BDFKRECEITA, BDFKINGREDIENTE, BDFKUNIDADEMEDIDA) VALUES (?, ?, ?, ?)";
+    private String SELECTNOMERECEITA = "SELECT BDNOME FROM TBRECEITA WHERE BDNOME = ?";
+            
     private String NOMERECEITA = "NOMERECEITA";
     private String IDRECEITA = "IDRECEITA";
     private String DESCRICAORECEITA = "DESCRICAORECEITA";
@@ -82,6 +87,79 @@ public class ReceitaDao {
     private String NOMEINGREDIENTE = "NOMEINGREDIENTE";
     private String QUANTIDADEINGREDIENTE = "QUANTIDADEINGREDIENTE";
     private String UNIDADEMEDIDA = "UNIDADEMEDIDA";
+
+    private boolean validarNomeReceita(String nomeReceita) {
+        Repository conexao = Repository.getInstance();
+        
+        try {
+            conexao.open();
+            
+            PreparedStatement ps = conexao.conection.prepareStatement(SELECTNOMERECEITA);
+            ps.setString(1, nomeReceita);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+            
+        } catch (Exception e) {
+            e.getMessage().toString();
+        }
+        return false;
+    }
+
+    public String cadastrarReceita(TbReceita receita, List<TbIngrediente> listaIngrediente) {
+        if (validarNomeReceita(receita.getBdNome())) 
+            return "Já existe essa receita cadastrada";
+        Repository conexao = Repository.getInstance();
+        
+        try {
+            conexao.open();
+            conexao.preparedStatement = conexao.conection.prepareStatement(INSERTRECEITA, PreparedStatement.RETURN_GENERATED_KEYS);
+            conexao.preparedStatement.setString(1, receita.getBdNome());
+            conexao.preparedStatement.setString(2, receita.getBdDescricao());
+            conexao.preparedStatement.setInt(3, receita.getBdFkFoto().getBdId());
+            conexao.preparedStatement.setInt(4, receita.getBdDKUsuario().getBdID());
+            conexao.preparedStatement.execute();
+
+            ResultSet rs = conexao.preparedStatement.getGeneratedKeys();
+
+            if (rs.next()) {
+                receita.setBdID(rs.getInt(1));
+            }
+
+            for (TbIngrediente tbIngrediente : listaIngrediente) {
+                String erro = cadastrarIngredienteReceita(receita.getBdID(), tbIngrediente);
+
+            }
+
+        } catch (SQLException e) {
+            return "Erro ao cadastrar uma nova receita" + e.getMessage();
+        } finally {
+            conexao.close();
+        }
+
+        return "Receita cadastrada com sucesso";
+    }
+
+    private String cadastrarIngredienteReceita(int idReceita, TbIngrediente ingrediente) {
+        Repository conexao = Repository.getInstance();
+
+        try {
+
+            conexao.preparedStatement = conexao.conection.prepareStatement(INSERTINGREDIENTERECEITA);
+            conexao.preparedStatement.setDouble(1, ingrediente.getQuantidade());
+            conexao.preparedStatement.setInt(2, idReceita);
+            conexao.preparedStatement.setInt(3, ingrediente.getDbID());
+            conexao.preparedStatement.setInt(4, ingrediente.getUnidadeMedida());
+            conexao.preparedStatement.execute();
+
+        } catch (SQLException e) {
+            return e.getMessage().toString();
+        }
+
+        return null;
+    }
 
     public int updateCurtidasReceita(int idReceita, boolean incrementa) {
 
@@ -179,7 +257,7 @@ public class ReceitaDao {
                     ingrediente.setDbID(rs.getInt(IDINGREDIENTE));
                     ingrediente.setBdNome(rs.getString(NOMEINGREDIENTE));
                     ingrediente.setQuantidade(rs.getDouble(QUANTIDADEINGREDIENTE));
-                    ingrediente.setUnidadeMedida(rs.getString(UNIDADEMEDIDA));
+                    ingrediente.setUnidadeMedida(rs.getInt(UNIDADEMEDIDA));
 
                     idIngrediente = rs.getInt(IDINGREDIENTE);
 
@@ -271,4 +349,5 @@ public class ReceitaDao {
 
         return json;
     }
+
 }

@@ -7,7 +7,7 @@ public class TbIngrediente implements Serializable {
     private int dbID;    
     private String bdNome; 
     private double quantidade; 
-    private String unidadeMedida;
+    private int unidadeMedida;
     
     public TbIngrediente() {
     }
@@ -45,16 +45,14 @@ public class TbIngrediente implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public String getUnidadeMedida() {
+    public int getUnidadeMedida() {
         return unidadeMedida;
     }
 
-    public void setUnidadeMedida(String unidadeMedida) {
+    public void setUnidadeMedida(int unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
     }
-    
-    
-        
+
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbingrediente[ dbID=" + dbID + " ]" + "DBNOME = " + bdNome;

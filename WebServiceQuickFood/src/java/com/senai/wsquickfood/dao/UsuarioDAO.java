@@ -27,9 +27,7 @@ public class UsuarioDAO {
 
     public String Salvar(TbUsuario pUsuario, TbPessoa pPessoa) {
         TbPessoa pessoaAux = new TbPessoa();
-        PessoaDAO pessoaDao = new PessoaDAO();
-        pessoaAux = pessoaDao.Salvar(pPessoa);
-        
+        PessoaDAO pessoaDao = new PessoaDAO();                
         Repository conexao = Repository.getInstance();
 
         if (validaLogin(pUsuario.getBdLogin())) {
@@ -47,6 +45,8 @@ public class UsuarioDAO {
             return null;
         }
         
+        pessoaAux = pessoaDao.Salvar(pPessoa);
+        
         try {
             conexao.open();
 
@@ -61,6 +61,7 @@ public class UsuarioDAO {
             conexao.preparedStatement.execute();
 
             System.out.println(pUsuario.getBdID());
+            
         } catch (SQLException e) {
             System.err.println("Erro ao salvar usuário: " + e.toString());
             return "Erro ao salvar usuário";
