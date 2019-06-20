@@ -7,11 +7,18 @@ import { UsuarioLoginComponent } from './control/usuario/login/usuario-login/usu
 import { UsuarioService } from './usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
+import { Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'login', component: UsuarioLoginComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsuarioLoginComponent
+    UsuarioLoginComponent,
+    PaginaInicialComponent
   ],
   imports: [
     BrowserModule,
