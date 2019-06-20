@@ -128,10 +128,9 @@ public class ReceitaDao {
                 receita.setBdID(rs.getInt(1));
             }
 
-            for (TbIngrediente tbIngrediente : listaIngrediente) {
+            listaIngrediente.forEach((tbIngrediente) -> {
                 String erro = cadastrarIngredienteReceita(receita.getBdID(), tbIngrediente);
-
-            }
+            });
 
         } catch (SQLException e) {
             return "Erro ao cadastrar uma nova receita" + e.getMessage();

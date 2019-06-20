@@ -11,8 +11,6 @@ import com.senai.wsquickfood.dao.ReceitaDao;
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.model.TbReceita;
 import java.util.List;
-
-import javax.json.Json;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -27,7 +25,7 @@ import javax.ws.rs.core.Response;
 /**
  * REST Web Service
  *
- * @author victo
+ * @author Greg
  */
 @Path("receita")
 public class ReceitaWs {
@@ -85,23 +83,24 @@ public class ReceitaWs {
         }
 
     }
-    
+
     @GET
-    @Path("receita/cadastrarReceita/{receita}/{ingredientes}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response cadastrarReceita(@PathParam("receita") String jSonReceita, @PathParam("ingredientes") String ingredientes) {
+    @Path("receita/cadastrarReceita/{receita}/{ingredientes}")
+    public Response cadastrarReceita(@PathParam("receita") String jSonReceita, @PathParam("ingredientes") String jSonIngredientes) {
         ReceitaDao receitaDao = new ReceitaDao();
-        Gson google = new Gson();
+
+        Gson gson = new Gson();
         TbReceita receita = new TbReceita();
-        
+        receita = gson.fromJson(jSonReceita, TbReceita.class);
+
         TypeToken token = new TypeToken<List<TbIngrediente>>() {
         };
 
         //Conversao json para List<Usuario>
-        List<TbIngrediente> listaIngredientes = google.fromJson(ingredientes, token.getType());
-        receita = google.fromJson(jSonReceita, TbReceita.class);
-        try {
+        List<TbIngrediente> listaIngredientes = gson.fromJson(jSonIngredientes, token.getType());
 
+        try {
             return Response.status(200).entity(receitaDao.cadastrarReceita(receita, listaIngredientes)).build();
 
         } catch (Exception e) {
