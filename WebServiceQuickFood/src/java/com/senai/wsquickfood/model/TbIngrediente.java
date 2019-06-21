@@ -6,8 +6,8 @@ public class TbIngrediente implements Serializable {
     
     private int dbID;    
     private String bdNome; 
-    private double quantidade; 
-    private int unidadeMedida;
+    private double bdQuantidade; 
+    private int bdUnidadeMedida;
     
     public TbIngrediente() {
     }
@@ -38,19 +38,19 @@ public class TbIngrediente implements Serializable {
     }     
 
     public double getQuantidade() {
-        return quantidade;
+        return bdQuantidade;
     }
     
     public void setQuantidade(double quantidade) {
-        this.quantidade = quantidade;
+        this.bdQuantidade = quantidade;
     }
 
     public int getUnidadeMedida() {
-        return unidadeMedida;
+        return bdUnidadeMedida;
     }
 
     public void setUnidadeMedida(int unidadeMedida) {
-        this.unidadeMedida = unidadeMedida;
+        this.bdUnidadeMedida = unidadeMedida;
     }
 
     @Override

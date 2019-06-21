@@ -77,7 +77,7 @@ public class ReceitaDao {
     private String INSERTRECEITA = "INSERT INTO TBRECEITA(BDID, BDNOME, BDDESCRICAO, BDFKFOTO, BDFKUSUARIO) VALUES (0, ?, ?, ?, ?)";
     private String INSERTINGREDIENTERECEITA = "INSERT INTO TBINGREDIENTERECEITA (BDQUANTIDADEINGREDIENTE, BDFKRECEITA, BDFKINGREDIENTE, BDFKUNIDADEMEDIDA) VALUES (?, ?, ?, ?)";
     private String SELECTNOMERECEITA = "SELECT BDNOME FROM TBRECEITA WHERE BDNOME = ?";
-            
+
     private String NOMERECEITA = "NOMERECEITA";
     private String IDRECEITA = "IDRECEITA";
     private String DESCRICAORECEITA = "DESCRICAORECEITA";
@@ -87,13 +87,14 @@ public class ReceitaDao {
     private String NOMEINGREDIENTE = "NOMEINGREDIENTE";
     private String QUANTIDADEINGREDIENTE = "QUANTIDADEINGREDIENTE";
     private String UNIDADEMEDIDA = "UNIDADEMEDIDA";
+    private int SEMFOTO = 0;    
 
     private boolean validarNomeReceita(String nomeReceita) {
         Repository conexao = Repository.getInstance();
-        
+
         try {
             conexao.open();
-            
+
             PreparedStatement ps = conexao.conection.prepareStatement(SELECTNOMERECEITA);
             ps.setString(1, nomeReceita);
             ResultSet rs = ps.executeQuery();
@@ -101,7 +102,7 @@ public class ReceitaDao {
             if (rs.next()) {
                 return true;
             }
-            
+
         } catch (Exception e) {
             e.getMessage().toString();
         }
@@ -109,16 +110,23 @@ public class ReceitaDao {
     }
 
     public String cadastrarReceita(TbReceita receita, List<TbIngrediente> listaIngrediente) {
-        if (validarNomeReceita(receita.getBdNome())) 
+        if (validarNomeReceita(receita.getBdNome())) {
             return "Já existe essa receita cadastrada";
+        }
         Repository conexao = Repository.getInstance();
-        
+
         try {
             conexao.open();
             conexao.preparedStatement = conexao.conection.prepareStatement(INSERTRECEITA, PreparedStatement.RETURN_GENERATED_KEYS);
             conexao.preparedStatement.setString(1, receita.getBdNome());
             conexao.preparedStatement.setString(2, receita.getBdDescricao());
-            conexao.preparedStatement.setInt(3, receita.getBdFkFoto().getBdId());
+
+            if (receita.getBdFkFoto() != null) {
+                conexao.preparedStatement.setInt(3, receita.getBdFkFoto().getBdId());
+            } else {
+                conexao.preparedStatement.setInt(3, SEMFOTO);
+            }
+
             conexao.preparedStatement.setInt(4, receita.getBdDKUsuario().getBdID());
             conexao.preparedStatement.execute();
 
