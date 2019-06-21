@@ -2,27 +2,27 @@ package com.senai.wsquickfood.model;
 
 public class TbFoto {
 
-    private int bdId;
+    private int bdID;
     private String bdFoto;
 
     public TbFoto() {
     }
 
     public TbFoto(int bdId) {
-        this.bdId = bdId;
+        this.bdID = bdId;
     }
 
     public TbFoto(int bdId, String bdFoto) {
-        this.bdId = bdId;
+        this.bdID = bdId;
         this.bdFoto = bdFoto;
     }
 
     public int getBdId() {
-        return bdId;
+        return bdID;
     }
 
     public void setBdId(int bdId) {
-        this.bdId = bdId;
+        this.bdID = bdId;
     }
 
     public String getBdFoto() {
@@ -35,7 +35,7 @@ public class TbFoto {
 
     @Override
     public String toString() {
-        return "TbFoto{" + "bdId=" + bdId + ", bdFoto=" + bdFoto + '}';
+        return "TbFoto{" + "bdId=" + bdID + ", bdFoto=" + bdFoto + '}';
     }
 
 }

@@ -10,7 +10,6 @@ import com.senai.wsquickfood.controller.Utils;
 import com.senai.wsquickfood.model.TbAvaliacao;
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.model.TbReceita;
-import com.senai.wsquickfood.model.TbUnidadeMedida;
 import com.senai.wsquickfood.repository.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

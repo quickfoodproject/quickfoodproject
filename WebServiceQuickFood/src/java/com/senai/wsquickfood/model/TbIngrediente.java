@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TbIngrediente implements Serializable {
     
-    private int dbID;    
+    private int bdID;    
     private String bdNome; 
     private double bdQuantidade; 
     private int bdUnidadeMedida;
@@ -13,20 +13,20 @@ public class TbIngrediente implements Serializable {
     }
 
     public TbIngrediente(int dbID) {
-        this.dbID = dbID;
+        this.bdID = dbID;
     }
 
     public TbIngrediente(int dbID, String bdNome) {
-        this.dbID = dbID;
+        this.bdID = dbID;
         this.bdNome = bdNome;
     }
 
     public int getDbID() {
-        return dbID;
+        return bdID;
     }
 
     public void setDbID(int dbID) {
-        this.dbID = dbID;
+        this.bdID = dbID;
     }
 
     public String getBdNome() {
@@ -55,7 +55,7 @@ public class TbIngrediente implements Serializable {
 
     @Override
     public String toString() {
-        return "com.senai.quickfood.dao.Tbingrediente[ dbID=" + dbID + " ]" + "DBNOME = " + bdNome;
+        return "com.senai.quickfood.dao.Tbingrediente[ dbID=" + bdID + " ]" + "DBNOME = " + bdNome;
     }
     
 }

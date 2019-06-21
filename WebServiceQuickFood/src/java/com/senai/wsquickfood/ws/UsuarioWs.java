@@ -72,7 +72,7 @@ public class UsuarioWs {
             }
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -102,7 +102,7 @@ public class UsuarioWs {
             }
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -123,7 +123,7 @@ public class UsuarioWs {
             return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -142,7 +142,7 @@ public class UsuarioWs {
             }
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -157,7 +157,7 @@ public class UsuarioWs {
             return Response.status(Response.Status.OK).entity("Senha alterada com sucesso.").header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 

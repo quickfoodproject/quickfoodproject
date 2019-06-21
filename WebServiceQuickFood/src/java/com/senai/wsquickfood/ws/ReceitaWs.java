@@ -53,10 +53,10 @@ public class ReceitaWs {
 
         try {
 
-            return Response.status(200).entity(receitaDao.selecionarReceitaById(idReceita)).build();
+            return Response.status(200).entity(receitaDao.selecionarReceitaById(idReceita)).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).header("Access-Control-Allow-Origin", "*").build();
         }
 
     }
@@ -76,10 +76,10 @@ public class ReceitaWs {
 
         try {
 
-            return Response.status(200).entity(receitaDao.selecionarByIngrediente(json)).build();
+            return Response.status(200).entity(receitaDao.selecionarByIngrediente(json)).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
 
     }
@@ -101,10 +101,10 @@ public class ReceitaWs {
         List<TbIngrediente> listaIngredientes = gson.fromJson(jSonIngredientes, token.getType());
 
         try {
-            return Response.status(200).entity(receitaDao.cadastrarReceita(receita, listaIngredientes)).build();
+            return Response.status(200).entity(receitaDao.cadastrarReceita(receita, listaIngredientes)).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
 
     }
@@ -117,9 +117,9 @@ public class ReceitaWs {
         Gson google = new Gson();
 
         try {
-            return Response.status(200).entity(receitaDao.listarReceitasTop()).build();
+            return Response.status(200).entity(receitaDao.listarReceitasTop()).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
 
     }
