@@ -190,7 +190,7 @@ public class ReceitaDao {
 
             avaliacaoDao = new AvaliacaoDao();
             listaComentario = new ArrayList<>();
-            listaComentario = avaliacaoDao.buscaComentariosDaReceita(pIdReceita, true);
+            listaComentario = avaliacaoDao.buscaComentariosDaReceita(pIdReceita, false);
 
             receita.setTbingredienteCollection(listaIngrediente);
             receita.setTbavaliacaoCollection(listaComentario);

@@ -252,7 +252,7 @@ public class AvaliacaoDao {
 
         try {
 
-            if (!abrirFecharConexao) {
+            if (abrirFecharConexao) {
                 conexao.open();
             }
 
@@ -276,7 +276,7 @@ public class AvaliacaoDao {
         } catch (SQLException e) {
             System.err.println("Erro ao buscar comentários: " + e.toString());
         } finally {
-            if (!abrirFecharConexao) {
+            if (abrirFecharConexao) {
                 conexao.close();
             }
         }
