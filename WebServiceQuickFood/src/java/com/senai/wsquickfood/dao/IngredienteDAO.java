@@ -58,7 +58,7 @@ public class IngredienteDAO {
     }
 
     public String getAll() {
-        String json = "";
+        String json = "[";
         List<TbIngrediente> ingredientes = new ArrayList();
         TbIngrediente ingrediente = null;
         Gson g = new Gson();
@@ -75,8 +75,12 @@ public class IngredienteDAO {
                 ingrediente.setDbID(conexao.resultSet.getInt("BDID"));
                 ingrediente.setBdNome(conexao.resultSet.getString("BDNOME"));
 
-                json = json + g.toJson(ingrediente) + ";";
+                json = json + g.toJson(ingrediente) + ",";
             }
+            
+            json = json.substring(0, json.length() - 1);
+            
+            json += "]";
 
             conexao.close();
 

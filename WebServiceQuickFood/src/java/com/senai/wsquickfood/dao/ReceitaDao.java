@@ -212,7 +212,7 @@ public class ReceitaDao {
         Repository conexao = Repository.getInstance();
         Gson google = new Gson();
         TbReceita receita = new TbReceita();
-        String json = "";
+        String json = "[";
 
         try {
             conexao.open();
@@ -227,8 +227,12 @@ public class ReceitaDao {
                 receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
                 receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
-                json = json + google.toJson(receita) + ";";
+                json = json + google.toJson(receita) + ",";
             }
+            
+            json = json.substring(0, json.length() - 1);
+            
+            json += "]";
 
         } catch (SQLException e) {
             return e.getMessage();
@@ -246,7 +250,7 @@ public class ReceitaDao {
         Gson google = new Gson();
 
         TbReceita receita = new TbReceita();
-        String json = "";
+        String json = "[";
 
         try {
             conexao.open();
@@ -260,8 +264,12 @@ public class ReceitaDao {
                 receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
                 receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
-                json = json + google.toJson(receita) + ";";
+                json = json + google.toJson(receita) + ",";
             }
+            
+            json = json.substring(0, json.length() - 1);
+            
+            json += "]";
 
         } catch (SQLException e) {
             return e.getMessage();
