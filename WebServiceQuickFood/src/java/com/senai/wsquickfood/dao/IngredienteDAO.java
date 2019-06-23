@@ -59,7 +59,6 @@ public class IngredienteDAO {
 
     public String getAll() {
         String json = "[";
-        List<TbIngrediente> ingredientes = new ArrayList();
         TbIngrediente ingrediente = null;
         Gson g = new Gson();
         try {
