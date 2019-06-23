@@ -170,7 +170,7 @@ public class ReceitaDao {
                     receita.setBdNome(rs.getString(NOMERECEITA));
                     receita.setBdDescricao(rs.getString(DESCRICAORECEITA));
                     receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
-                    receita.setBdURLlmagem(rs.getString(FOTORECEITA));
+                    receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
                     idReceita = rs.getInt(IDRECEITA);
                 }
@@ -225,10 +225,10 @@ public class ReceitaDao {
                 receita.setBdID(rs.getInt(IDRECEITA));
                 receita.setBdNome(rs.getString(NOMERECEITA));
                 receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
-                receita.setBdURLlmagem(rs.getString(FOTORECEITA));
-            }
+                receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
-            json = google.toJson(receita);
+                json = json + google.toJson(receita) + ";";
+            }
 
         } catch (SQLException e) {
             return e.getMessage();
@@ -258,10 +258,10 @@ public class ReceitaDao {
                 receita.setBdID(rs.getInt(IDRECEITA));
                 receita.setBdNome(rs.getString(NOMERECEITA));
                 receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
-                receita.setBdURLlmagem(rs.getString(FOTORECEITA));
-            }
+                receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
-            json = google.toJson(receita);
+                json = json + google.toJson(receita) + ";";
+            }
 
         } catch (SQLException e) {
             return e.getMessage();
