@@ -8,9 +8,9 @@ package com.senai.wsquickfood.ws;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.senai.wsquickfood.dao.ReceitaDao;
+import com.senai.wsquickfood.model.TbIngrediente;
+import com.senai.wsquickfood.model.TbReceita;
 import java.util.List;
-
-import javax.json.Json;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response;
 /**
  * REST Web Service
  *
- * @author victo
+ * @author Greg
  */
 @Path("receita")
 public class ReceitaWs {
@@ -53,10 +53,10 @@ public class ReceitaWs {
 
         try {
 
-            return Response.status(200).entity(receitaDao.selecionarReceitaById(idReceita)).build();
+            return Response.status(200).entity(receitaDao.selecionarReceitaById(idReceita)).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).header("Access-Control-Allow-Origin", "*").build();
         }
 
     }
@@ -76,10 +76,35 @@ public class ReceitaWs {
 
         try {
 
-            return Response.status(200).entity(receitaDao.selecionarByIngrediente(json)).build();
+            return Response.status(200).entity(receitaDao.selecionarByIngrediente(json)).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
+        }
+
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("receita/cadastrarReceita/{receita}/{ingredientes}")
+    public Response cadastrarReceita(@PathParam("receita") String jSonReceita, @PathParam("ingredientes") String jSonIngredientes) {
+        ReceitaDao receitaDao = new ReceitaDao();
+
+        Gson gson = new Gson();
+        TbReceita receita = new TbReceita();
+        receita = gson.fromJson(jSonReceita, TbReceita.class);
+
+        TypeToken token = new TypeToken<List<TbIngrediente>>() {
+        };
+
+        //Conversao json para List<Usuario>
+        List<TbIngrediente> listaIngredientes = gson.fromJson(jSonIngredientes, token.getType());
+
+        try {
+            return Response.status(200).entity(receitaDao.cadastrarReceita(receita, listaIngredientes)).header("Access-Control-Allow-Origin", "*").build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
 
     }
@@ -92,9 +117,9 @@ public class ReceitaWs {
         Gson google = new Gson();
 
         try {
-            return Response.status(200).entity(receitaDao.listarReceitasTop()).build();
+            return Response.status(200).entity(receitaDao.listarReceitasTop()).header("Access-Control-Allow-Origin", "*").build();
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
 
     }

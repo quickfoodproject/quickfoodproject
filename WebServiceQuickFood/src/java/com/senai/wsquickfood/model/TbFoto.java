@@ -4,7 +4,7 @@ import java.sql.Blob;
 
 public class TbFoto {
 
-    private int bdId;
+    private int bdID;
     private Blob bdFoto;
     private String fotoJson;
 
@@ -16,11 +16,11 @@ public class TbFoto {
     }
 
     public TbFoto(int bdId) {
-        this.bdId = bdId;
+        this.bdID = bdId;
     }
 
     public TbFoto(int bdId, Blob bdFoto) {
-        this.bdId = bdId;
+        this.bdID = bdId;
         this.bdFoto = bdFoto;
     }
 
@@ -33,11 +33,11 @@ public class TbFoto {
     }
 
     public int getBdId() {
-        return bdId;
+        return bdID;
     }
 
     public void setBdId(int bdId) {
-        this.bdId = bdId;
+        this.bdID = bdId;
     }
 
     public Blob getBdFoto() {
@@ -50,7 +50,7 @@ public class TbFoto {
 
     @Override
     public String toString() {
-        return "TbFoto{" + "bdId=" + bdId + ", bdFoto=" + bdFoto + '}';
+        return "TbFoto{" + "bdId=" + bdID + ", bdFoto=" + bdFoto + '}';
     }
 
 }

@@ -6,9 +6,6 @@ import com.senai.wsquickfood.repository.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class PessoaDAO {
 
@@ -56,8 +53,6 @@ public class PessoaDAO {
     public void Atualizar(TbPessoa pPessoa) {
 
         Repository conexao = Repository.getInstance();
-
-        TbPessoa usuario = new TbPessoa();
         
         try {
             conexao.open();

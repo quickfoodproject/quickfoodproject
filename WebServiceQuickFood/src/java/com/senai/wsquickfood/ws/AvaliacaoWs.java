@@ -66,7 +66,7 @@ public class AvaliacaoWs {
             return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -82,7 +82,7 @@ public class AvaliacaoWs {
             return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
