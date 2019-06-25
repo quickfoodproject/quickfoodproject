@@ -13,13 +13,23 @@ import org.apache.commons.mail.SimpleEmail;
 
 public class Utils {
 
+    public static String retiraQuebraDeLinha(String string) {
+
+        if (string == null) {
+            return string;
+
+        }
+        
+        return string.replaceAll("\n", "");
+    }
+
     public static boolean retornaUsuarioAdm(String prString) {
         boolean retorno = false;
 
         if (prString.equals("0")) {
             retorno = true;
         }
-        
+
         return retorno;
 
     }
@@ -96,15 +106,15 @@ public class Utils {
         }
         return isEmailIdValid;
     }
-    
-    public static String listaParaString(List<String> listaString,char caracter) {
+
+    public static String listaParaString(List<String> listaString, char caracter) {
         String retorno = "";
-        
-            for (String string : listaString) {                
-                retorno = retorno + string + caracter;
+
+        for (String string : listaString) {
+            retorno = retorno + string + caracter;
         }
-            retorno = retorno.substring(0, retorno.length()-1);
-                    
+        retorno = retorno.substring(0, retorno.length() - 1);
+
         return retorno;
     }
 }

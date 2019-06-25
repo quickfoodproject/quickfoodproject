@@ -243,15 +243,18 @@ public class AvaliacaoDao {
         return "Comentário excluído com sucesso.";
     }
 
-    public List<TbAvaliacao> buscaComentariosDaReceita(int idReceita) {
+    public List<TbAvaliacao> buscaComentariosDaReceita(int idReceita, boolean abrirFecharConexao) {
 
         Repository conexao = Repository.getInstance();
         TbAvaliacao avaliacao;
         List<TbAvaliacao> listaComentario = new ArrayList<>();
+        String comentario = "";
 
         try {
 
-            conexao.open();
+            if (abrirFecharConexao) {
+                conexao.open();
+            }
 
             PreparedStatement ps = conexao.conection.prepareStatement(BUSCACOMENTARIOSRECEITA);
             ps.setInt(1, idReceita);
@@ -259,7 +262,9 @@ public class AvaliacaoDao {
 
             while (rs.next()) {
 
-                if (!rs.getString(COMENTARIO).isEmpty()) {
+                comentario = rs.getString(COMENTARIO);
+
+                if (comentario != null) {
 
                     avaliacao = new TbAvaliacao();
                     avaliacao.setBdID(rs.getInt(IDAVALIACAO));
@@ -271,7 +276,9 @@ public class AvaliacaoDao {
         } catch (SQLException e) {
             System.err.println("Erro ao buscar comentários: " + e.toString());
         } finally {
-            conexao.close();
+            if (abrirFecharConexao) {
+                conexao.close();
+            }
         }
 
         return listaComentario;
