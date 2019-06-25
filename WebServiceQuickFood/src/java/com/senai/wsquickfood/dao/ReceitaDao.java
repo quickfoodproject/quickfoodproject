@@ -254,7 +254,7 @@ public class ReceitaDao {
                     receita.setBdNome(rs.getString(NOMERECEITA));
                     receita.setBdDescricao(rs.getString(DESCRICAORECEITA));
                     receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
-                    receita.setBdURLlmagem(rs.getString(FOTORECEITA));
+                    receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
                     idReceita = rs.getInt(IDRECEITA);
                 }
@@ -274,7 +274,7 @@ public class ReceitaDao {
 
             avaliacaoDao = new AvaliacaoDao();
             listaComentario = new ArrayList<>();
-            listaComentario = avaliacaoDao.buscaComentariosDaReceita(pIdReceita);
+            listaComentario = avaliacaoDao.buscaComentariosDaReceita(pIdReceita, false);
 
             receita.setTbingredienteCollection(listaIngrediente);
             receita.setTbavaliacaoCollection(listaComentario);
@@ -296,7 +296,7 @@ public class ReceitaDao {
         Repository conexao = Repository.getInstance();
         Gson google = new Gson();
         TbReceita receita = new TbReceita();
-        String json = "";
+        String json = "[";
 
         try {
             conexao.open();
@@ -309,10 +309,14 @@ public class ReceitaDao {
                 receita.setBdID(rs.getInt(IDRECEITA));
                 receita.setBdNome(rs.getString(NOMERECEITA));
                 receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
-                receita.setBdURLlmagem(rs.getString(FOTORECEITA));
-            }
+                receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
-            json = google.toJson(receita);
+                json = json + google.toJson(receita) + ",";
+            }
+            
+            json = json.substring(0, json.length() - 1);
+            
+            json += "]";
 
         } catch (SQLException e) {
             return e.getMessage();
@@ -330,7 +334,7 @@ public class ReceitaDao {
         Gson google = new Gson();
 
         TbReceita receita = new TbReceita();
-        String json = "";
+        String json = "[";
 
         try {
             conexao.open();
@@ -342,10 +346,14 @@ public class ReceitaDao {
                 receita.setBdID(rs.getInt(IDRECEITA));
                 receita.setBdNome(rs.getString(NOMERECEITA));
                 receita.setBdCurtidas(rs.getInt(CURTIDASRECEITA));
-                receita.setBdURLlmagem(rs.getString(FOTORECEITA));
-            }
+                receita.setBdURLlmagem(Utils.retiraQuebraDeLinha(rs.getString(FOTORECEITA)));
 
-            json = google.toJson(receita);
+                json = json + google.toJson(receita) + ",";
+            }
+            
+            json = json.substring(0, json.length() - 1);
+            
+            json += "]";
 
         } catch (SQLException e) {
             return e.getMessage();
