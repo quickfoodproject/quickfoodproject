@@ -58,7 +58,9 @@ public class IngredienteDAO {
     }
 
     public String getAll() {
+
         String json = "[";
+
         TbIngrediente ingrediente = null;
         Gson g = new Gson();
         try {
