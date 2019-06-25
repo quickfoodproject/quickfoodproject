@@ -4,28 +4,29 @@ import java.io.Serializable;
 
 public class TbIngrediente implements Serializable {
     
-    private int dbID;    
+    private int bdID;    
     private String bdNome; 
-    private int quantidade; 
-
+    private double bdQuantidade; 
+    private int bdUnidadeMedida;
+    
     public TbIngrediente() {
     }
 
     public TbIngrediente(int dbID) {
-        this.dbID = dbID;
+        this.bdID = dbID;
     }
 
     public TbIngrediente(int dbID, String bdNome) {
-        this.dbID = dbID;
+        this.bdID = dbID;
         this.bdNome = bdNome;
     }
 
     public int getDbID() {
-        return dbID;
+        return bdID;
     }
 
     public void setDbID(int dbID) {
-        this.dbID = dbID;
+        this.bdID = dbID;
     }
 
     public String getBdNome() {
@@ -36,17 +37,25 @@ public class TbIngrediente implements Serializable {
         this.bdNome = bdNome;
     }     
 
-    public int getQuantidade() {
-        return quantidade;
+    public double getQuantidade() {
+        return bdQuantidade;
+    }
+    
+    public void setQuantidade(double quantidade) {
+        this.bdQuantidade = quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public int getUnidadeMedida() {
+        return bdUnidadeMedida;
     }
-        
+
+    public void setUnidadeMedida(int unidadeMedida) {
+        this.bdUnidadeMedida = unidadeMedida;
+    }
+
     @Override
     public String toString() {
-        return "com.senai.quickfood.dao.Tbingrediente[ dbID=" + dbID + " ]" + "DBNOME = " + bdNome;
+        return "com.senai.quickfood.dao.Tbingrediente[ dbID=" + bdID + " ]" + "DBNOME = " + bdNome;
     }
     
 }

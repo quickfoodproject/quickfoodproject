@@ -1,5 +1,6 @@
 package com.senai.wsquickfood.dao;
 
+import com.google.gson.Gson;
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.repository.Repository;
 import java.sql.PreparedStatement;
@@ -7,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.Json;
 
 public class IngredienteDAO {
 
@@ -16,10 +18,10 @@ public class IngredienteDAO {
     String SELECTALL = "SELECT * FROM TBINGREDIENTE ORDER BY BDNOME";
     String SELECTBYID = "SELECT * FROM TBINGREDIENTE WHERE BDID = ";
     String SELECTNOME = "SELECT * FROM TBINGREDIENTE WHERE BDNOME = ?";
-    
-    public void save(TbIngrediente pIngrediente) {
-        if (!verificaNome(pIngrediente.getBdNome())) {
-            System.out.println("O nome informado já existe");
+
+    public String salvar(TbIngrediente pIngrediente) {
+        if (validaNome(pIngrediente.getBdNome())) {
+            return "O nome informado já existe";
         }
         try {
             Repository conexao = Repository.getInstance();
@@ -34,6 +36,8 @@ public class IngredienteDAO {
         } catch (SQLException e) {
             System.err.println("Erro na execução SQL de INSERT: " + e.toString());
         }
+
+        return "Ingrediente salvo com sucesso";
     }
 
     public void update(TbIngrediente pIngrediente) {
@@ -52,11 +56,13 @@ public class IngredienteDAO {
             System.err.println("Erro na execução SQL de UPDATE: " + e.toString());
         }
     }
-    
-    public List<TbIngrediente> getAll() {
-        List<TbIngrediente> ingredientes = new ArrayList();
-        TbIngrediente ingrediente = null;
 
+    public String getAll() {
+
+        String json = "[";
+
+        TbIngrediente ingrediente = null;
+        Gson g = new Gson();
         try {
             Repository conexao = Repository.getInstance();
             conexao.open();
@@ -70,18 +76,22 @@ public class IngredienteDAO {
                 ingrediente.setDbID(conexao.resultSet.getInt("BDID"));
                 ingrediente.setBdNome(conexao.resultSet.getString("BDNOME"));
 
-                ingredientes.add(ingrediente);
+                json = json + g.toJson(ingrediente) + ",";
             }
+            
+            json = json.substring(0, json.length() - 1);
+            
+            json += "]";
 
             conexao.close();
 
         } catch (SQLException e) {
             System.err.println("Erro na execução SQL de SELECT ALL: " + e.toString());
         }
-        return ingredientes;
+        return json;
     }
 
-    public boolean verificaNome(String pNome) {
+    public boolean validaNome(String pNome) {
         Repository conexao = Repository.getInstance();
 
         try {
@@ -101,7 +111,7 @@ public class IngredienteDAO {
 
         return false;
     }
-    
+
     public List<TbIngrediente> getAllNome(String pNome) {
         List<TbIngrediente> ingredientes = new ArrayList();
         TbIngrediente ingrediente = null;

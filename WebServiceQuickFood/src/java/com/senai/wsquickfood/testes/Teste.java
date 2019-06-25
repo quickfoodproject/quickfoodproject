@@ -1,10 +1,16 @@
 package com.senai.wsquickfood.testes;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.senai.wsquickfood.dao.AvaliacaoDao;
 import com.senai.wsquickfood.dao.IngredienteDAO;
 import com.senai.wsquickfood.dao.PessoaDAO;
+import com.senai.wsquickfood.dao.ReceitaDao;
 import com.senai.wsquickfood.dao.UsuarioDAO;
+import com.senai.wsquickfood.model.TbFoto;
 import com.senai.wsquickfood.model.TbIngrediente;
 import com.senai.wsquickfood.model.TbPessoa;
+import com.senai.wsquickfood.model.TbReceita;
 import com.senai.wsquickfood.model.TbUsuario;
 import java.sql.SQLException;
 
@@ -16,91 +22,48 @@ import java.util.List;
 public class Teste {
 
     public static void main(String[] args) throws SQLException {
-
-//        UsuarioTeste u = new UsuarioTeste();
-//        UsuarioTesteDao userDao = new UsuarioTesteDao();
-//        List<UsuarioTeste> usuarios = new ArrayList();
+//        String jsonReceita = "{	\"bdnome\": \"gregzera \",	\"bdDescricao \": \"123\",	\"bdFkfoto\": {	\"bdId\": \"1\"	},	\"bdDKUsuario\": 	{	\"bdId\": \"1\"	}	}";
+//        String jsonlistaingrediente = "[{	\"bdID\": \"2\",	\"bdQuantidade\": \"100\",	\"bdUnidadeMedida\": \"1\"}, {	\"bdID\": \"2\",	\"bdQuantidade\": \"100\",	\"bdUnidadeMedida\": \"1\"}]";
+//        Gson google = new Gson();
+//        TbReceita receita = new TbReceita();
+//        TypeToken token = new TypeToken<List<TbIngrediente>>() {
+//        };
+//        
+//        ReceitaDao dao = new ReceitaDao();
+////        TbReceita receita = new TbReceita(0, "Teste patricio", "Victor teste");
+////        TbFoto foto = new TbFoto(1);
+////        TbUsuario usuario = new TbUsuario(2);
+////        
+////        receita.setBdDKUsuario(usuario);
+////        receita.setBdFkFoto(foto);
+////        
+//        TbIngrediente ingrediente = new TbIngrediente();        
+////        ingrediente.setDbID(1);
+////        ingrediente.setQuantidade(10000);
+////        ingrediente.setUnidadeMedida(2);
+////      
 //
-//        u.setId(52);
-//        u.setNome("Teste");
-//        u.setTelefone("1151");
-//        u.setEmail("teste@teste.com");
-//        u.setRepostaSeguranca("asdasds");
-//        u.setIePermissao("asdasds");
-//        //u.setId(32);
-//        u.setLogin("TestePadrao");
-//        u.setPassword("13456789100");
+//        List<TbIngrediente> listaIngrediente = google.fromJson(jsonlistaingrediente, token.getType());
+//        receita = google.fromJson(jsonReceita, TbReceita.class);
+////        listaIngrediente.add(ingrediente);
+////        listaIngrediente.add(ingrediente);
+////        listaIngrediente.add(ingrediente);
+////        
 //        
-//        userDao.save(u);        
-        //userDao.delete(u);
-        //userDao.update(u);
-//        usuarios = userDao.getAll();
-//        
-//        for (Usuario usuario : usuarios) {
-//            System.out.println(usuario.toString());
-//            System.out.println("");
-//        }
-//        System.out.println(userDao.getById(42).toString());
-//       if(userDao.logar("gregoryalves2", "abc123") != null){
-//           System.out.println("Usuário logado com sucesso.");
-//       } else {
-//           System.out.println("Usuário ou senha inválidos!");
-//       }
-//        try {
-//            System.out.println(Utils.criptografarSHA256("Senha"));
-//        } catch (Exception e) {
-//        }
-//    Tbusuario user = new Tbusuario();
-//    
-//    UsuarioDAO usuario = new UsuarioDAO();
-//    
-//    user = usuario.recuperaSenhaDAO("Leonardo");
-//    
-//        System.out.println(user.toString());
-//    
-//Utils.enviaEmail("gregoryalves@hotmail.com", "Teste", "Teste Java");
-//        TbIngrediente ingrediente = new TbIngrediente();
-//        IngredienteDAO ingredienteDAO = new IngredienteDAO();
-//        List<TbIngrediente> ingredientes = new ArrayList();
-//        
-//        ingrediente.setBdNome("Algas");
-//        
-//        ingredienteDAO.save(ingrediente);
-//        ingredientes.addAll(ingredienteDAO.getAllNome(pNome));
-//        
-//        for (TbIngrediente ingrediente1 : ingredientes) {
-//            System.out.println(ingrediente1.toString());
-//            
-//        }
-//      SimpleDateFormat sdf = new SimpleDateFormat();
+        String jsonusuario = "{	\"bdLogin\": \"gregzera\",	\"bdSenha\": \"123\",	\"bdEmail\": \"gha.alves@gmai.com\",	\"bdUsuarioAdministrador\": null    }";
+        String jsonPessoa = "{	\"bdNome\": \"gregoryalves\",	\"bdSexo\": \"m\",	\"bdDataNascimento\": null      }";
         
-        TbPessoa p = new TbPessoa();
         
-        p.setBdSexo("Masculino");
-        p.setBdDataNascimento(new Date());
+        Gson google = new Gson();
+                
+        TbUsuario pUsuario = new TbUsuario();
+        TbPessoa pPessoa = new TbPessoa();
         
-        TbUsuario usuario = new TbUsuario();        
-        usuario.setBdEmail("victorcordova014@gmail.com");
-        UsuarioDAO uDAO = new UsuarioDAO();
-        uDAO.atualizar(usuario, p.getBdID());
-//        usuario.setBdLogin("victor");
-//        usuario.setBdSenha("senha");
-//        usuario.setBdEmail("victor@");
-//        usuario.setBdUsuarioAdministrador(true);
-//        
-//        uDAO.Salvar(usuario, p);
-//        
-//        System.out.println(usuario.getBdID());
-//        TbPessoa pessoa = new TbPessoa();
-//        PessoaDAO pessoaDAO = new PessoaDAO();
-//        List<TbPessoa> pessoas = new ArrayList();
-//        
-//        pessoas.addAll(pessoaDAO.Selecionar(602, "Victor"));
-//        
-//        for (TbPessoa pessoa1 : pessoas) {
-//            System.out.println(pessoa1.toString());
-//            
-//        }
+        pUsuario = google.fromJson(jsonusuario, TbUsuario.class);
+        pPessoa = google.fromJson(jsonPessoa, TbPessoa.class);
+        UsuarioDAO dao = new UsuarioDAO();        
         
+        System.out.println(dao.Salvar(pUsuario, pPessoa));
+
     }
 }

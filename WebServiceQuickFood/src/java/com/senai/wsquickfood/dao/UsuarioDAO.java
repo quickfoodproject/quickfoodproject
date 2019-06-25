@@ -7,8 +7,6 @@ import com.senai.wsquickfood.repository.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UsuarioDAO {
 
@@ -18,7 +16,8 @@ public class UsuarioDAO {
     String UPDATE = "UPDATE TBUSUARIO SET BDLOGIN = ?, BDEMAIL = ?, BDUSUARIOADMINISTRADOR = ?, BDFKPESSOA = ? WHERE BDID = ?";
     String SELECT = "SELECT * FROM TBUSUARIO WHERE BDLOGIN = ";
     String SELECTALLLOGIN = "SELECT BDLOGIN FROM TBUSUARIO WHERE BDLOGIN = ?";
-
+    String SELECTALLEMAIL = "SELECT BDEMAIL FROM TBUSUARIO WHERE BDEMAIL = ?";
+    
     String ID = "bdID";
     String EMAIL = "bdEmail";
     String LOGIN = "bdLogin";
@@ -28,20 +27,26 @@ public class UsuarioDAO {
 
     public String Salvar(TbUsuario pUsuario, TbPessoa pPessoa) {
         TbPessoa pessoaAux = new TbPessoa();
-        PessoaDAO pessoaDao = new PessoaDAO();
-        pessoaAux = pessoaDao.Salvar(pPessoa);
-
+        PessoaDAO pessoaDao = new PessoaDAO();                
         Repository conexao = Repository.getInstance();
 
-        if (!Utils.validarEmail(pUsuario.getBdEmail())) {
-            System.err.println("O email informado não é válido");
-            return null;
-        }
-
-        if (selecionarLogin(pUsuario.getBdLogin())) {
+        if (validaLogin(pUsuario.getBdLogin())) {
             System.err.println("Não foi possível cadastro por que esse login já existe!");
             return null;
         }
+        
+        if ((validarEmail(pUsuario.getBdEmail()))) {
+            System.err.println("O email já existe");
+            return null;
+        }
+        
+        if (!Utils.verificaEmail(pUsuario.getBdEmail())) {
+            System.err.println("O email informado não é válido");
+            return null;
+        }
+        
+        pessoaAux = pessoaDao.Salvar(pPessoa);
+        
         try {
             conexao.open();
 
@@ -56,6 +61,7 @@ public class UsuarioDAO {
             conexao.preparedStatement.execute();
 
             System.out.println(pUsuario.getBdID());
+            
         } catch (SQLException e) {
             System.err.println("Erro ao salvar usuário: " + e.toString());
             return "Erro ao salvar usuário";
@@ -138,8 +144,8 @@ public class UsuarioDAO {
         }
         
     }
-
-    public boolean selecionarLogin(String pNome) {
+    
+    public boolean validaLogin(String pNome) {
         Repository conexao = Repository.getInstance();
 
         try {
@@ -153,6 +159,27 @@ public class UsuarioDAO {
 
         } catch (Exception e) {
             System.err.println("Falha ao selecionar o usuário para login = " + e.toString());
+        } finally {
+            conexao.close();
+        }
+
+        return false;
+    }
+
+    public boolean validarEmail(String pEmail) {
+        Repository conexao = Repository.getInstance();
+        
+        try {
+            conexao.open();
+
+            PreparedStatement ps = conexao.conection.prepareStatement(SELECTALLEMAIL);
+            ps.setString(1, pEmail);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+            System.err.println("Falha ao validadr o usuário pelo email = " + e.toString());
         } finally {
             conexao.close();
         }

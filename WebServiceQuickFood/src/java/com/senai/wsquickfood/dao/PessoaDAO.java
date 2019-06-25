@@ -1,14 +1,11 @@
 package com.senai.wsquickfood.dao;
 
-import com.mysql.jdbc.PreparedStatement;
+import java.sql.PreparedStatement;
 import com.senai.wsquickfood.model.TbPessoa;
 import com.senai.wsquickfood.repository.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class PessoaDAO {
 
@@ -24,15 +21,20 @@ public class PessoaDAO {
     SimpleDateFormat sdf = new SimpleDateFormat();
 
     public TbPessoa Salvar(TbPessoa pPessoa) {
-
+        String data = null;
+        if(!(pPessoa.getBdDataNascimento() == null))
+            data = sdf.format(pPessoa.getBdDataNascimento());
+        
+        
         try {
             Repository conexao = Repository.getInstance();
             conexao.open();
-
+            
+            
             conexao.preparedStatement = conexao.conection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
             conexao.preparedStatement.setString(1, pPessoa.getBdNome());
             conexao.preparedStatement.setString(2, pPessoa.getBdSexo());
-            conexao.preparedStatement.setString(3, sdf.format(pPessoa.getBdDataNascimento()));
+            conexao.preparedStatement.setString(3, data);
             conexao.preparedStatement.execute();
             ResultSet rs = conexao.preparedStatement.getGeneratedKeys();
 
@@ -51,8 +53,6 @@ public class PessoaDAO {
     public void Atualizar(TbPessoa pPessoa) {
 
         Repository conexao = Repository.getInstance();
-
-        TbPessoa usuario = new TbPessoa();
         
         try {
             conexao.open();

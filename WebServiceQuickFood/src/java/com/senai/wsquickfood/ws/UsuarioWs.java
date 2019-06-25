@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Aluno
  */
-@Path("quickfood")
+@Path("usuario")
 public class UsuarioWs {
 
     @Context
@@ -73,7 +73,7 @@ public class UsuarioWs {
             }
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -86,8 +86,8 @@ public class UsuarioWs {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-
-    @POST
+   
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/logar")
     public Response logar(TbUsuario usuario) {
@@ -102,7 +102,7 @@ public class UsuarioWs {
             }
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -118,13 +118,12 @@ public class UsuarioWs {
         TbPessoa pessoa = gson.fromJson(oPessoa, TbPessoa.class);
 
         try {
-            //String retorno = dao.Salvar(oUsuario, oPessoa);
-            String retorno = "";
+            String retorno = dao.Salvar(usuario, pessoa);
 
             return Response.status(Response.Status.OK).entity(retorno).header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -143,7 +142,7 @@ public class UsuarioWs {
             }
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 
@@ -158,7 +157,7 @@ public class UsuarioWs {
             return Response.status(Response.Status.OK).entity("Senha alterada com sucesso.").header("Access-Control-Allow-Origin", "*").build();
 
         } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "*").entity(e).build();
         }
     }
 

@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.Collection;
 
 public class TbReceita implements Serializable {
-   
-    private int bdID;    
-    private String bdNome;    
-    private String bdDescricao;   
-    private String bdURLlmagem;  
-    private int bdCurtidas;   
-    private TbUsuario bdDKUsuario;  
-    private Collection<TbIngrediente> tbingredienteCollection;    
+
+    private int bdID;
+    private String bdNome;
+    private String bdDescricao;
+    private String bdURLlmagem;
+    private TbFoto bdFkFoto;
+    private int bdCurtidas;
+    private TbUsuario bdDKUsuario;
+    private Collection<TbIngrediente> tbingredienteCollection;
     private Collection<TbAvaliacao> tbavaliacaoCollection;
 
     public TbReceita() {
@@ -25,6 +26,14 @@ public class TbReceita implements Serializable {
         this.bdID = bdID;
         this.bdNome = bdNome;
         this.bdDescricao = bdDescricao;
+    }
+
+    public TbFoto getBdFkFoto() {
+        return bdFkFoto;
+    }
+
+    public void setBdFkFoto(TbFoto bdFkFoto) {
+        this.bdFkFoto = bdFkFoto;
     }
 
     public int getBdID() {
@@ -65,8 +74,8 @@ public class TbReceita implements Serializable {
 
     public void setBdCurtidas(int bdCurtidas) {
         this.bdCurtidas = bdCurtidas;
-    }    
-    
+    }
+
     public TbUsuario getBdDKUsuario() {
         return bdDKUsuario;
     }
@@ -74,7 +83,7 @@ public class TbReceita implements Serializable {
     public void setBdDKUsuario(TbUsuario bdDKUsuario) {
         this.bdDKUsuario = bdDKUsuario;
     }
-  
+
     public Collection<TbIngrediente> getTbingredienteCollection() {
         return tbingredienteCollection;
     }
@@ -82,7 +91,7 @@ public class TbReceita implements Serializable {
     public void setTbingredienteCollection(Collection<TbIngrediente> tbingredienteCollection) {
         this.tbingredienteCollection = tbingredienteCollection;
     }
-   
+
     public Collection<TbAvaliacao> getTbavaliacaoCollection() {
         return tbavaliacaoCollection;
     }
@@ -90,10 +99,10 @@ public class TbReceita implements Serializable {
     public void setTbavaliacaoCollection(Collection<TbAvaliacao> tbavaliacaoCollection) {
         this.tbavaliacaoCollection = tbavaliacaoCollection;
     }
-   
+
     @Override
     public String toString() {
         return "com.senai.quickfood.dao.Tbreceita[ bdID=" + bdID + " ]";
     }
-    
+
 }

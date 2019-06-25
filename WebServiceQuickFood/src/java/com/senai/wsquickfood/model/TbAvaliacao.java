@@ -8,6 +8,7 @@ public class TbAvaliacao implements Serializable {
     private boolean bdJaCurtiu;
     private TbReceita bdFKReceita;
     private TbUsuario bdFKUsuario;
+    private String bdDescricao;
 
     public TbAvaliacao() {
     }
@@ -16,20 +17,28 @@ public class TbAvaliacao implements Serializable {
         this.bdID = bdID;
     }
 
+    public boolean getBdJaCurtiu() {
+        return bdJaCurtiu;
+    }
+
+    public void setBdJaCurtiu(boolean bdJaCurtiu) {
+        this.bdJaCurtiu = bdJaCurtiu;
+    }
+
+    public String getBdDescricao() {
+        return bdDescricao;
+    }
+
+    public void setBdDescricao(String bdDescricao) {
+        this.bdDescricao = bdDescricao;
+    }
+
     public int getBdID() {
         return bdID;
     }
 
     public void setBdID(int bdID) {
         this.bdID = bdID;
-    }
-
-    public boolean getbdJaCurtiu() {
-        return bdJaCurtiu;
-    }
-
-    public void setbdJaCurtiu(boolean bdJaCurtiu) {
-        this.bdJaCurtiu = bdJaCurtiu;
     }
 
     public TbReceita getBdFKReceita() {
@@ -50,7 +59,7 @@ public class TbAvaliacao implements Serializable {
 
     @Override
     public String toString() {
-        return "com.senai.quickfood.dao.Tbavaliacao[ bdID=" + bdID + " ]";
+        return "com.senai.quickfood.dao.Tbavaliacao[ bdID=" + bdID + " bdDescricao=" + bdDescricao + " ]";
     }
-    
+
 }

@@ -3,6 +3,7 @@ package com.senai.wsquickfood.controller;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,13 +13,23 @@ import org.apache.commons.mail.SimpleEmail;
 
 public class Utils {
 
+    public static String retiraQuebraDeLinha(String string) {
+
+        if (string == null) {
+            return string;
+
+        }
+        
+        return string.replaceAll("\n", "");
+    }
+
     public static boolean retornaUsuarioAdm(String prString) {
         boolean retorno = false;
 
         if (prString.equals("0")) {
             retorno = true;
         }
-        
+
         return retorno;
 
     }
@@ -83,7 +94,7 @@ public class Utils {
         return senha;
     }
 
-    public static boolean validarEmail(String email) {
+    public static boolean verificaEmail(String email) {
         boolean isEmailIdValid = false;
         if (email != null && email.length() > 0) {
             String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
@@ -94,5 +105,16 @@ public class Utils {
             }
         }
         return isEmailIdValid;
+    }
+
+    public static String listaParaString(List<String> listaString, char caracter) {
+        String retorno = "";
+
+        for (String string : listaString) {
+            retorno = retorno + string + caracter;
+        }
+        retorno = retorno.substring(0, retorno.length() - 1);
+
+        return retorno;
     }
 }
