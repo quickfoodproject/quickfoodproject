@@ -4,7 +4,7 @@ import java.sql.Blob;
 
 public class TbFoto {
 
-    private int bdId;
+    private int bdID;
     private Blob bdFoto;
     private String fotoJson;
 
@@ -20,7 +20,7 @@ public class TbFoto {
     }
 
     public TbFoto(int bdId, Blob bdFoto) {
-        this.bdId = bdId;
+        this.bdID = bdId;
         this.bdFoto = bdFoto;
     }
 
