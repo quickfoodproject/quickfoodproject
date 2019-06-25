@@ -15,6 +15,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -85,20 +86,19 @@ public class UsuarioWs {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
-
-    
+   
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("Usuario/logar/{login}/{senha}")
-    public Response logar(@PathParam("login") String login, @PathParam("senha") String senha) {
+    @Path("Usuario/logar")
+    public Response logar(TbUsuario usuario) {
         try {
             UsuarioDAO dao = new UsuarioDAO();
-            TbUsuario user = dao.validaLoginDAO(login, senha);
+            usuario = dao.validaLoginDAO(usuario.getBdLogin(), usuario.getBdSenha());
 
-            if (user.getBdID() != 0) {
-                return Response.status(Response.Status.OK).entity(user).build();
+            if (usuario.getBdID() != 0) {
+                return Response.status(Response.Status.OK).entity(usuario).build();
             } else {
-                return Response.status(Response.Status.OK).entity("Usuário ou senha inválido(s)").header("Access-Control-Allow-Origin", "*").build();
+                return Response.status(Response.Status.OK).entity(new Exception("Usuário não encontrado")).header("Access-Control-Allow-Origin", "*").build();
             }
 
         } catch (Exception e) {

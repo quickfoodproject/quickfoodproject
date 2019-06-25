@@ -1,0 +1,29 @@
+.login{
+    padding: 5%;
+    background-image: url('2024282.jpg');
+}
+
+.password-bg{
+    padding: 5%;
+}
+.form{
+    background-color: white;
+    border: 1pt black ;
+    padding: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+    margin: 5%  auto;
+    align-content: center;
+}
+
+.text-center{
+    margin-top: 10%;
+    font-size: 14px;
+}
+
+@media(max-width: 576px){
+   .form{
+    margin-top: 50%;   
+   }
+}
+
