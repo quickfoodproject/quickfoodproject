@@ -20,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import static org.eclipse.persistence.jpa.rs.util.JPARSLogger.exception;
 
 /**
  * REST Web Service
@@ -39,7 +40,9 @@ public class IngredienteWS {
     }
 
     /**
-     * Retrieves representation of an instance of com.senai.wsquickfood.ws.IngredienteWS
+     * Retrieves representation of an instance of
+     * com.senai.wsquickfood.ws.IngredienteWS
+     *
      * @return an instance of java.lang.String
      */
     @GET
@@ -48,27 +51,36 @@ public class IngredienteWS {
     public Response salvarIngrediente(@PathParam("objIngrediente") String objIngrediente) {
         //TODO return proper representation object
         Gson google = new Gson();
-        
         TbIngrediente tIngrediente = new TbIngrediente();
-        IngredienteDAO iDao = new IngredienteDAO();               
-        
+        IngredienteDAO iDao = new IngredienteDAO();
         tIngrediente = google.fromJson(objIngrediente, TbIngrediente.class);
-        
-        return Response.status(200).entity(iDao.salvar(tIngrediente)).build();
+
+        try {
+            return Response.status(200).entity(iDao.salvar(tIngrediente)).header("Access-Control-Allow-Origin", "*").build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+
     }
-    
+
     @GET
     @Path("Ingrediente/getAll/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
-        //TODO return proper representation object
-        IngredienteDAO iDao = new IngredienteDAO();               
-                
-        return Response.status(200).entity(iDao.getAll()).build();
+
+        IngredienteDAO iDao = new IngredienteDAO();
+
+        try {
+            return Response.status(200).entity(iDao.getAll()).header("Access-Control-Allow-Origin", "*").build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+
     }
 
     /**
      * PUT method for updating or creating an instance of IngredienteWS
+     *
      * @param content representation for the resource
      */
     @PUT
