@@ -263,7 +263,7 @@ public class ReceitaDao {
                     ingrediente.setDbID(rs.getInt(IDINGREDIENTE));
                     ingrediente.setBdNome(rs.getString(NOMEINGREDIENTE));
                     ingrediente.setQuantidade(rs.getDouble(QUANTIDADEINGREDIENTE));
-                    ingrediente.setUnidadeMedida(rs.getInt(UNIDADEMEDIDA));
+                    ingrediente.setUnidadeMedidaString(rs.getString(UNIDADEMEDIDA));
 
                     idIngrediente = rs.getInt(IDINGREDIENTE);
 
