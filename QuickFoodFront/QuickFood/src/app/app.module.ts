@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
 import { Routes } from '@angular/router';
+import { CadastrarPessoaComponent } from './cadastrar-pessoa/cadastrar-pessoa.component';
+import { CadastroPessoaService } from './cadastrar-pessoa/cadastro-pessoa.service';
 
 const appRoutes: Routes = [
   { path: 'login', component: UsuarioLoginComponent}
@@ -18,7 +20,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     UsuarioLoginComponent,
-    PaginaInicialComponent
+    PaginaInicialComponent,
+    CadastrarPessoaComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,7 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UsuarioService],
+  providers: [UsuarioService, CadastroPessoaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
