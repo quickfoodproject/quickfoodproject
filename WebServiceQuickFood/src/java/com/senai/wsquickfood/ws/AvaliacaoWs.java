@@ -39,7 +39,7 @@ public class AvaliacaoWs {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("Avaliacao/insererirComentario/{idUsuario}/{idReceita}/{descricao}")
     public Response insererirComentario(@PathParam("idUsuario") int idusuario, @PathParam("idReceita") int idReceita, @PathParam("descricao") String descricao) {
         try {
@@ -55,7 +55,7 @@ public class AvaliacaoWs {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("Avaliacao/editarComentario/{idAvaliacao}/{descricao}")
     public Response editarComentario(@PathParam("idAvaliacao") int idAvaliacao, @PathParam("descricao") String descricao) {
         try {
@@ -71,7 +71,7 @@ public class AvaliacaoWs {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("Avaliacao/excluirComentario/{idAvaliacao}")
     public Response excluirComentario(@PathParam("idAvaliacao") int idAvaliacao) {
         try {
@@ -87,7 +87,7 @@ public class AvaliacaoWs {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("Avaliacao/darLikeDeslike/{idUsuario}/{idReceita}")
     public Response darLikeDeslike(@PathParam("idUsuario") int idUsuario, @PathParam("idReceita") int idReceita) {
         try {
