@@ -47,7 +47,7 @@ public class IngredienteWS {
      */
     @GET
     @Path("Ingrediente/SalvarIngrediente/{objIngrediente}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response salvarIngrediente(@PathParam("objIngrediente") String objIngrediente) {
         //TODO return proper representation object
         Gson google = new Gson();

@@ -89,6 +89,7 @@ public class UsuarioWs {
    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("Usuario/logar")
     public Response logar(TbUsuario usuario) {
         try {
@@ -107,7 +108,8 @@ public class UsuarioWs {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_XML)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("Usuario/SalvarUsuario/{objUsuario}/{objPessoa}")
     public Response salvarUsuario(@PathParam("objUsuario") String oUsuario, @PathParam("objPessoa") String oPessoa) {
         UsuarioDAO dao = new UsuarioDAO();
@@ -128,7 +130,7 @@ public class UsuarioWs {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("Usuario/validasenha/{idusuario}/{senha}")
     public Response validaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
         try {
@@ -147,7 +149,7 @@ public class UsuarioWs {
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("Usuario/gravanovasenha/{idusuario}/{senha}")
     public Response gravaNovaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
         try {
