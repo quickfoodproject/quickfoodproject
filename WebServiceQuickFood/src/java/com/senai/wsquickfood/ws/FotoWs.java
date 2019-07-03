@@ -54,8 +54,8 @@ public class FotoWs {
     }
 
     @POST
-    @Produces("application/json")
-    @Consumes("application/json")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     public String salvarFoto(String pFoto) throws SQLException {
         try {
             FotoDao dao = new FotoDao();
