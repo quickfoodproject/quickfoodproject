@@ -90,7 +90,7 @@ public class UsuarioWs {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/logar")
-    public Response logar(TbUsuario usuario) {
+    public Response logar(@PathParam("logar") TbUsuario usuario) {
         try {
             UsuarioDAO dao = new UsuarioDAO();
             usuario = dao.validaLoginDAO(usuario.getBdLogin(), usuario.getBdSenha());
