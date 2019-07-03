@@ -46,7 +46,7 @@ public class ReceitaWs {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("receita/selecionarById/{idReceita}")
+    @Path("selecionarById/{idReceita}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response selecionarById(@PathParam("idReceita") Integer idReceita) {
         ReceitaDao receitaDao = new ReceitaDao();
@@ -62,7 +62,7 @@ public class ReceitaWs {
     }
 
     @GET
-    @Path("receita/selecionarByIngrediente/{ingredientes}")
+    @Path("selecionarByIngrediente/{ingredientes}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response selecionarByIngrediente(@PathParam("ingredientes") String ingredientes) {
@@ -88,7 +88,7 @@ public class ReceitaWs {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("receita/cadastrarReceita/{receita}/{ingredientes}")
+    @Path("cadastrarReceita/{receita}/{ingredientes}")
     public Response cadastrarReceita(@PathParam("receita") String jSonReceita, @PathParam("ingredientes") String jSonIngredientes) {
         ReceitaDao receitaDao = new ReceitaDao();
 
@@ -112,7 +112,7 @@ public class ReceitaWs {
     }
 
     @GET
-    @Path("receita/listarReceitasTop/")
+    @Path("listarReceitasTop/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listarReceitasTop() {
         ReceitaDao receitaDao = new ReceitaDao();

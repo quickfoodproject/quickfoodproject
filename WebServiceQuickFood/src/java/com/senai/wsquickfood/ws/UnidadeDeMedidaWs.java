@@ -42,7 +42,7 @@ public class UnidadeDeMedidaWs {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("unidadesmedida/getAll/")
+    @Path("getAll/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         UnidadeDeMedidaDAO unidadesmedida = new UnidadeDeMedidaDAO();
