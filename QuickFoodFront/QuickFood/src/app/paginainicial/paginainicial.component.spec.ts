@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaginaInicialComponent } from './pagina-inicial.component';
+import { PaginainicialComponent } from './paginainicial.component';
 
-describe('PaginaInicialComponent', () => {
-  let component: PaginaInicialComponent;
-  let fixture: ComponentFixture<PaginaInicialComponent>;
+describe('PaginainicialComponent', () => {
+  let component: PaginainicialComponent;
+  let fixture: ComponentFixture<PaginainicialComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginaInicialComponent ]
+      declarations: [ PaginainicialComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaginaInicialComponent);
+    fixture = TestBed.createComponent(PaginainicialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

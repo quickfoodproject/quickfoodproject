@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400&display=swap');
+.login {
+    padding: 5%;
+    background-image: url('Artboard\ 1.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.password-bg {
+    padding: 5%;
+}
+
+.form {
+    background-color: white;
+    border: 1pt black;
+    padding: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+    margin: 5% auto;
+    align-content: center;
+}
+
+.md-avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+}
+
+.md-avatar.size-1 {
+    width: 40px;
+    height: 40px;
+}
+
+.md-avatar.size-2 {
+    width: 70px;
+    height: 70px;
+}
+
+.md-avatar.size-3 {
+    width: 90px;
+    height: 90px;
+}
+
+.md-avatar.size-4 {
+    width: 110px;
+    height: 110px;
+}
+
+.sv-normal {
+    font-size: 20px;
+}
+
+.sv-slim {
+    font-size: 20px;
+}
+
+.active-pink-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-pink input[type=text] {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-purple-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-purple input[type=text] {
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-cyan-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+.active-cyan input[type=text] {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+.active-cyan .fa,
+.active-cyan-2 .fa {
+    color: #4dd0e1;
+}
+
+.active-purple .fa,
+.active-purple-2 .fa {
+    color: #ce93d8;
+}
+
+.active-amber .fa,
+.active-amber-2 .fa {
+    color: #ffc107;
+}
+
+@media(max-width: 576px) {
+    .form {
+        margin-top: 50%;
+    }
+}
