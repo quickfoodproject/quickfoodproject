@@ -22,6 +22,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
@@ -56,7 +57,7 @@ public class FotoWs {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String salvarFoto(String pFoto) throws SQLException {
+    public Response salvarFoto(String pFoto) throws SQLException {
         try {
             FotoDao dao = new FotoDao();
             Gson google = new Gson();
@@ -69,9 +70,9 @@ public class FotoWs {
             
             foto.setBdFoto(blob);
 
-            return google.toJson(dao.insereFoto(foto));
+            return Response.status(200).entity(dao.insereFoto(foto)).build();
         } catch (JsonSyntaxException e) {
-            return "Erro ao inserir a imagem";
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
     }
 
