@@ -46,7 +46,7 @@ public class IngredienteWS {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("Ingrediente/SalvarIngrediente/{objIngrediente}")
+    @Path("/SalvarIngrediente/{objIngrediente}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response salvarIngrediente(@PathParam("objIngrediente") String objIngrediente) {
         //TODO return proper representation object
@@ -64,7 +64,7 @@ public class IngredienteWS {
     }
 
     @GET
-    @Path("Ingrediente/getAll/")
+    @Path("/getAll/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
 

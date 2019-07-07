@@ -47,7 +47,7 @@ public class UsuarioWs {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("Usuario/recuperaSenha/{login}")
+    @Path("/recuperaSenha/{login}")
     public Response solicitarNovaSenha(@PathParam("login") String login) {
         try {
             UsuarioDAO dao = new UsuarioDAO();
@@ -87,10 +87,10 @@ public class UsuarioWs {
     public void putJson(String content) {
     }
    
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("Usuario/logar")
+    @Path("/logar/")
     public Response logar(TbUsuario usuario) {
         try {
             UsuarioDAO dao = new UsuarioDAO();
@@ -108,9 +108,9 @@ public class UsuarioWs {
     }
 
     @GET
-    @Produces(MediaType.TEXT_XML)
+    @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("Usuario/SalvarUsuario/{objUsuario}/{objPessoa}")
+    @Path("/SalvarUsuario/{objUsuario}/{objPessoa}")
     public Response salvarUsuario(@PathParam("objUsuario") String oUsuario, @PathParam("objPessoa") String oPessoa) {
         UsuarioDAO dao = new UsuarioDAO();
 
@@ -131,7 +131,7 @@ public class UsuarioWs {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("Usuario/validasenha/{idusuario}/{senha}")
+    @Path("/validasenha/{idusuario}/{senha}")
     public Response validaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
         try {
             UsuarioDAO dao = new UsuarioDAO();
@@ -150,7 +150,7 @@ public class UsuarioWs {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("Usuario/gravanovasenha/{idusuario}/{senha}")
+    @Path("/gravanovasenha/{idusuario}/{senha}")
     public Response gravaNovaSenha(@PathParam("idusuario") int idusuario, @PathParam("senha") String senha) {
         try {
             UsuarioDAO dao = new UsuarioDAO();
