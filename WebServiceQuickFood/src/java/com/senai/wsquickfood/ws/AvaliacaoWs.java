@@ -40,7 +40,7 @@ public class AvaliacaoWs {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/insererirComentario/{idUsuario}/{idReceita}/{descricao}")
+    @Path("insererirComentario/{idUsuario}/{idReceita}/{descricao}")
     public Response insererirComentario(@PathParam("idUsuario") int idusuario, @PathParam("idReceita") int idReceita, @PathParam("descricao") String descricao) {
         try {
             AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
@@ -56,7 +56,7 @@ public class AvaliacaoWs {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/editarComentario/{idAvaliacao}/{descricao}")
+    @Path("editarComentario/{idAvaliacao}/{descricao}")
     public Response editarComentario(@PathParam("idAvaliacao") int idAvaliacao, @PathParam("descricao") String descricao) {
         try {
             AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
@@ -72,7 +72,7 @@ public class AvaliacaoWs {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/excluirComentario/{idAvaliacao}")
+    @Path("excluirComentario/{idAvaliacao}")
     public Response excluirComentario(@PathParam("idAvaliacao") int idAvaliacao) {
         try {
             AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
@@ -88,7 +88,7 @@ public class AvaliacaoWs {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/darLikeDeslike/{idUsuario}/{idReceita}")
+    @Path("darLikeDeslike/{idUsuario}/{idReceita}")
     public Response darLikeDeslike(@PathParam("idUsuario") int idUsuario, @PathParam("idReceita") int idReceita) {
         try {
             AvaliacaoDao avaliacaoDao = new AvaliacaoDao();
