@@ -1,29 +1,155 @@
-.login{
-    padding: 5%;
-    background-image: url('2024282.jpg');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
 }
 
-.password-bg{
+.login {
     padding: 5%;
+    background-image: url('356587-PBR95Z-912-01.png');
+    background-size: 100%;
 }
-.form{
+
+.password-bg {
+    padding: 5%;
+    background-image: url('356587-PBR95Z-912-01.png');
+    background-size: 100%;
+}
+
+.form,
+.form_login,
+.form-receita {
     background-color: white;
-    border: 1pt black ;
+    border: 1pt black;
     padding: 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 8px;
-    margin: 5%  auto;
+    margin: 5% auto;
     align-content: center;
 }
 
-.text-center{
-    margin-top: 10%;
-    font-size: 14px;
+.md-avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
 }
 
-@media(max-width: 576px){
-   .form{
-    margin-top: 50%;   
-   }
+.md-avatar.size-1 {
+    width: 40px;
+    height: 40px;
 }
 
+.md-avatar.size-2 {
+    width: 70px;
+    height: 70px;
+}
+
+.md-avatar.size-3 {
+    width: 90px;
+    height: 90px;
+}
+
+.md-avatar.size-4 {
+    width: 110px;
+    height: 110px;
+}
+
+.sv-normal {
+    font-size: 20px;
+}
+
+.sv-slim {
+    font-size: 20px;
+}
+
+.active-pink-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-pink input[type=text] {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-purple-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-purple input[type=text] {
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-cyan-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+.active-cyan input[type=text] {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+}
+
+.active-cyan .fa,
+.active-cyan-2 .fa {
+    color: #4dd0e1;
+}
+
+.active-purple .fa,
+.active-purple-2 .fa {
+    color: #ce93d8;
+}
+
+.active-amber .fa,
+.active-amber-2 .fa {
+    color: #ffc107;
+}
+
+.receita {
+    margin-top: 4%;
+    padding: 5%;
+    background-image: url('356587-PBR95Z-912-01.png');
+    background-size: 100%;
+}
+
+.receita-top {
+    margin-top: 4%;
+    padding: 5%;
+    background-image: url('356587-PBR95Z-912-01.png');
+    background-size: 100%;
+}
+
+.card-deck {
+    padding: 5%;
+}
+
+@media(max-width: 576px) {
+    .form_login {
+        margin-top: 2%;
+    }
+    .password-bg {
+        margin-top: 50%;
+    }
+    .form {
+        margin-top: -10.5%;
+    }
+    .row {
+        margin-right: -100px;
+        margin-left: 0px;
+    }
+    .receita-top {
+        margin-top: -3%;
+    }
+    #preparo {
+        height: 80%;
+        width: 80%;
+    }
+}
+
+@media (min-width: 992px) {
+    .img-receita {
+        max-width: 20%;
+        max-height: 20%;
+    }
+}

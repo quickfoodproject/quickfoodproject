@@ -1,18 +1,16 @@
-<div class="receita text-center">
-    <div class="badge badge-warning text-wrap">
-        <h2> Cadastro de Receita </h2>
-    </div>
-
-    <div class="form">
-        <img class="card-img-top img-fluid animated fadeInRight" src="assets/Ativo 1@4x.png" alt="Card image cap">
-
-        <!-- Name -->
-        <div class="md-form mt-3">
-            <input type="text" id="materialSubscriptionFormPasswords" class="form-control">
-            <label for="materialSubscriptionFormPasswords">Nome da receita</label>
+<div>
+    <div class="text-center">
+        <div class="badge badge-warning text-wrap">
+            <h2> Nome da Receita </h2>
         </div>
-
-        <!-- Sign in button -->
-        <button class="btn btn-amber btn-rounded  z-depth-0 my-4 waves-effect" type="submit" routerLink="/">Próximo</button>
+        <div class="form-receita " style="margin-top: -5%">
+            <img class="img-receita card-img-top img-fluid animated slideInLeft" src="assets/Ativo 1@4x.png" alt="Card image cap">
+            <div class="md-form mt-3 ">
+                <input type="text" id="materialSubscriptionFormPasswords" class="form-control">
+                <label for="materialSubscriptionFormPasswords">Nome da receita</label>
+            </div>
+            <!-- Sign in button -->
+            <a role=button href="telainicial.html" class="btn btn-link btn-rounded  z-depth-0 my-4 waves-effect">Cancelar</a>
+        <a role=button (onClick)="proximaPagina()" class="btn btn-amber btn-rounded  z-depth-0 my-4 waves-effect">Próximo</a>
     </div>
 </div>
