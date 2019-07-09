@@ -1,0 +1,63 @@
+<div>
+    <div class="text-center">
+        <div class="badge badge-warning text-wrap" style="margin-top: -5%">
+            <h2> Ingredientes </h2>
+        </div>
+        <div class="form-receita" style="margin-top: -5%">
+
+            <h5 class="form-group">
+                <small class="badge badge-warning text-wrap">Escolha as medidas de cada ingrediente</small>
+            </h5>
+
+            <img class="img-receita card-img-top img-fluid animated fadeInRight" src="assets/Ativo 3@4x.png"
+                alt="Card image cap">
+
+            <div class="text-center">
+
+                <div class="row">
+
+                    <table class="table">
+                        <!-- Table head -->
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-leaf mr-2 indigo-text" aria-hidden="true"></i>Ingredientes</th>
+                                <th><i class="fas fa-leaf mr-2 indigo-text" aria-hidden="true"></i>Unidade de Medida</th>
+                                <th><i class="fas fa-leaf mr-2 indigo-text" aria-hidden="true"></i>Quantidade</th>
+                                <th><i class="fas fa-leaf mr-2 indigo-text" aria-hidden="true">Salvar</i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i of ingredientes">
+                                <td>
+                                    <select class="selectpicker form-control" data-style="btn-outline-amber btn-rounded"
+                                        multiple data-live-search="true" multiple title="Ingredientes" data-width="auto"
+                                        (change)="onSelectIngrediente($event.target.value)">
+                                        <option *ngFor="let i of ingredientes" value="{{i.bdNome}}">
+                                    </select>
+                                </td>
+                                <td> <select class="selectpicker form-control"
+                                        data-style="btn-outline-amber btn-rounded" multiple data-live-search="true"
+                                        multiple title="Unidade de Medida" data-width="auto"
+                                        (change)="onSelectUnidadeMedida($event.target.value)">
+                                        <option *ngFor="let u of unidadeMedida" value="{{u.bdNome}}">
+                                    </select>
+                                </td>
+                                <td><input id="valorItem" name="valorItem" class="form-control" formControlName="valorItem" type="number"></td>
+                                <td><a class="btn btn-link btn-rounded  z-depth-0 my-4 waves-effect" (click)="adicionar(i.bdId, u, valorItem)"><i class="fas fa-plus-circle"></i></a></td>
+                            </tr>
+                        </tbody>
+                        <!-- Table body -->
+                    </table>
+                    <!-- Table  -->
+
+                    <!-- Sign in button -->
+                    <a role=button href="cadastrar_receita.1.html"
+                        class="btn btn-link btn-rounded  z-depth-0 my-4 waves-effect">Voltar</a>
+
+                    <a role=button
+                        class="btn btn-amber btn-rounded  z-depth-0 my-4 waves-effect" (click)="proximaPagina()">Próximo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

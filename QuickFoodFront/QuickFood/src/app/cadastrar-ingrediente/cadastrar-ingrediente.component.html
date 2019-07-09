@@ -1,0 +1,22 @@
+<div>
+    <div class="text-center">
+        <div class="badge badge-warning text-wrap">
+            <h2> Ingredientes </h2>
+        </div>
+        <div class="form-receita " style="margin-top: -5%">
+            <img class="img-receita card-img-top img-fluid animated slideInLeft" src="assets/Ativo 4@4x.png" alt="Card image cap">
+            <div class="text-center">
+                <select class="selectpicker form-control" data-style="btn-outline-amber btn-rounded" multiple data-live-search="true" multiple title="Ingredientes" data-width="auto" (change)="onSelect($event.target.value)">
+                    <option *ngFor="let i of ingredientes" value="{{i.bdNome}}">
+                </select>
+            </div>
+
+            <script>
+                $('select').selectpicker();
+            </script>
+            <!-- Sign in button -->
+            <a role=button routerLink="/cadastrar-receita" class="btn btn-link btn-rounded  z-depth-0 my-4 waves-effect">Voltar</a>
+
+            <a role=button (click)="proximaPagina()" class="btn btn-amber btn-rounded  z-depth-0 my-4 waves-effect">Próximo</a>
+        </div>
+    </div>

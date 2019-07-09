@@ -1,0 +1,40 @@
+<div>
+    <div class="text-center">
+        <div class="badge badge-warning text-wrap">
+            <h2> Sua Receita </h2>
+        </div>
+    </div>
+    <div class="form-receita" style="margin-top:-3%">
+
+        <h5 class="h5-responsive">Nome da Receita</h5>
+        <hr>
+
+        <ul class="list-unstyled">
+            <li class="list-group-item"><strong>Ingredientes</strong>
+                <ul *ngFor="let i of ingredientes">
+                    <li>{{i.bdNome}}</li>
+                </ul>
+            </li>
+            <div class="list-group-item">
+                <li><strong> Modo de Preparo</strong></li>
+                <li>{{ receita.bdDescricao }}</li>
+            </div>
+        </ul>
+        <form class="md-form">
+            <div class="file-field">
+                <div class="btn btn-outline-amber btn-rounded btn-sm float-left">
+                    <span><i class="fas fa-image mr-2" aria-hidden="true"></i>Imagem</span>
+                    <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Imagem da receita">
+                </div>
+            </div>
+        </form>
+        <!-- Sign in button -->
+        <a role=button href="cadastrar_receita.3.html"
+            class="btn btn-link btn-rounded  z-depth-0 my-4 waves-effect">Voltar</a>
+
+        <a role=button href="cadastrar_receita.5.html"
+            class="btn btn-amber btn-rounded  z-depth-0 my-4 waves-effect">Próximo</a>
+</div>

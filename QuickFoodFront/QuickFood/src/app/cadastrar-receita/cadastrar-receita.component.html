@@ -1,0 +1,22 @@
+<form [formGroup]="receitaForm" (ngSubmit)="proximaPagina">
+    <div class="form-group">
+        <div class="text-center">
+            <div class="badge badge-warning text-wrap">
+                <h2> Nome da Receita </h2>
+            </div>
+            <div class="form-receita " style="margin-top: -5%">
+                <img class="img-receita card-img-top img-fluid animated slideInLeft" src="assets/Ativo 1@4x.png"
+                    alt="Card image cap">
+                <div class="md-form mt-3 ">
+                    <input type="text" id="materialSubscriptionFormPasswords" class="form-control" formControlName="bdNome">
+                    <label for="materialSubscriptionFormPasswords">Nome da receita</label>
+                </div>
+                <!-- Sign in button -->
+                <a role=button href="telainicial.html"
+                    class="btn btn-link btn-rounded  z-depth-0 my-4 waves-effect">Cancelar</a>                
+                    <a role=button
+                        class="btn btn-amber btn-rounded  z-depth-0 my-4 waves-effect" (click)="proximaPagina()">Próximo</a>
+            </div>
+        </div>
+    </div>
+</form>
