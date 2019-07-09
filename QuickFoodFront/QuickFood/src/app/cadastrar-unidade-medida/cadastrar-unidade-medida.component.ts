@@ -15,6 +15,7 @@ export class CadastrarUnidadeMedidaComponent implements OnInit {
   receita: Receita;
   unidadeMedidas: UnidadeMedida[];
   ingredientes: Ingrediente[];
+  ingredientesUnidadeMedida: Ingrediente[];
 
   constructor(private service: CadastrarUnidadeMedidaService, private router: Router) { }
 
@@ -23,9 +24,12 @@ export class CadastrarUnidadeMedidaComponent implements OnInit {
 
     this.receita = JSON.parse(jsonReceita);
     this.ingredientes = this.receita.tbingredienteCollection;
+
+    this.getAllUnidadeMedida();
   }
 
   salvarReceitaLocal() {
+    this.receita.tbingredienteCollection = this.ingredientesUnidadeMedida;
     const jsonAux = JSON.stringify(this.receita);
 
     window.sessionStorage.setItem('receita', jsonAux);
@@ -34,11 +38,34 @@ export class CadastrarUnidadeMedidaComponent implements OnInit {
   proximaPagina() {
     this.salvarReceitaLocal();
 
-    this.router.navigate(['cadastrar-unidade-medida']);
+    this.router.navigate(['\modo-preparo']);
   }
 
   onSelectIngredienteAtual(id) {
-    this.receita.tbingredienteCollection = this.service.getUnidadeMedida().filter((item) => item.tbingredienteCollection === id);
+    this.ingredientesUnidadeMedida = this.ingredientes.filter((item) => item.bdID === id);
+  }
+
+  getAllUnidadeMedida() {
+    this.service.getUnidadeMedida()
+      .subscribe(dados => this.unidadeMedidas = dados);
+  }
+
+  adiconar(id: number, unidadeMedida: UnidadeMedida, qtd: Float64Array) {
+    const ingredienteAtual = this.getIngredienteAtual(id);
+
+    ingredienteAtual.bdQuantidade = qtd;
+    ingredienteAtual.bdUnidadeMedida = unidadeMedida.bdID;
+
+    this.ingredientesUnidadeMedida.push(ingredienteAtual);
+  }
+
+  getIngredienteAtual(id: number): Ingrediente {
+// tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.ingredientes.length; ++i) {
+      if (this.ingredientes[i].bdID === id) {
+        return this.ingredientes[i];
+      }
+    }
   }
 
 }

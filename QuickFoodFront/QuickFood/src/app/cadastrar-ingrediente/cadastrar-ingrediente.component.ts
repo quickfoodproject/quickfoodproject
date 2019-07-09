@@ -14,6 +14,7 @@ export class CadastrarIngredienteComponent implements OnInit {
 
   receita: Receita;
   ingredientes: Ingrediente[];
+  ingredientesSelecionado: Ingrediente[];
 
   constructor(private router: Router, private service: CadastrarIngredienteService) { }
 
@@ -21,6 +22,8 @@ export class CadastrarIngredienteComponent implements OnInit {
     const jsonReceita = window.sessionStorage.getItem('receita');
 
     this.receita = JSON.parse(jsonReceita);
+
+    this.getIngredientes();
   }
 
   getIngredientes() {
@@ -28,19 +31,20 @@ export class CadastrarIngredienteComponent implements OnInit {
       .subscribe(dados => this.ingredientes = dados);
   }
 
-  proximaPagina() {
-    this.salvarReceitaLocal();
-
-    this.router.navigate(['cadastrar-unidade-medida']);
-  }
-
   salvarReceitaLocal() {
+    this.receita.tbingredienteCollection = this.ingredientesSelecionado;
     const jsonAux = JSON.stringify(this.receita);
 
     window.sessionStorage.setItem('receita', jsonAux);
   }
 
   onSelect(id) {
-    this.receita.tbingredienteCollection = this.service.getIngredientes().filter((item) => item.tbingredienteCollection === id);
+    this.ingredientesSelecionado = this.ingredientes.filter((item) => item.bdID === id);
+  }
+
+  proximaPagina() {
+    this.salvarReceitaLocal();
+
+    this.router.navigate(['\cadastrar-unidade-medida']);
   }
 }
